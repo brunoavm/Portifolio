@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conversor de Moedas | Bruno Magalhães</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="conversor.css" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+
+</head>
+<body>
+
+  <div class="glow-fundo glow-1"></div>
+  <div class="glow-fundo glow-2"></div>
+
+  <header class="topo">
+    <a href="../../index.html#projetos" class="topo-voltar">
+      <i class="ri-arrow-left-line"></i> Voltar ao Portfolio
+    </a>
+    <span class="topo-titulo">Conversor de Moedas</span>
+    <span class="topo-badge">API + JS</span>
+    <button id="botaoTema" class="botao-tema" aria-label="Alternar tema">
+      <i class="ri-moon-line" id="iconeTema"></i>
+    </button>
+  </header>
+
+  <div class="container">
+
+    <div class="header">
+      <div class="header-label"><i class="ri-exchange-dollar-line"></i> Câmbio em Tempo Real</div>
+      <h1 class="header-titulo">Conversor de <span>Moedas</span></h1>
+      <p class="header-sub">Taxas atualizadas via API pública de câmbio.</p>
+    </div>
+
+    <!-- Conversor -->
+    <div class="card-conversor">
+
+      <!-- Moeda de origem -->
+      <div class="campo-moeda">
+        <label class="campo-moeda-label"><i class="ri-money-dollar-circle-line"></i> De</label>
+        <div class="campo-moeda-input">
+          <select class="select-moeda" id="moedaOrigem">
+            <option value="BRL">🇧🇷 BRL</option>
+            <option value="USD" selected>🇺🇸 USD</option>
+            <option value="EUR">🇪🇺 EUR</option>
+            <option value="GBP">🇬🇧 GBP</option>
+            <option value="JPY">🇯🇵 JPY</option>
+            <option value="CAD">🇨🇦 CAD</option>
+            <option value="AUD">🇦🇺 AUD</option>
+            <option value="CHF">🇨🇭 CHF</option>
+            <option value="CNY">🇨🇳 CNY</option>
+            <option value="ARS">🇦🇷 ARS</option>
+          </select>
+          <input type="number" class="input-valor" id="valorOrigem"
+            placeholder="1,00" value="1" min="0" step="any" />
+        </div>
+      </div>
+
+      <!-- Botão inverter -->
+      <div class="btn-inverter-wrapper">
+        <button class="btn-inverter" id="btnInverter" aria-label="Inverter moedas">
+          <i class="ri-arrow-up-down-line"></i>
+        </button>
+      </div>
+
+      <!-- Moeda de destino -->
+      <div class="campo-moeda">
+        <label class="campo-moeda-label"><i class="ri-money-dollar-circle-line"></i> Para</label>
+        <div class="campo-moeda-input">
+          <select class="select-moeda" id="moedaDestino">
+            <option value="BRL" selected>🇧🇷 BRL</option>
+            <option value="USD">🇺🇸 USD</option>
+            <option value="EUR">🇪🇺 EUR</option>
+            <option value="GBP">🇬🇧 GBP</option>
+            <option value="JPY">🇯🇵 JPY</option>
+            <option value="CAD">🇨🇦 CAD</option>
+            <option value="AUD">🇦🇺 AUD</option>
+            <option value="CHF">🇨🇭 CHF</option>
+            <option value="CNY">🇨🇳 CNY</option>
+            <option value="ARS">🇦🇷 ARS</option>
+          </select>
+          <input type="number" class="input-valor" id="valorDestino"
+            placeholder="—" readonly />
+        </div>
+      </div>
+
+      <!-- Resultado -->
+      <div class="resultado-wrapper">
+        <div class="resultado-label">Resultado da conversão</div>
+        <div class="resultado-valor" id="resultadoValor">—</div>
+        <div class="resultado-taxa" id="resultadoTaxa">
+          Taxa: <span>carregando...</span>
+        </div>
+      </div>
+
+      <!-- Botão converter -->
+      <button class="btn-converter" id="btnConverter">
+        <i class="ri-refresh-line" id="iconeConverter"></i>
+        <span id="textoConverter">Converter</span>
+      </button>
+    </div>
+
+    <!-- Cotações rápidas -->
+    <div class="card-cotacoes">
+      <div class="cotacoes-titulo">
+        <i class="ri-line-chart-line"></i> Cotações Populares (base USD)
+      </div>
+      <div class="cotacoes-lista" id="cotacoesLista">
+        <!-- Preenchido por JS -->
+      </div>
+      <div class="api-status" id="apiStatus">
+        <div class="api-ponto offline"></div>
+        <span>Aguardando conexão com a API...</span>
+      </div>
+    </div>
+  </div>
+  <script src="conversor.js"></script>
+  <script src="../../js/tema.js"></script>
+</body>
+</html>

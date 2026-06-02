@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora | Bruno Magalhães</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="calculadora.css" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+
+</head>
+<body>
+
+  <div class="glow-fundo glow-1"></div>
+  <div class="glow-fundo glow-2"></div>
+
+  <!-- Topo -->
+  <header class="topo">
+    <a href="../../index.html#projetos" class="topo-voltar">
+      <i class="ri-arrow-left-line"></i> Voltar ao Portfolio
+    </a>
+    <span class="topo-titulo">Calculadora</span>
+    <span class="topo-badge">JS Puro</span>
+    <button id="botaoTema" class="botao-tema" aria-label="Alternar tema">
+      <i class="ri-moon-line" id="iconeTema"></i>
+    </button>
+  </header>
+
+  <div class="calc-wrapper">
+    <span class="calc-label"><i class="ri-calculator-line"></i> Calculadora</span>
+
+    <!-- Calculadora principal -->
+    <div class="calc" role="application" aria-label="Calculadora">
+
+      <!-- Display -->
+      <div class="display">
+        <div class="display-historico" id="displayHistorico"></div>
+        <div class="display-expressao"  id="displayExpressao"></div>
+        <div class="display-resultado"  id="displayResultado">0</div>
+      </div>
+
+      <!-- Botões -->
+      <div class="botoes">
+        <!-- Linha 1 -->
+        <button class="btn btn-limpar"  data-acao="limpar">C</button>
+        <button class="btn btn-apagar"  data-acao="apagar"><i class="ri-delete-back-2-line"></i></button>
+        <button class="btn btn-porcento" data-acao="porcento">%</button>
+        <button class="btn btn-op"      data-acao="operador" data-val="÷">÷</button>
+        <!-- Linha 2 -->
+        <button class="btn" data-acao="numero" data-val="7">7</button>
+        <button class="btn" data-acao="numero" data-val="8">8</button>
+        <button class="btn" data-acao="numero" data-val="9">9</button>
+        <button class="btn btn-op" data-acao="operador" data-val="×">×</button>
+        <!-- Linha 3 -->
+        <button class="btn" data-acao="numero" data-val="4">4</button>
+        <button class="btn" data-acao="numero" data-val="5">5</button>
+        <button class="btn" data-acao="numero" data-val="6">6</button>
+        <button class="btn btn-op" data-acao="operador" data-val="−">−</button>
+        <!-- Linha 4 -->
+        <button class="btn" data-acao="numero" data-val="1">1</button>
+        <button class="btn" data-acao="numero" data-val="2">2</button>
+        <button class="btn" data-acao="numero" data-val="3">3</button>
+        <button class="btn btn-op" data-acao="operador" data-val="+">+</button>
+        <!-- Linha 5 -->
+        <button class="btn btn-zero" data-acao="numero" data-val="0">0</button>
+        <button class="btn" data-acao="virgula">,</button>
+        <button class="btn btn-igual" data-acao="igual">=</button>
+      </div>
+    </div>
+
+    <!-- Histórico -->
+    <div class="historico-wrapper">
+      <div class="historico-titulo">
+        <span><i class="ri-history-line"></i> Histórico</span>
+        <button class="historico-limpar-btn" id="btnLimparHistorico">Limpar</button>
+      </div>
+      <div class="historico-lista" id="historicoLista">
+        <div class="historico-vazio">Nenhum cálculo ainda.</div>
+      </div>
+    </div>
+  </div>
+  <script src="calculadora.js"></script>
+  <script src="../../js/tema.js"></script>
+</body>
+</html>

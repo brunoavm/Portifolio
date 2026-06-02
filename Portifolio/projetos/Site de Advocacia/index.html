@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deise Carla — Advocacia</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <nav class="nav">
+      <a href="#" class="logo">
+        <span class="logo-main">Deise Carla</span>
+        <span class="logo-sub">Advocacia</span>
+      </a>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <span></span><span></span><span></span>
+      </div>
+
+      <ul class="nav-list" id="navList">
+        <li><a href="#sobre" class="nav-link">Sobre</a></li>
+        <li><a href="#atuacao" class="nav-link">Atuação</a></li>
+        <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+        <li><a href="#contato" class="nav-link nav-cta">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">Advocacia Especializada</p>
+        <h1 class="hero-title">Drª Deise Carla</h1>
+        <p class="hero-subtitle">Direito Imobiliário &amp; Tributário<br>com excelência e comprometimento</p>
+        <div class="hero-actions">
+          <a href="https://wa.me/5581988890248" target="_blank" class="btn btn-primary">
+            <i class="fab fa-whatsapp"></i> Agendar Consulta
+          </a>
+          <a href="#sobre" class="btn btn-ghost">Conheça meu trabalho</a>
+        </div>
+      </div>
+      <div class="hero-scroll-indicator">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre">
+      <div class="section-container sobre-grid">
+        <div class="sobre-visual">
+          <div class="img-frame">
+            <img src="Fotos/Imagem-menor-1.jpg" alt="Dra. Deise Carla na OAB Pernambuco">
+            <div class="img-badge">
+              <span class="badge-number">25</span>
+              <span class="badge-text">anos de<br>experiência</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sobre-text">
+          <p class="section-label">Sobre mim</p>
+          <h2 class="section-title">Trajetória construída com dedicação e excelência</h2>
+
+          <div class="sobre-body" id="sobreBody">
+            <p>Sou <strong>Deise Carla Sales</strong>, Bacharela em Direito pela primeira turma da Faculdade de Ciências Humanas e Sociais Aplicadas do Cabo de Santo Agostinho/PE, com pós-graduação em <strong>Direito Tributário</strong> pelo Instituto IMADEC.</p>
+            <p>Com <strong>25 anos de atuação no Direito Notarial e Registral</strong>, especializei-me em Direito Imobiliário, trabalhando com excelência em processos de compra e venda de imóveis, regularização de propriedades, contratos, loteamentos e disputas judiciais.</p>
+            <p class="extra">Minha atuação é guiada pelo conhecimento técnico, ética e comprometimento — oferecendo soluções personalizadas e estratégicas, sempre com foco na segurança jurídica e em resultados eficientes.</p>
+            <p class="extra">Seja para assessoria preventiva, negociações ou demandas contenciosas, uno tradição e modernidade para garantir um atendimento completo e de qualidade.</p>
+          </div>
+
+          <button class="btn-text" id="btnSaibaMais">
+            Saiba mais <i class="fas fa-arrow-down"></i>
+          </button>
+          <button class="btn-text" id="btnMostrarMenos" style="display:none">
+            Mostrar menos <i class="fas fa-arrow-up"></i>
+          </button>
+
+          <div class="credenciais">
+            <div class="credencial">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Pós-graduada em Direito Tributário — IMADEC</span>
+            </div>
+            <div class="credencial">
+              <i class="fas fa-balance-scale"></i>
+              <span>OAB/PE — Advogada registrada</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÁREAS DE ATUAÇÃO -->
+    <section id="atuacao">
+      <div class="section-container">
+        <div class="section-header centered">
+          <p class="section-label">Expertise</p>
+          <h2 class="section-title">Áreas de Atuação</h2>
+          <p class="section-desc">Assessoria jurídica completa e personalizada nas áreas que mais exigem segurança e precisão técnica.</p>
+        </div>
+
+        <div class="areas-grid">
+          <div class="area-card" data-num="01">
+            <div class="area-icon">
+              <img src="Icones/Imóvel.png" alt="Imobiliário">
+            </div>
+            <h3>Direito Imobiliário</h3>
+            <p>Compra, venda e regularização de imóveis com total segurança jurídica em cada etapa do processo.</p>
+          </div>
+
+          <div class="area-card" data-num="02">
+            <div class="area-icon">
+              <img src="Icones/impostos.png" alt="Tributário">
+            </div>
+            <h3>Direito Tributário</h3>
+            <p>Planejamento tributário estratégico e defesa eficiente em execuções fiscais e autuações.</p>
+          </div>
+
+          <div class="area-card" data-num="03">
+            <div class="area-icon">
+              <img src="Icones/Documentos.png" alt="Contratos">
+            </div>
+            <h3>Contratos &amp; Loteamentos</h3>
+            <p>Elaboração, revisão e assessoria em contratos imobiliários, loteamentos e incorporações.</p>
+          </div>
+
+          <div class="area-card" data-num="04">
+            <div class="area-icon">
+              <img src="Icones/Papeis.png" alt="Notarial">
+            </div>
+            <h3>Direito Notarial e Registral</h3>
+            <p>Experiência de 25 anos em cartório, garantindo eficiência e precisão em todos os registros.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREDENCIAIS / FOTO 2 -->
+    <section id="credenciais-section">
+      <div class="section-container cred-grid">
+        <div class="cred-text">
+          <p class="section-label">Credenciais</p>
+          <h2 class="section-title">Formação que<br>inspira confiança</h2>
+          <p>Minha carteira da OAB e anos de dedicação ao Direito são a garantia de que cada caso é tratado com o máximo de seriedade e profissionalismo.</p>
+          <a href="https://wa.me/5581988890248" target="_blank" class="btn btn-primary" style="margin-top:2rem">
+            <i class="fab fa-whatsapp"></i> Fale comigo
+          </a>
+        </div>
+        <div class="cred-visual">
+          <img src="Fotos/Imagem-menor-2.jpg" alt="Carteira de Advogada OAB">
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos">
+      <div class="section-container">
+        <div class="section-header centered">
+          <p class="section-label">Clientes</p>
+          <h2 class="section-title">O que dizem sobre mim</h2>
+        </div>
+
+        <div class="dep-grid">
+          <div class="dep-card">
+            <div class="dep-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="dep-text">"A Dra. Deise foi extremamente atenciosa e resolutiva no meu processo. Recomendo com toda certeza!"</p>
+            <div class="dep-author">
+              <div class="dep-avatar">JS</div>
+              <div>
+                <strong>João Silva</strong>
+                <span>Cliente — Direito Imobiliário</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dep-card dep-card--featured">
+            <div class="dep-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="dep-text">"Profissional excelente, me explicou tudo com clareza. Atendimento de primeira — senti que estava em boas mãos."</p>
+            <div class="dep-author">
+              <div class="dep-avatar">MF</div>
+              <div>
+                <strong>Maria Fernandes</strong>
+                <span>Cliente — Direito Tributário</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dep-card">
+            <div class="dep-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="dep-text">"Conseguiu resolver uma situação que eu achava impossível. Muito grata pela dedicação e competência!"</p>
+            <div class="dep-author">
+              <div class="dep-avatar">CS</div>
+              <div>
+                <strong>Carla Souza</strong>
+                <span>Cliente — Regularização de Imóvel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato">
+      <div class="section-container contato-grid">
+        <div class="contato-info">
+          <p class="section-label light">Contato</p>
+          <h2 class="section-title light">Vamos conversar<br>sobre o seu caso</h2>
+          <p class="contato-desc">Atendimento presencial e online. Entre em contato e agende sua consulta com a Dra. Deise Carla.</p>
+
+          <div class="contato-items">
+            <a href="https://wa.me/5581988890248" target="_blank" class="contato-item">
+              <div class="ci-icon"><i class="fab fa-whatsapp"></i></div>
+              <div>
+                <strong>WhatsApp</strong>
+                <span>(81) 98889-0248</span>
+              </div>
+            </a>
+            <a href="mailto:advdcsales@gmail.com" class="contato-item">
+              <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <strong>E-mail</strong>
+                <span>advdcsales@gmail.com</span>
+              </div>
+            </a>
+            <div class="contato-item">
+              <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <strong>Endereço</strong>
+                <span>Av. Santa Maria, 04 — Ipojuca/PE</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="https://wa.me/5581988890248" target="_blank" class="btn btn-primary btn-lg">
+            <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
+          </a>
+        </div>
+
+        <div class="contato-form">
+          <form action="https://formsubmit.co/brunoadryanmagalhaes13@gmail.com" method="POST">
+            <div class="form-group">
+              <label for="nome">Nome completo</label>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Mensagem</label>
+              <textarea id="message" name="message" placeholder="Descreva brevemente o seu caso..." required></textarea>
+            </div>
+            <input type="hidden" name="_next" value="obrigado.html">
+            <input type="hidden" name="_autoresponse" value="Obrigado pelo contato! Em breve retornaremos.">
+            <button type="submit" class="btn btn-primary btn-block">
+              Enviar mensagem <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOTÃO FLUTUANTE WPP -->
+  <a href="https://wa.me/5581988890248" target="_blank" class="fab-wpp" aria-label="WhatsApp">
+    <img src="Icones/wpp-icon.png" alt="WhatsApp">
+  </a>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-main">Deise Carla</span>
+        <span class="logo-sub">Advocacia</span>
+      </div>
+      <p>© 2025 Deise Carla Sales — Todos os direitos reservados.</p>
+      <p>Desenvolvido por <a href="mailto:brunomagalhaes.dev@gmail.com">Bruno Magalhães</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

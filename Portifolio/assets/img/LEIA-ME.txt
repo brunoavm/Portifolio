@@ -1,0 +1,23 @@
+PASTA DE IMAGENS — /assets/img/
+
+Adicione suas imagens aqui com os seguintes nomes sugeridos:
+
+FOTOS DE PERFIL:
+  foto-perfil.jpg         → Usada no Hero (circular)
+  foto-sobre.jpg          → Usada na seção Sobre
+
+THUMBNAILS DOS PROJETOS (sugerido 800x450px ou 16:9):
+  projeto-meu-enfermeiro.jpg
+  projeto-controle-contas.jpg
+  projeto-registro-diario.jpg
+  projeto-site-advocacia.jpg
+  projeto-cartorio-inteligente.jpg
+  projeto-calculadora.jpg
+  projeto-todo-list.jpg
+  projeto-conversor-moedas.jpg
+  projeto-relogio-digital.jpg
+
+DICAS:
+- Use imagens no formato .jpg ou .webp para melhor performance
+- Tamanho recomendado para thumbnails: 800x450px
+- Comprima as imagens em: squoosh.app ou tinypng.com

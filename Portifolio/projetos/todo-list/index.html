@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-do List | Bruno Magalhães</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="todo.css" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+
+</head>
+<body>
+
+  <div class="glow-fundo glow-1"></div>
+  <div class="glow-fundo glow-2"></div>
+
+  <header class="topo">
+    <a href="../../index.html#projetos" class="topo-voltar">
+      <i class="ri-arrow-left-line"></i> Voltar ao Portfolio
+    </a>
+    <span class="topo-titulo">To-do List</span>
+    <span class="topo-badge">localStorage</span>
+    <button id="botaoTema" class="botao-tema" aria-label="Alternar tema">
+      <i class="ri-moon-line" id="iconeTema"></i>
+    </button>
+  </header>
+
+  <div class="container">
+
+    <div class="pagina-header">
+      <div class="pagina-label"><i class="ri-todo-line"></i> Gerenciador de Tarefas</div>
+      <h1 class="pagina-titulo">Minhas <span>Tarefas</span></h1>
+      <p class="pagina-sub">Organize, priorize e conclua suas tarefas com estilo.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num" id="statTotal">0</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num amarelo" id="statPendentes">0</span>
+        <span class="stat-label">Pendentes</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num verde" id="statConcluidas">0</span>
+        <span class="stat-label">Concluídas</span>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="input-wrapper">
+      <i class="ri-add-circle-line"></i>
+      <input type="text" class="input-tarefa" id="inputTarefa"
+        placeholder="Adicionar nova tarefa..." maxlength="120" />
+    </div>
+    <div class="input-extra">
+      <select class="select-prioridade" id="selectPrioridade">
+        <option value="baixa">🟢 Baixa</option>
+        <option value="media" selected>🟡 Média</option>
+        <option value="alta">🔴 Alta</option>
+      </select>
+      <input type="date" class="input-data" id="inputData" />
+      <button class="btn-adicionar" id="btnAdicionar">
+        <i class="ri-add-line"></i> Adicionar
+      </button>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filtros">
+      <button class="filtro-btn ativo" data-filtro="todas">Todas</button>
+      <button class="filtro-btn" data-filtro="pendentes">Pendentes</button>
+      <button class="filtro-btn" data-filtro="concluidas">Concluídas</button>
+      <button class="filtro-btn" data-filtro="alta">🔴 Alta</button>
+      <button class="filtro-btn" data-filtro="media">🟡 Média</button>
+      <button class="filtro-btn" data-filtro="baixa">🟢 Baixa</button>
+    </div>
+
+    <!-- Lista -->
+    <div class="lista-tarefas" id="listaTarefas"></div>
+  </div>
+  <script src="todo.js"></script>
+  <script src="../../js/tema.js"></script>
+</body>
+</html>

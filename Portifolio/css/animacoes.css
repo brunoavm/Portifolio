@@ -1,0 +1,369 @@
+/* ============================================================
+   ANIMACOES.CSS — Sistema de Animações
+   Portfolio Bruno Magalhães
+   ============================================================
+
+   ÍNDICE:
+   1. Classes de Revelação ao Scroll
+   2. Animações de Entrada (Keyframes)
+   3. Animações de Cards e Elementos
+   4. Efeitos de Hover Premium
+   5. Partículas e Fundo
+   6. Preferência de Movimento Reduzido
+   ============================================================ */
+
+/* ============================================================
+   1. CLASSES DE REVELAÇÃO AO SCROLL
+   ============================================================ */
+
+/* Estado inicial: elementos invisíveis aguardando revelação */
+.revelar-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Quando o Intersection Observer aciona a revelação */
+.revelar-scroll.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variantes de direção de entrada */
+.revelar-esquerda {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.revelar-direita {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.revelar-esquerda.visivel,
+.revelar-direita.visivel {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Escala: surge crescendo do centro */
+.revelar-escala {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.revelar-escala.visivel {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Delays em cascata para grupos de cards */
+.atraso-100 { transition-delay: 0.1s; }
+.atraso-200 { transition-delay: 0.2s; }
+.atraso-300 { transition-delay: 0.3s; }
+.atraso-400 { transition-delay: 0.4s; }
+.atraso-500 { transition-delay: 0.5s; }
+.atraso-600 { transition-delay: 0.6s; }
+.atraso-700 { transition-delay: 0.7s; }
+.atraso-800 { transition-delay: 0.8s; }
+
+/* ============================================================
+   2. ANIMAÇÕES DE ENTRADA — Keyframes
+   ============================================================ */
+
+/* Fade-in suave vindo de baixo */
+@keyframes entrarDeBaixo {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-in vindo da esquerda */
+@keyframes entrarDaEsquerda {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade-in da direita */
+@keyframes entrarDaDireita {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Surgir com escala */
+@keyframes surgirEscala {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Fade-in simples */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Pulsar suave (usado em badges e pontos) */
+@keyframes pulsarSuave {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(0, 212, 255, 0);
+  }
+}
+
+/* Flutuar (elementos que sobem e descem) */
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* Girar 360° (ícones e anéis) */
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Glow pulsante neon */
+@keyframes glowPulsar {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3),
+                0 0 20px rgba(0, 212, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6),
+                0 0 40px rgba(0, 212, 255, 0.2);
+  }
+}
+
+/* Animação de gradiente (para bordas e fundos especiais) */
+@keyframes gradienteAnimado {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Scan line (efeito cinematográfico) */
+@keyframes scanLine {
+  0%   { top: -100%; }
+  100% { top: 200%; }
+}
+
+/* Piscar cursor de texto */
+@keyframes piscarCursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ============================================================
+   3. ANIMAÇÕES DE CARDS E ELEMENTOS
+   ============================================================ */
+
+/* Efeito de shimmer / loading skeleton */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Card "entrando" na tela com mola */
+@keyframes entrarComMola {
+  0%   { opacity: 0; transform: scale(0.8) translateY(20px); }
+  60%  { transform: scale(1.04) translateY(-4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Linha da timeline crescendo */
+@keyframes crescerLinha {
+  from { height: 0; }
+  to   { height: 100%; }
+}
+
+/* Progresso das barras de nível */
+@keyframes preencherBarra {
+  from { width: 0; }
+  to   { width: var(--nivel, 0%); }
+}
+
+/* ============================================================
+   4. EFEITOS DE HOVER PREMIUM
+   ============================================================ */
+
+/* Glow nos cards ao hover */
+.card-tecnologia:hover {
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(0, 212, 255, 0.2);
+}
+
+/* Brilho pulsante nos ícones de tecnologia ao hover */
+.card-tecnologia:hover .card-tec-icone {
+  animation: glowIcone 1.5s ease-in-out infinite;
+}
+
+@keyframes glowIcone {
+  0%, 100% { text-shadow: none; }
+  50% {
+    text-shadow: 0 0 15px currentColor, 0 0 30px currentColor;
+  }
+}
+
+/* Elevação suave de links e botões */
+.nav-link,
+.botao-primario,
+.botao-secundario,
+.botao-terciario,
+.card-projeto,
+.card-tecnologia,
+.contato-link-item {
+  will-change: transform;
+}
+
+/* Efeito de ripple ao clicar em botões */
+.botao-primario,
+.botao-secundario,
+.botao-enviar,
+.botao-curriculo-contato {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(0);
+  animation: rippleAnimar 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes rippleAnimar {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   5. PARTÍCULAS E FUNDO
+   ============================================================ */
+
+/* Partículas flutuantes no hero (complementam o canvas JS) */
+.particula {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: flutuarParticula linear infinite;
+  opacity: 0;
+}
+
+@keyframes flutuarParticula {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) rotate(360deg);
+  }
+}
+
+/* Efeito de varredura (scan) no hero */
+.hero-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 212, 255, 0.5),
+    rgba(0, 212, 255, 0.8),
+    rgba(0, 212, 255, 0.5),
+    transparent
+  );
+  filter: blur(1px);
+  animation: scanLine 6s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+/* Pontos de ruído no background (efeito grain) */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   6. PREFERÊNCIA DE MOVIMENTO REDUZIDO (Acessibilidade)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* Desativa animações para usuários que preferem menos movimento */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Mostra elementos que normalmente seriam revelados ao scroll */
+  .revelar-scroll,
+  .revelar-esquerda,
+  .revelar-direita,
+  .revelar-escala {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Exibe barras de nível sem animação */
+  .nivel-preenchimento {
+    width: var(--nivel, 0%) !important;
+    transition: none !important;
+  }
+
+  .aprendendo-barra {
+    width: var(--w, 0%) !important;
+    transition: none !important;
+  }
+}

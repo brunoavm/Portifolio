@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relógio Digital | Bruno Magalhães</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="relogio.css" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+
+  </head>
+<body>
+
+  <div class="glow-fundo glow-1"></div>
+  <div class="glow-fundo glow-2"></div>
+
+  <header class="topo">
+    <a href="../../index.html#projetos" class="topo-voltar">
+      <i class="ri-arrow-left-line"></i> Voltar ao Portfolio
+    </a>
+    <span class="topo-titulo">Relógio Digital</span>
+    <span class="topo-badge">JS Puro</span>
+    <button id="botaoTema" class="botao-tema" aria-label="Alternar tema">
+      <i class="ri-moon-line" id="iconeTema"></i>
+    </button>
+  </header>
+
+  <div class="container">
+
+    <div class="header">
+      <div class="header-label"><i class="ri-time-line"></i> Relógio, Cronômetro & Timer</div>
+      <h1 class="header-titulo">Relógio <span>Digital</span></h1>
+      <p class="header-sub">Relógio em tempo real com cronômetro de voltas e timer com alerta sonoro.</p>
+    </div>
+
+    <!-- ═══ RELÓGIO PRINCIPAL ═══ -->
+    <div class="relogio-card">
+
+      <!-- Data -->
+      <div class="relogio-data" id="relogioData">—</div>
+
+      <!-- Dígitos -->
+      <div class="relogio-tempo">
+        <div class="digito-grupo">
+          <div class="digito" id="dHora1">0</div>
+          <div class="digito" id="dHora2">0</div>
+        </div>
+        <span class="separador">:</span>
+        <div class="digito-grupo">
+          <div class="digito" id="dMin1">0</div>
+          <div class="digito" id="dMin2">0</div>
+        </div>
+        <span class="separador">:</span>
+        <div class="digito-grupo">
+          <div class="digito" id="dSeg1">0</div>
+          <div class="digito" id="dSeg2">0</div>
+        </div>
+      </div>
+
+      <!-- Meta: AM/PM + fuso + botão 12/24h -->
+      <div class="relogio-meta">
+        <span class="relogio-ampm" id="relogioAmpm" style="display:none"></span>
+        <span class="relogio-fuso"><i class="ri-map-pin-line"></i><span id="relogioFuso">—</span></span>
+        <button class="btn-formato" id="btnFormato" title="Alternar entre 12h e 24h">24h</button>
+      </div>
+
+      <!-- Progresso do dia -->
+      <div class="progresso-dia">
+        <div class="progresso-dia-titulo">
+          <span>⏳ Progresso do dia</span>
+          <span id="progressoPorcentagem">0%</span>
+        </div>
+        <div class="progresso-barra">
+          <div class="progresso-preenchimento" id="progressoPreenchimento" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CRONÔMETRO ═══ -->
+    <div class="cronometro-card">
+      <div class="secao-titulo"><i class="ri-timer-line"></i> Cronômetro</div>
+
+      <div class="crono-display" id="cronoDisplay">
+        <span id="cronoHH">00</span>:<span id="cronoMM">00</span>:<span id="cronoSS">00</span><span class="crono-ms">.<span id="cronoMS">00</span></span>
+      </div>
+
+      <div class="crono-botoes">
+        <button class="crono-btn crono-btn-iniciar" id="btnCronoIniciar">
+          <i class="ri-play-line"></i> Iniciar
+        </button>
+        <button class="crono-btn crono-btn-pausar" id="btnCronoPausar" style="display:none">
+          <i class="ri-pause-line"></i> Pausar
+        </button>
+        <button class="crono-btn crono-btn-volta" id="btnCronoVolta" style="display:none">
+          <i class="ri-flag-line"></i> Volta
+        </button>
+        <button class="crono-btn crono-btn-zerar" id="btnCronoZerar">
+          <i class="ri-stop-circle-line"></i> Zerar
+        </button>
+      </div>
+
+      <!-- Lista de voltas -->
+      <div class="voltas-lista" id="voltasLista"></div>
+    </div>
+
+    <!-- ═══ TIMER ═══ -->
+    <div class="timer-card">
+      <div class="secao-titulo"><i class="ri-alarm-line"></i> Timer</div>
+
+      <!-- Círculo de progresso -->
+      <div class="timer-progresso-wrapper" id="timerProgressoWrapper" style="position:relative; display:none;">
+        <svg class="timer-svg" width="140" height="140" viewBox="0 0 110 110">
+          <defs>
+            <linearGradient id="grad-timer" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#1a6fff"/>
+              <stop offset="100%" style="stop-color:#00d4ff"/>
+            </linearGradient>
+          </defs>
+          <circle class="timer-circulo-bg" cx="55" cy="55" r="50"/>
+          <circle class="timer-circulo-prog" id="timerCirculo" cx="55" cy="55" r="50"/>
+        </svg>
+        <div class="timer-label-svg" id="timerLabelSVG">00:00</div>
+      </div>
+
+      <!-- Inputs de configuração -->
+      <div class="timer-inputs" id="timerInputsWrapper">
+        <div class="timer-campo">
+          <label for="timerHoras">Horas</label>
+          <input type="number" id="timerHoras" min="0" max="23" value="0" placeholder="00" />
+        </div>
+        <span class="timer-sep">:</span>
+        <div class="timer-campo">
+          <label for="timerMinutos">Min</label>
+          <input type="number" id="timerMinutos" min="0" max="59" value="5" placeholder="05" />
+        </div>
+        <span class="timer-sep">:</span>
+        <div class="timer-campo">
+          <label for="timerSegundos">Seg</label>
+          <input type="number" id="timerSegundos" min="0" max="59" value="0" placeholder="00" />
+        </div>
+      </div>
+
+      <div class="timer-botoes">
+        <button class="crono-btn crono-btn-iniciar" id="btnTimerIniciar">
+          <i class="ri-play-line"></i> Iniciar Timer
+        </button>
+        <button class="crono-btn crono-btn-pausar" id="btnTimerPausar" style="display:none">
+          <i class="ri-pause-line"></i> Pausar
+        </button>
+        <button class="crono-btn crono-btn-zerar" id="btnTimerZerar">
+          <i class="ri-stop-circle-line"></i> Zerar
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+  <script src="relogio.js"></script>
+  <script src="../../js/tema.js"></script>
+</body>
+</html>

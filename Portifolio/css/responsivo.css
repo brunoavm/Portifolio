@@ -1,0 +1,522 @@
+/* ============================================================
+   RESPONSIVO.CSS — Media Queries & Responsividade
+   Portfolio Bruno Magalhães
+   ============================================================
+
+   ÍNDICE:
+   1. Tablet grande (max-width: 1100px)
+   2. Tablet (max-width: 900px)
+   3. Mobile grande (max-width: 768px)
+   4. Mobile pequeno (max-width: 480px)
+   5. Mobile muito pequeno (max-width: 360px)
+   ============================================================ */
+
+/* ============================================================
+   1. TABLET GRANDE — max-width: 1100px
+   ============================================================ */
+@media (max-width: 1100px) {
+
+  /* Hero: empilhar conteúdo e avatar */
+  .secao-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 8rem 2rem 5rem;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-conteudo {
+    align-items: center;
+    max-width: 700px;
+  }
+
+  .hero-badge {
+    margin: 0 auto;
+  }
+
+  .hero-nome {
+    align-items: center;
+  }
+
+  .hero-subtitulo {
+    justify-content: center;
+  }
+
+  .hero-descricao {
+    text-align: center;
+  }
+
+  .hero-botoes {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  /* Avatar fica menor e embaixo */
+  .hero-avatar-wrapper {
+    width: 300px;
+    height: 300px;
+  }
+
+  .avatar-anel-externo {
+    width: 270px;
+    height: 270px;
+  }
+
+  .avatar-anel-medio {
+    width: 220px;
+    height: 220px;
+  }
+
+  .avatar-placeholder {
+    width: 180px;
+    height: 180px;
+  }
+
+  .avatar-iniciais {
+    font-size: 2.8rem;
+  }
+
+  /* Sobre: menos gap */
+  .sobre-conteudo {
+    gap: 3rem;
+  }
+
+  /* Projetos destaque: uma coluna */
+  .grid-projetos-destaque {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contato: reduzir gap */
+  .contato-conteudo {
+    gap: 3rem;
+  }
+
+  /* Footer: 2 colunas */
+  .rodape-conteudo {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .rodape-esquerda {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ============================================================
+   2. TABLET — max-width: 900px
+   ============================================================ */
+@media (max-width: 900px) {
+
+  /* Mostrar botão hambúrguer, esconder nav desktop */
+  .botao-menu-mobile {
+    display: flex;
+  }
+
+  .nav-links,
+  .botao-curriculo-nav {
+    display: none;
+  }
+
+  /* Drawer mobile fica visível quando aberto */
+  .menu-mobile {
+    display: block;
+  }
+
+  .menu-mobile-overlay {
+    display: block;
+  }
+
+  /* Sobre: empilhar em coluna */
+  .sobre-conteudo {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .sobre-visual {
+    align-items: center;
+  }
+
+  .sobre-tags {
+    justify-content: center;
+  }
+
+  .sobre-botao {
+    align-self: center;
+  }
+
+  /* Timeline: coluna única */
+  .timeline-linha {
+    left: 24px;
+    transform: none;
+  }
+
+  .timeline-item {
+    flex-direction: column !important;
+    padding-left: 70px;
+    text-align: left !important;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-esquerda {
+    text-align: left !important;
+  }
+
+  .timeline-marcador {
+    left: 0;
+    top: 0;
+    transform: none;
+    width: 44px;
+    height: 44px;
+    position: absolute;
+  }
+
+  .timeline-card {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .timeline-tags {
+    justify-content: flex-start !important;
+  }
+
+  /* Contato: empilhar */
+  .contato-conteudo {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  /* Tecnologias: 2 colunas */
+  .grid-tecnologias {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Footer */
+  .rodape-conteudo {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .rodape-nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .rodape-redes {
+    justify-content: center;
+  }
+
+  .rodape-inferior {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   3. MOBILE GRANDE — max-width: 768px
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* Variáveis ajustadas para mobile */
+  :root {
+    --espacamento-secao: 5rem 0;
+  }
+
+  /* Hero */
+  .secao-hero {
+    padding: 7rem 1.5rem 4rem;
+    gap: 2.5rem;
+  }
+
+  .hero-avatar-wrapper {
+    width: 240px;
+    height: 240px;
+  }
+
+  .avatar-anel-externo {
+    width: 220px;
+    height: 220px;
+  }
+
+  .avatar-anel-medio {
+    width: 175px;
+    height: 175px;
+  }
+
+  .avatar-placeholder {
+    width: 150px;
+    height: 150px;
+  }
+
+  .avatar-iniciais {
+    font-size: 2.2rem;
+  }
+
+  /* Chips flutuantes menores */
+  .chip-flutuante {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .chip-flutuante-1 { top: 5%; right: -2%; }
+  .chip-flutuante-2 { bottom: 5%; right: -2%; }
+  .chip-flutuante-3 { bottom: 25%; left: -2%; }
+
+  /* Botões em coluna no mobile */
+  .hero-botoes {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .botao-primario,
+  .botao-secundario,
+  .botao-terciario {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Stats */
+  .hero-stats {
+    gap: 1.25rem;
+  }
+
+  .stat-numero {
+    font-size: 1.3rem;
+  }
+
+  /* Seções */
+  .secao-titulo {
+    font-size: clamp(1.7rem, 6vw, 2.4rem);
+  }
+
+  /* Sobre */
+  .sobre-avatar-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Tecnologias */
+  .grid-tecnologias {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-aprendendo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Projetos */
+  .projetos-filtros {
+    gap: 0.4rem;
+  }
+
+  .filtro-btn {
+    font-size: 0.8rem;
+    padding: 0.45rem 1rem;
+  }
+
+  .grid-projetos {
+    grid-template-columns: 1fr;
+  }
+
+  /* Formulário de contato */
+  .campo-grupo-duplo {
+    grid-template-columns: 1fr;
+  }
+
+  .formulario-card {
+    padding: 1.75rem;
+  }
+
+  /* Botão topo */
+  .botao-topo {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ============================================================
+   4. MOBILE PEQUENO — max-width: 480px
+   ============================================================ */
+@media (max-width: 480px) {
+
+  :root {
+    --espacamento-secao: 4rem 0;
+    --espacamento-container: 0 1.25rem;
+  }
+
+  /* Cabeçalho */
+  .nav-container {
+    padding: 0 1.25rem;
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+  }
+
+  /* Hero */
+  .secao-hero {
+    padding: 6rem 1.25rem 3.5rem;
+  }
+
+  .hero-nome {
+    font-size: clamp(2.2rem, 9vw, 3rem);
+  }
+
+  .hero-badge {
+    font-size: 0.75rem;
+  }
+
+  /* Esconder chips no mobile pequeno */
+  .chip-flutuante {
+    display: none;
+  }
+
+  /* Sobre: avatar menor */
+  .sobre-avatar-container {
+    width: 170px;
+    height: 170px;
+  }
+
+  .sobre-avatar-iniciais {
+    font-size: 3rem;
+  }
+
+  /* Projetos destaque */
+  .projeto-destaque-imagem {
+    height: 180px;
+  }
+
+  /* Tecnologias aprendendo: 1 coluna */
+  .grid-aprendendo {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contato */
+  .contato-link-valor {
+    font-size: 0.82rem;
+  }
+
+  /* Footer */
+  .rodape {
+    padding: 3rem 0 1.5rem;
+  }
+
+  .rodape-frase {
+    font-size: 0.82rem;
+  }
+
+  /* Timeline */
+  .timeline-item {
+    padding-left: 60px;
+  }
+
+  .timeline-marcador {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+}
+
+/* ============================================================
+   5. MOBILE MUITO PEQUENO — max-width: 360px
+   ============================================================ */
+@media (max-width: 360px) {
+
+  .hero-nome {
+    font-size: 2rem;
+  }
+
+  .secao-titulo {
+    font-size: 1.6rem;
+  }
+
+  .hero-stats {
+    gap: 0.8rem;
+  }
+
+  .stat-numero {
+    font-size: 1.2rem;
+  }
+
+  .hero-botoes {
+    max-width: 100%;
+  }
+
+  .sobre-avatar-container {
+    width: 150px;
+    height: 150px;
+  }
+
+  .formulario-card {
+    padding: 1.25rem;
+  }
+
+  .card-tecnologia {
+    padding: 1.4rem;
+  }
+
+  .card-projeto {
+    padding: 1.4rem;
+  }
+
+  .projeto-destaque-info {
+    padding: 1.4rem;
+  }
+}
+
+/* ============================================================
+   LANDSCAPE NO MOBILE — orientação horizontal
+   ============================================================ */
+@media (max-height: 600px) and (orientation: landscape) {
+
+  .secao-hero {
+    min-height: auto;
+    padding: 5rem 2rem 3rem;
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+  }
+
+  .hero-conteudo {
+    align-items: flex-start;
+  }
+
+  .hero-badge,
+  .hero-nome,
+  .hero-botoes {
+    text-align: left;
+  }
+
+  .hero-nome {
+    align-items: flex-start;
+  }
+
+  .hero-subtitulo {
+    justify-content: flex-start;
+  }
+
+  .hero-botoes {
+    flex-direction: row;
+    max-width: none;
+  }
+
+  .hero-avatar-wrapper {
+    width: 220px;
+    height: 220px;
+  }
+
+  .avatar-anel-externo { width: 200px; height: 200px; }
+  .avatar-anel-medio   { width: 160px; height: 160px; }
+  .avatar-placeholder  { width: 130px; height: 130px; }
+}

@@ -1,0 +1,456 @@
+    :root {
+      --fundo:       #050d1a;
+      --fundo-card:  #0a1929;
+      --borda:       rgba(0,212,255,.12);
+      --borda-h:     rgba(0,212,255,.35);
+      --azul-neon:   #00d4ff;
+      --azul-royal:  #1a6fff;
+      --texto:       #e8f0fe;
+      --texto-suave: #8eafd4;
+      --texto-fraco: #4a6785;
+      --verde:       #00e676;
+      --vermelho:    #ff5252;
+      --amarelo:     #ffca28;
+      --grad:        linear-gradient(135deg,#1a6fff,#00d4ff);
+      --fonte-d:     'Oxanium', sans-serif;
+      --fonte-c:     'Plus Jakarta Sans', sans-serif;
+      --r:           16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--fundo);
+      min-height: 100dvh;
+      font-family: var(--fonte-c);
+      display: flex; flex-direction: column; align-items: center;
+      background-image:
+        linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      padding-bottom: 3rem;
+      overflow-x: hidden;
+    }
+
+    /* ── Topo ── */
+    .topo {
+      width: 100%; position: sticky; top: 0;
+      padding: .9rem 2rem;
+      background: rgba(5,13,26,.9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--borda);
+      display: flex; align-items: center; gap: 1rem;
+      z-index: 100;
+    }
+    .topo-voltar {
+      display: flex; align-items: center; gap: .5rem;
+      color: var(--texto-suave); font-size: .85rem; font-weight: 500;
+      text-decoration: none; transition: color .2s;
+    }
+    .topo-voltar:hover { color: var(--azul-neon); }
+    .topo-titulo { font-family: var(--fonte-d); font-size: .95rem; font-weight: 700; color: var(--texto); }
+    .topo-badge {
+      margin-left: auto; font-size: .72rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: rgba(0,212,255,.08); border: 1px solid rgba(0,212,255,.2);
+      color: var(--azul-neon); padding: .25rem .8rem; border-radius: 100px;
+    }
+
+    /* ── Container ── */
+    .container {
+      width: 100%; max-width: 700px;
+      padding: 3rem 1.5rem;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 2rem;
+    }
+
+    /* ── Header ── */
+    .header { text-align: center; }
+    .header-label {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--fonte-d); font-size: .75rem; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--azul-neon); background: rgba(0,212,255,.08);
+      border: 1px solid rgba(0,212,255,.2);
+      padding: .3rem 1rem; border-radius: 100px; margin-bottom: 1rem;
+    }
+    .header-titulo {
+      font-family: var(--fonte-d); font-size: 2.2rem; font-weight: 800;
+      color: var(--texto); margin-bottom: .4rem;
+    }
+    .header-titulo span {
+      background: var(--grad); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .header-sub { color: var(--texto-suave); font-size: .88rem; }
+
+    /* ── RELÓGIO PRINCIPAL ── */
+    .relogio-card {
+      width: 100%;
+      background: var(--fundo-card);
+      border: 1px solid var(--borda);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 50px rgba(0,0,0,.5), 0 0 80px rgba(0,212,255,.04);
+    }
+
+    /* Efeito de brilho interno no card */
+    .relogio-card::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 80%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--azul-neon), transparent);
+      opacity: .4;
+    }
+
+    /* Data completa */
+    .relogio-data {
+      font-family: var(--fonte-d);
+      font-size: .85rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--texto-suave);
+      background: rgba(0,212,255,.06);
+      border: 1px solid var(--borda);
+      padding: .4rem 1.2rem; border-radius: 100px;
+    }
+
+    /* Dígitos do relógio */
+    .relogio-tempo {
+      display: flex; align-items: center; gap: .25rem;
+    }
+
+    .digito-grupo {
+      display: flex; gap: .15rem;
+    }
+
+    .digito {
+      font-family: var(--fonte-d);
+      font-size: clamp(3.5rem, 10vw, 6rem);
+      font-weight: 800;
+      color: var(--texto);
+      background: var(--fundo-card);
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      width: clamp(60px, 13vw, 100px);
+      height: clamp(80px, 17vw, 130px);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+
+    /* Linha divisória no meio do dígito (efeito flip-clock) */
+    .digito::after {
+      content: '';
+      position: absolute; left: 0; right: 0;
+      top: 50%; height: 1px;
+      background: rgba(0,0,0,.4);
+      pointer-events: none;
+    }
+
+    /* Glow no dígito quando muda */
+    .digito.piscando {
+      border-color: rgba(0,212,255,.4);
+      box-shadow: 0 0 20px rgba(0,212,255,.15);
+    }
+
+    /* Separador : entre horas/min/seg */
+    .separador {
+      font-family: var(--fonte-d);
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 800;
+      color: var(--azul-neon);
+      animation: piscaSeparador 1s step-end infinite;
+      line-height: 1;
+      margin: 0 .1rem;
+      align-self: center;
+      text-shadow: 0 0 20px rgba(0,212,255,.5);
+    }
+
+    @keyframes piscaSeparador {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: .2; }
+    }
+
+    /* AM/PM e Fuso */
+    .relogio-meta {
+      display: flex; align-items: center; gap: 1.25rem;
+    }
+
+    .relogio-ampm {
+      font-family: var(--fonte-d);
+      font-size: 1.4rem; font-weight: 800;
+      background: var(--grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .relogio-fuso {
+      font-size: .78rem; color: var(--texto-fraco);
+      display: flex; align-items: center; gap: .35rem;
+    }
+    .relogio-fuso i { color: var(--azul-neon); }
+
+    /* Botão 12/24h */
+    .btn-formato {
+      padding: .45rem 1.1rem;
+      background: rgba(0,212,255,.07);
+      border: 1px solid rgba(0,212,255,.2);
+      border-radius: 8px; color: var(--azul-neon);
+      font-family: var(--fonte-d); font-size: .78rem; font-weight: 700;
+      cursor: pointer; letter-spacing: .05em;
+      transition: all .2s;
+    }
+    .btn-formato:hover,
+    .btn-formato.ativo { background: var(--grad); border-color: transparent; color: #fff; }
+
+    /* ── Barra de progresso do dia ── */
+    .progresso-dia {
+      width: 100%;
+      background: rgba(0,0,0,.2);
+      border: 1px solid var(--borda);
+      border-radius: 10px; padding: 1rem 1.25rem;
+      display: flex; flex-direction: column; gap: .6rem;
+    }
+    .progresso-dia-titulo {
+      font-size: .78rem; color: var(--texto-fraco);
+      display: flex; justify-content: space-between;
+    }
+    .progresso-barra {
+      height: 6px; background: rgba(255,255,255,.05);
+      border-radius: 10px; overflow: hidden;
+    }
+    .progresso-preenchimento {
+      height: 100%;
+      background: var(--grad);
+      border-radius: 10px;
+      transition: width 1s linear;
+      box-shadow: 0 0 10px rgba(0,212,255,.4);
+    }
+
+    /* ── CRONÔMETRO ── */
+    .cronometro-card {
+      width: 100%;
+      background: var(--fundo-card);
+      border: 1px solid var(--borda);
+      border-radius: var(--r);
+      padding: 1.75rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+
+    .secao-titulo {
+      font-family: var(--fonte-d); font-size: .78rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--texto-suave);
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .secao-titulo i { color: var(--azul-neon); font-size: .95rem; }
+
+    .crono-display {
+      font-family: var(--fonte-d);
+      font-size: clamp(2.2rem, 8vw, 3.5rem);
+      font-weight: 800; text-align: center;
+      color: var(--texto);
+      letter-spacing: .05em;
+    }
+
+    .crono-ms {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      color: var(--azul-neon);
+    }
+
+    .crono-botoes {
+      display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap;
+    }
+
+    .crono-btn {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.5rem;
+      border-radius: 10px; border: 1px solid var(--borda);
+      font-family: var(--fonte-c); font-size: .88rem; font-weight: 600;
+      cursor: pointer; transition: all .2s;
+    }
+
+    .crono-btn-iniciar {
+      background: var(--grad); color: #fff; border-color: transparent;
+      box-shadow: 0 4px 20px rgba(26,111,255,.3);
+    }
+    .crono-btn-iniciar:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    .crono-btn-pausar {
+      background: rgba(255,202,40,.1); color: var(--amarelo);
+      border-color: rgba(255,202,40,.25);
+    }
+    .crono-btn-pausar:hover { background: rgba(255,202,40,.2); }
+
+    .crono-btn-zerar {
+      background: rgba(255,82,82,.08); color: var(--vermelho);
+      border-color: rgba(255,82,82,.2);
+    }
+    .crono-btn-zerar:hover { background: rgba(255,82,82,.15); }
+
+    .crono-btn-volta {
+      background: rgba(0,212,255,.07); color: var(--azul-neon);
+      border-color: rgba(0,212,255,.2);
+    }
+    .crono-btn-volta:hover { background: rgba(0,212,255,.14); }
+
+    /* Voltas */
+    .voltas-lista {
+      max-height: 180px; overflow-y: auto;
+      display: flex; flex-direction: column; gap: .4rem;
+    }
+    .voltas-lista::-webkit-scrollbar { width: 4px; }
+    .voltas-lista::-webkit-scrollbar-thumb { background: var(--borda-h); border-radius: 4px; }
+
+    .volta-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .55rem .85rem;
+      background: rgba(0,0,0,.15);
+      border: 1px solid var(--borda);
+      border-radius: 8px; font-size: .82rem;
+      animation: entrarVolta .25s ease;
+    }
+    @keyframes entrarVolta { from { opacity: 0; transform: translateY(-6px); } }
+    .volta-num  { color: var(--texto-fraco); font-family: var(--fonte-d); font-size: .75rem; }
+    .volta-tempo { font-family: var(--fonte-d); font-weight: 700; color: var(--azul-neon); }
+    .volta-delta { font-size: .75rem; color: var(--texto-fraco); }
+
+    /* ── TIMER ── */
+    .timer-card {
+      width: 100%;
+      background: var(--fundo-card);
+      border: 1px solid var(--borda);
+      border-radius: var(--r);
+      padding: 1.75rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+
+    .timer-inputs {
+      display: flex; align-items: center; justify-content: center;
+      gap: .5rem;
+    }
+
+    .timer-campo {
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+    }
+    .timer-campo label {
+      font-size: .68rem; color: var(--texto-fraco);
+      font-family: var(--fonte-d); letter-spacing: .1em; text-transform: uppercase;
+    }
+    .timer-campo input {
+      width: clamp(70px, 18vw, 90px);
+      background: rgba(0,0,0,.2);
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      color: var(--texto); font-family: var(--fonte-d);
+      font-size: 2rem; font-weight: 800;
+      text-align: center; outline: none; padding: .5rem;
+      transition: border-color .2s;
+    }
+    .timer-campo input:focus { border-color: rgba(0,212,255,.45); }
+
+    .timer-sep {
+      font-family: var(--fonte-d); font-size: 2rem; font-weight: 800;
+      color: var(--borda-h); align-self: flex-end; padding-bottom: .6rem;
+    }
+
+    .timer-display {
+      text-align: center;
+      font-family: var(--fonte-d); font-size: clamp(2.5rem, 9vw, 4rem);
+      font-weight: 800; color: var(--texto);
+      display: none;
+    }
+    .timer-display.visivel { display: block; }
+    .timer-display.urgente { color: var(--vermelho); animation: pulsarTimer .5s ease-in-out infinite; }
+    @keyframes pulsarTimer { 0%,100%{opacity:1} 50%{opacity:.5} }
+
+    .timer-botoes {
+      display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap;
+    }
+
+    /* Círculo de progresso do timer */
+    .timer-progresso-wrapper {
+      display: flex; justify-content: center;
+    }
+    .timer-svg { transform: rotate(-90deg); }
+    .timer-circulo-bg {
+      fill: none; stroke: rgba(0,212,255,.08); stroke-width: 6;
+    }
+    .timer-circulo-prog {
+      fill: none; stroke: url(#grad-timer); stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 314;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+    .timer-label-svg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--fonte-d); font-size: 1.6rem; font-weight: 800; color: var(--texto);
+    }
+
+    /* Glows de fundo */
+    .glow-fundo { position: fixed; pointer-events: none; border-radius: 50%; filter: blur(80px); z-index: -1; }
+    .glow-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(26,111,255,.1), transparent 70%); top: -15%; left: -20%; }
+    .glow-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,255,.08), transparent 70%); bottom: -10%; right: -15%; }
+
+    @media (max-width: 480px) {
+      .relogio-card { padding: 1.75rem 1rem; }
+      .crono-botoes { gap: .5rem; }
+      .crono-btn { padding: .6rem 1rem; font-size: .82rem; }
+    }
+
+/* ============================================================
+   TEMA CLARO — Relógio Digital
+   ============================================================ */
+html[data-tema="claro"] {
+  --fundo: #f2f5fc; --fundo-card: #ffffff;
+  --borda: rgba(26,111,255,.2); --borda-h: rgba(26,111,255,.45);
+  --texto: #0d1b2a; --texto-suave: #2d4a6e; --texto-fraco: #5a7a9e;
+  --verde: #16a34a; --vermelho: #dc2626; --amarelo: #b47800;
+}
+html[data-tema="claro"] body { background-color: var(--fundo); background-image: linear-gradient(rgba(26,111,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26,111,255,.05) 1px, transparent 1px); }
+html[data-tema="claro"] .topo  { background: rgba(242,245,252,.94); border-bottom-color: rgba(26,111,255,.15); }
+html[data-tema="claro"] .topo-titulo { color: var(--texto); }
+html[data-tema="claro"] .topo-badge  { background: rgba(26,111,255,.1); border-color: rgba(26,111,255,.28); color: #1a6fff; }
+html[data-tema="claro"] .relogio-card  { background: #ffffff; border-color: rgba(26,111,255,.18); box-shadow: 0 8px 40px rgba(13,27,42,.1); }
+html[data-tema="claro"] .relogio-card::before { background: linear-gradient(90deg, transparent, rgba(26,111,255,.5), transparent); }
+html[data-tema="claro"] .relogio-data   { background: rgba(26,111,255,.08); border-color: rgba(26,111,255,.2); color: var(--texto-suave); }
+html[data-tema="claro"] .digito        { background: #f0f5ff; border-color: rgba(26,111,255,.2); color: var(--texto); }
+html[data-tema="claro"] .digito::after  { background: rgba(0,0,0,.08); }
+html[data-tema="claro"] .digito.piscando { border-color: rgba(26,111,255,.5); box-shadow: 0 0 18px rgba(26,111,255,.18); }
+html[data-tema="claro"] .progresso-dia  { background: rgba(26,111,255,.05); border-color: rgba(26,111,255,.18); }
+html[data-tema="claro"] .progresso-barra { background: rgba(26,111,255,.1); }
+html[data-tema="claro"] .cronometro-card { background: #ffffff; border-color: rgba(26,111,255,.18); box-shadow: 0 4px 24px rgba(13,27,42,.08); }
+html[data-tema="claro"] .timer-card     { background: #ffffff; border-color: rgba(26,111,255,.18); box-shadow: 0 4px 24px rgba(13,27,42,.08); }
+html[data-tema="claro"] .crono-display  { color: var(--texto); }
+html[data-tema="claro"] .volta-item     { background: #f6f9ff; border-color: rgba(26,111,255,.16); }
+html[data-tema="claro"] .volta-num      { color: var(--texto-fraco); }
+html[data-tema="claro"] .volta-delta    { color: var(--texto-fraco); }
+html[data-tema="claro"] .timer-campo input { background: #f6f9ff; border-color: rgba(26,111,255,.2); color: var(--texto); }
+html[data-tema="claro"] .timer-campo label { color: var(--texto-fraco); }
+html[data-tema="claro"] .timer-sep       { color: rgba(26,111,255,.3); }
+html[data-tema="claro"] .timer-label-svg { color: var(--texto) !important; }
+html[data-tema="claro"] .timer-circulo-bg { stroke: rgba(26,111,255,.12); }
+html[data-tema="claro"] .secao-titulo    { color: var(--texto-suave); }
+html[data-tema="claro"] .header-label    { background: rgba(26,111,255,.1); border-color: rgba(26,111,255,.28); color: #1a6fff; }
+html[data-tema="claro"] .crono-btn-volta { background: rgba(26,111,255,.08); color: #1a6fff; border-color: rgba(26,111,255,.25); }
+html[data-tema="claro"] .crono-btn-zerar { background: rgba(220,38,38,.07); color: #dc2626; border-color: rgba(220,38,38,.2); }
+html[data-tema="claro"] .crono-btn-pausar{ background: rgba(180,120,0,.08); color: #b47800; border-color: rgba(180,120,0,.25); }
+html[data-tema="claro"] .glow-fundo      { opacity: .35; }
+.botao-tema {
+  margin-left: auto; width: 36px; height: 36px; flex-shrink: 0;
+  border-radius: 9px; border: 1px solid var(--borda);
+  background: transparent; color: var(--texto-suave);
+  font-size: 1.05rem; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .25s;
+}
+.botao-tema:hover { border-color: var(--borda-h); transform: rotate(18deg); }
+html[data-tema="claro"] .botao-tema { color: #e09000; border-color: rgba(224,144,0,.3); }
+html.transicao-tema *, html.transicao-tema *::before, html.transicao-tema *::after {
+  transition: background-color .35s ease, color .35s ease, border-color .35s ease, box-shadow .35s ease !important;
+}

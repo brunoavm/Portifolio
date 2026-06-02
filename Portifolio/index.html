@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO BÁSICO ===== -->
+  <meta name="description" content="Bruno Magalhães — Desenvolvedor Front-End & Estudante de ADS. Criando interfaces modernas, fluidas e impactantes." />
+  <meta name="keywords" content="desenvolvedor front-end, portfolio, Bruno Magalhães, HTML, CSS, JavaScript, React" />
+  <meta name="author" content="Bruno Magalhães" />
+  <meta property="og:title" content="Bruno Magalhães | Desenvolvedor Front-End" />
+  <meta property="og:description" content="Portfolio profissional — Bruno Magalhães, Desenvolvedor Front-End & Estudante de ADS." />
+  <meta property="og:type" content="website" />
+
+  <title>Bruno Magalhães | Desenvolvedor Front-End</title>
+
+  <!-- ===== FONTES GOOGLE ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- ===== ÍCONES REMIX ===== -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- ===== ESTILOS ===== -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animacoes.css" />
+  <link rel="stylesheet" href="css/responsivo.css" />
+</head>
+<body>
+
+  <!-- ===================================================
+       TELA DE CARREGAMENTO (Loading Screen)
+  =================================================== -->
+  <!-- <div id="teladecarregamento" class="tela-carregamento">
+    <div class="carregamento-conteudo">
+      <div class="carregamento-logo">BM</div>
+      <div class="carregamento-barra">
+        <div class="carregamento-progresso"></div>
+      </div>
+      <span class="carregamento-texto">Inicializando...</span>
+    </div>
+  </div> -->
+
+  <!-- ===================================================
+       NAVBAR FIXA
+  =================================================== -->
+  <header id="cabecalho" class="cabecalho">
+    <nav class="nav-container">
+
+      <!-- Logo -->
+      <a href="#inicio" class="nav-logo" aria-label="Voltar ao início">
+        <span class="logo-simbolo">&lt;</span>
+        <span class="logo-nome">Bruno<span class="logo-sobrenome">Magalhães</span></span>
+        <span class="logo-simbolo">/&gt;</span>
+      </a>
+
+      <!-- Links de Navegação (Desktop) -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio"      class="nav-link" data-secao="inicio">Início</a></li>
+        <li><a href="#sobre"       class="nav-link" data-secao="sobre">Sobre</a></li>
+        <li><a href="#tecnologias" class="nav-link" data-secao="tecnologias">Skills</a></li>
+        <li><a href="#projetos"    class="nav-link" data-secao="projetos">Projetos</a></li>
+        <li><a href="#jornada"     class="nav-link" data-secao="jornada">Jornada</a></li>
+        <li><a href="#contato"     class="nav-link" data-secao="contato">Contato</a></li>
+      </ul>
+
+      <!-- Botão Currículo (Desktop) -->
+      <a href="curriculo/curriculo-bruno-magalhaes.pdf" download class="botao-curriculo-nav" aria-label="Baixar currículo">
+        <i class="ri-download-line"></i> Currículo
+      </a>
+
+      <!-- Botão Alternar Tema (Dark/Light Mode) -->
+      <button id="botaoTema" class="botao-tema" aria-label="Alternar tema">
+        <i class="ri-moon-line" id="iconeTema"></i>
+      </button>
+
+      <!-- Botão Menu Mobile (Hambúrguer) -->
+      <button class="botao-menu-mobile" id="botaoMenuMobile" aria-label="Abrir menu" aria-expanded="false">
+        <span class="hamburger-linha"></span>
+        <span class="hamburger-linha"></span>
+        <span class="hamburger-linha"></span>
+      </button>
+
+    </nav>
+
+    <!-- Menu Mobile (Drawer) -->
+    <div class="menu-mobile" id="menuMobile" aria-hidden="true">
+      <ul class="menu-mobile-links">
+        <li><a href="#inicio"      class="menu-mobile-link" data-secao="inicio"><i class="ri-home-4-line"></i>Início</a></li>
+        <li><a href="#sobre"       class="menu-mobile-link" data-secao="sobre"><i class="ri-user-line"></i>Sobre</a></li>
+        <li><a href="#tecnologias" class="menu-mobile-link" data-secao="tecnologias"><i class="ri-code-s-slash-line"></i>Skills</a></li>
+        <li><a href="#projetos"    class="menu-mobile-link" data-secao="projetos"><i class="ri-folder-open-line"></i>Projetos</a></li>
+        <li><a href="#jornada"     class="menu-mobile-link" data-secao="jornada"><i class="ri-map-pin-time-line"></i>Jornada</a></li>
+        <li><a href="#contato"     class="menu-mobile-link" data-secao="contato"><i class="ri-mail-line"></i>Contato</a></li>
+        <li>
+          <a href="curriculo/curriculo-bruno-magalhaes.pdf" download class="menu-mobile-link menu-mobile-curriculo">
+            <i class="ri-download-line"></i>Baixar Currículo
+          </a>
+        </li>
+        <li>
+          <button id="botaoTemaMobile" class="menu-mobile-link menu-mobile-tema" aria-label="Alternar tema">
+            <i class="ri-moon-line" id="iconeTemaMobile"></i>
+            <span id="textoTemaMobile">Modo Claro</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <!-- Overlay escuro do menu mobile -->
+    <div class="menu-mobile-overlay" id="menuMobileOverlay"></div>
+  </header>
+
+  <!-- ===================================================
+       SEÇÃO HERO — ABERTURA PRINCIPAL
+  =================================================== -->
+  <section id="inicio" class="secao-hero">
+
+    <!-- Canvas de partículas animadas no background -->
+    <canvas id="canvasParticulas" class="canvas-particulas" aria-hidden="true"></canvas>
+
+    <!-- Grade decorativa no background -->
+    <div class="hero-grade" aria-hidden="true"></div>
+
+    <!-- Círculos de luz ambiente (glow) -->
+    <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+
+    <div class="hero-conteudo">
+
+      <!-- Badge superior -->
+      <div class="hero-badge revelar-scroll">
+        <span class="badge-ponto"></span>
+        <span>Disponível para oportunidades</span>
+      </div>
+
+      <!-- Nome principal com efeito de digitação -->
+      <h1 class="hero-nome revelar-scroll">
+        <span class="nome-linha">Bruno</span>
+        <span class="nome-linha nome-destaque">Magalhães</span>
+      </h1>
+
+      <!-- Subtítulo com typing effect -->
+      <div class="hero-subtitulo revelar-scroll">
+        <span class="typing-prefixo">Sou </span>
+        <span id="textoDigitando" class="typing-texto"></span>
+        <span class="typing-cursor">|</span>
+      </div>
+
+      <!-- Descrição profissional -->
+      <p class="hero-descricao revelar-scroll">
+        Transformo ideias em interfaces digitais elegantes e funcionais.
+        Apaixonado por UI moderno, código limpo e experiências que
+        <strong>impressionam</strong> desde o primeiro pixel.
+      </p>
+
+      <!-- Botões de ação -->
+      <div class="hero-botoes revelar-scroll">
+        <a href="#projetos" class="botao-primario">
+          <i class="ri-folder-open-line"></i>
+          <span>Ver Projetos</span>
+          <div class="botao-brilho"></div>
+        </a>
+        <a href="curriculo/curriculo-bruno-magalhaes.pdf" download class="botao-secundario">
+          <i class="ri-download-2-line"></i>
+          <span>Download Currículo</span>
+        </a>
+        <a href="#contato" class="botao-terciario">
+          <i class="ri-send-plane-line"></i>
+          <span>Contato</span>
+        </a>
+      </div>
+
+      <!-- Indicadores de stats rápidos -->
+      <div class="hero-stats revelar-scroll">
+        <div class="stat-item">
+          <span class="stat-numero">10+</span>
+          <span class="stat-label">Projetos</span>
+        </div>
+        <div class="stat-divisor"></div>
+        <div class="stat-item">
+          <span class="stat-numero">8+</span>
+          <span class="stat-label">Tecnologias</span>
+        </div>
+        <div class="stat-divisor"></div>
+        <div class="stat-item">
+          <span class="stat-numero">ADS</span>
+          <span class="stat-label">Cursando</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Elemento visual decorativo lateral (avatar estilizado) -->
+    <div class="hero-avatar-wrapper revelar-scroll">
+      <div class="avatar-anel avatar-anel-externo" aria-hidden="true"></div>
+      <div class="avatar-anel avatar-anel-medio" aria-hidden="true"></div>
+      <div class="avatar-container">
+        <div class="avatar-placeholder">
+          <!-- Substitua pela sua foto real:
+               <img src="assets/img/foto-perfil.jpg" alt="Bruno Magalhães" /> -->
+          <div class="avatar-iniciais">BM</div>
+          <div class="avatar-glow" aria-hidden="true"></div>
+        </div>
+      </div>
+      <!-- Chips flutuantes ao redor do avatar -->
+      <div class="chip-flutuante chip-flutuante-1" aria-hidden="true">
+        <i class="ri-code-s-slash-line"></i> Front-End
+      </div>
+      <div class="chip-flutuante chip-flutuante-2" aria-hidden="true">
+        <i class="ri-reactjs-line"></i> React
+      </div>
+      <div class="chip-flutuante chip-flutuante-3" aria-hidden="true">
+        <i class="ri-git-branch-line"></i> Git
+      </div>
+    </div>
+
+    <!-- Seta de scroll para baixo -->
+    <a href="#sobre" class="hero-scroll-indicador" aria-label="Rolar para a próxima seção">
+      <i class="ri-arrow-down-line"></i>
+    </a>
+
+  </section>
+
+  <!-- ===================================================
+       SEÇÃO SOBRE MIM
+  =================================================== -->
+  <section id="sobre" class="secao-sobre secao">
+    <div class="container">
+
+      <!-- Cabeçalho da seção -->
+      <div class="secao-cabecalho revelar-scroll">
+        <span class="secao-etiqueta">Quem sou eu</span>
+        <h2 class="secao-titulo">Sobre <span class="destaque-texto">Mim</span></h2>
+        <p class="secao-subtitulo">Conheça um pouco da minha história e trajetória</p>
+      </div>
+
+      <div class="sobre-conteudo">
+
+        <!-- Card visual da esquerda -->
+        <div class="sobre-visual revelar-scroll">
+          <div class="sobre-avatar-container">
+            <div class="sobre-avatar">
+              <!-- Substitua pela sua foto:
+                   <img src="assets/img/foto-sobre.jpg" alt="Bruno Magalhães" /> -->
+              <div class="sobre-avatar-iniciais">BM</div>
+            </div>
+            <div class="sobre-avatar-decoracao" aria-hidden="true">
+              <div class="decoracao-linha decoracao-linha-h"></div>
+              <div class="decoracao-linha decoracao-linha-v"></div>
+              <div class="decoracao-canto decoracao-canto-tl"></div>
+              <div class="decoracao-canto decoracao-canto-br"></div>
+            </div>
+          </div>
+
+          <!-- Cartão de localização -->
+          <div class="sobre-info-card">
+            <i class="ri-map-pin-2-line"></i>
+            <div>
+              <span class="info-card-titulo">Localização</span>
+              <span class="info-card-valor">Ipojuca/PE - BR</span>
+            </div>
+          </div>
+
+          <!-- Cartão de status -->
+          <div class="sobre-info-card sobre-info-card-status">
+            <div class="status-ponto-animado"></div>
+            <div>
+              <span class="info-card-titulo">Status</span>
+              <span class="info-card-valor">Disponível para projetos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texto da direita -->
+        <div class="sobre-texto revelar-scroll">
+          <p class="sobre-paragrafo sobre-paragrafo-destaque">
+            Olá! Sou <strong>Bruno Magalhães</strong>, desenvolvedor front-end apaixonado
+            por criar experiências digitais que combinam <strong>estética refinada</strong>
+            com <strong>funcionalidade real</strong>.
+          </p>
+          <p class="sobre-paragrafo">
+            Minha jornada na tecnologia começou pela curiosidade de entender como as
+            interfaces que usamos no dia a dia são construídas. Hoje, estudo
+            <strong>Análise e Desenvolvimento de Sistemas (ADS)</strong> e aplico esse
+            conhecimento em projetos que resolvem problemas reais.
+          </p>
+          <p class="sobre-paragrafo">
+            Tenho profundo interesse em <strong>UI/UX moderno</strong>, código bem
+            estruturado e na criação de soluções que entregam valor. Acredito que um
+            bom produto não é só funcional — ele também precisa ser visualmente elegante
+            e agradável de usar.
+          </p>
+          <p class="sobre-paragrafo">
+            Estou sempre em <strong>evolução constante</strong>, explorando novas
+            tecnologias e desafios. Meu objetivo é construir uma carreira sólida como
+            desenvolvedor, contribuindo com times e projetos que fazem a diferença.
+          </p>
+
+          <!-- Tags de interesses -->
+          <div class="sobre-tags">
+            <span class="tag"><i class="ri-code-s-slash-line"></i> Front-End Dev</span>
+            <span class="tag"><i class="ri-palette-line"></i> UI/UX</span>
+            <span class="tag"><i class="ri-graduation-cap-line"></i> ADS</span>
+            <span class="tag"><i class="ri-lightbulb-flash-line"></i> Inovação</span>
+            <span class="tag"><i class="ri-book-open-line"></i> Aprendizado</span>
+          </div>
+
+          <a href="#contato" class="botao-primario sobre-botao">
+            <i class="ri-message-3-line"></i>
+            <span>Vamos Conversar</span>
+            <div class="botao-brilho"></div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SEÇÃO TECNOLOGIAS / STACK
+  =================================================== -->
+  <section id="tecnologias" class="secao-tecnologias secao">
+    <div class="container">
+
+      <div class="secao-cabecalho revelar-scroll">
+        <span class="secao-etiqueta">O que eu uso</span>
+        <h2 class="secao-titulo">Minhas <span class="destaque-texto">Skills</span></h2>
+        <p class="secao-subtitulo">Tecnologias que domino e estou aprendendo atualmente</p>
+      </div>
+
+      <!-- Grade de tecnologias principais -->
+      <div class="tec-grupo-titulo revelar-scroll">
+        <span class="grupo-linha"></span>
+        <span class="grupo-label">Domínio Atual</span>
+        <span class="grupo-linha"></span>
+      </div>
+
+      <div class="grid-tecnologias revelar-scroll">
+
+        <!-- ===== CARD HTML5 ===== -->
+        <div class="card-tecnologia" data-cor="#E34F26" data-atraso="0">
+          <div class="card-tec-glow" style="--cor-glow: #E34F2640;"></div>
+          <div class="card-tec-icone">
+            <i class="ri-html5-line" style="color: #E34F26;"></i>
+          </div>
+          <h3 class="card-tec-nome">HTML5</h3>
+          <p class="card-tec-descricao">Estrutura semântica, acessibilidade e boas práticas para um código limpo e bem organizado.</p>
+          <div class="card-tec-nivel">
+            <span class="nivel-label">Nível</span>
+            <div class="nivel-barra">
+              <div class="nivel-preenchimento" style="--nivel: 92%; --cor: #E34F26;"></div>
+            </div>
+            <span class="nivel-valor">Avançado</span>
+          </div>
+          <div class="card-tec-badge" style="background: #E34F2620; color: #E34F26;">Front-End</div>
+        </div>
+
+        <!-- ===== CARD CSS3 ===== -->
+        <div class="card-tecnologia" data-cor="#264DE4" data-atraso="100">
+          <div class="card-tec-glow" style="--cor-glow: #264DE440;"></div>
+          <div class="card-tec-icone">
+            <i class="ri-css3-line" style="color: #264DE4;"></i>
+          </div>
+          <h3 class="card-tec-nome">CSS3</h3>
+          <p class="card-tec-descricao">Animações, layouts responsivos, Flexbox, Grid e estilização avançada com foco em UI premium.</p>
+          <div class="card-tec-nivel">
+            <span class="nivel-label">Nível</span>
+            <div class="nivel-barra">
+              <div class="nivel-preenchimento" style="--nivel: 88%; --cor: #264DE4;"></div>
+            </div>
+            <span class="nivel-valor">Avançado</span>
+          </div>
+          <div class="card-tec-badge" style="background: #264DE420; color: #264DE4;">Front-End</div>
+        </div>
+
+        <!-- ===== CARD JAVASCRIPT ===== -->
+        <div class="card-tecnologia" data-cor="#F7DF1E" data-atraso="200">
+          <div class="card-tec-glow" style="--cor-glow: #F7DF1E40;"></div>
+          <div class="card-tec-icone">
+            <i class="ri-javascript-line" style="color: #F7DF1E;"></i>
+          </div>
+          <h3 class="card-tec-nome">JavaScript</h3>
+          <p class="card-tec-descricao">Lógica de programação, manipulação do DOM, APIs, async/await e interatividade avançada.</p>
+          <div class="card-tec-nivel">
+            <span class="nivel-label">Nível</span>
+            <div class="nivel-barra">
+              <div class="nivel-preenchimento" style="--nivel: 80%; --cor: #F7DF1E;"></div>
+            </div>
+            <span class="nivel-valor">Intermediário</span>
+          </div>
+          <div class="card-tec-badge" style="background: #F7DF1E20; color: #F7DF1E;">Front-End</div>
+        </div>
+
+        <!-- ===== CARD REACT ===== -->
+        <div class="card-tecnologia" data-cor="#61DAFB" data-atraso="300">
+          <div class="card-tec-glow" style="--cor-glow: #61DAFB40;"></div>
+          <div class="card-tec-icone">
+            <i class="ri-reactjs-line" style="color: #61DAFB;"></i>
+          </div>
+          <h3 class="card-tec-nome">React</h3>
+          <p class="card-tec-descricao">Componentização, gerenciamento de estado, hooks e criação de SPAs modernas e performáticas.</p>
+          <div class="card-tec-nivel">
+            <span class="nivel-label">Nível</span>
+            <div class="nivel-barra">
+              <div class="nivel-preenchimento" style="--nivel: 20%; --cor: #61DAFB;"></div>
+            </div>
+            <span class="nivel-valor">Básico+</span>
+          </div>
+          <div class="card-tec-badge" style="background: #61DAFB20; color: #61DAFB;">Front-End</div>
+        </div>
+
+        <!-- ===== CARD FIREBASE ===== -->
+        <div class="card-tecnologia" data-cor="#FFCA28" data-atraso="400">
+          <div class="card-tec-glow" style="--cor-glow: #FFCA2840;"></div>
+          <div class="card-tec-icone">
+            <i class="ri-firebase-line" style="color: #FFCA28;"></i>
+          </div>
+          <h3 class="card-tec-nome">Firebase</h3>
+          <p class="card-tec-descricao">Banco de dados em tempo real, autenticação, Firestore e deploy de aplicações web completas.</p>
+          <div class="card-tec-nivel">
+            <span class="nivel-label">Nível</span>
+            <div class="nivel-barra">
+              <div class="nivel-preenchimento" style="--nivel: 60%; --cor: #FFCA28;"></div>
+            </div>
+            <span class="nivel-valor">Básico+</span>
+          </div>
+          <div class="card-tec-badge" style="background: #FFCA2820; color: #FFCA28;">Back-End</div>
+        </div>
+
+        <!-- ===== CARD NODE.JS ===== -->
+        <div class="card-tecnologia" data-cor="#339933" data-atraso="500">
+          <div class="card-tec-glow" style="--cor-glow: #33993340;"></div>
+          <div class="card-tec-icone">
+            <i class="ri-nodejs-line" style="color: #339933;"></i>
+          </div>
+          <h3 class="card-tec-nome">Node.js</h3>
+          <p class="card-tec-descricao">Desenvolvimento back-end com JavaScript, criação de APIs REST e ambientes de servidor.</p>
+          <div class="card-tec-nivel">
+            <span class="nivel-label">Nível</span>
+            <div class="nivel-barra">
+              <div class="nivel-preenchimento" style="--nivel: 20%; --cor: #339933;"></div>
+            </div>
+            <span class="nivel-valor">Básico+</span>
+          </div>
+          <div class="card-tec-badge" style="background: #33993320; color: #339933;">Back-End</div>
+        </div>
+
+        <!-- ===== CARD GIT ===== -->
+        <div class="card-tecnologia" data-cor="#F05032" data-atraso="600">
+          <div class="card-tec-glow" style="--cor-glow: #F0503240;"></div>
+          <div class="card-tec-icone">
+            <i class="ri-git-branch-line" style="color: #F05032;"></i>
+          </div>
+          <h3 class="card-tec-nome">Git</h3>
+          <p class="card-tec-descricao">Controle de versão, branches, merges, resolução de conflitos e fluxo de trabalho colaborativo.</p>
+          <div class="card-tec-nivel">
+            <span class="nivel-label">Nível</span>
+            <div class="nivel-barra">
+              <div class="nivel-preenchimento" style="--nivel: 30%; --cor: #F05032;"></div>
+            </div>
+            <span class="nivel-valor">Intermediário</span>
+          </div>
+          <div class="card-tec-badge" style="background: #F0503220; color: #F05032;">DevOps</div>
+        </div>
+
+        <!-- ===== CARD GITHUB ===== -->
+        <div class="card-tecnologia" data-cor="#8b949e" data-atraso="700">
+          <div class="card-tec-glow" style="--cor-glow: #8b949e40;"></div>
+          <div class="card-tec-icone">
+            <i class="ri-github-line" style="color: #8b949e;"></i>
+          </div>
+          <h3 class="card-tec-nome">GitHub</h3>
+          <p class="card-tec-descricao">Repositórios remotos, pull requests, Actions para CI/CD e colaboração em projetos open source.</p>
+          <div class="card-tec-nivel">
+            <span class="nivel-label">Nível</span>
+            <div class="nivel-barra">
+              <div class="nivel-preenchimento" style="--nivel: 40%; --cor: #8b949e;"></div>
+            </div>
+            <span class="nivel-valor">Intermediário</span>
+          </div>
+          <div class="card-tec-badge" style="background: #8b949e20; color: #8b949e;">DevOps</div>
+        </div>
+
+      </div>
+
+      <!-- Tecnologias em aprendizado -->
+      <div class="tec-grupo-titulo revelar-scroll" style="margin-top: 4rem;">
+        <span class="grupo-linha"></span>
+        <span class="grupo-label aprendendo">📚 Aprendendo Atualmente</span>
+        <span class="grupo-linha"></span>
+      </div>
+
+      <div class="grid-aprendendo revelar-scroll">
+
+        <div class="card-aprendendo">
+          <div class="aprendendo-icone" style="color: #3178C6;">
+            <i class="ri-code-box-line"></i>
+          </div>
+          <span class="aprendendo-nome">TypeScript</span>
+          <div class="aprendendo-progresso">
+            <div class="aprendendo-barra" style="--w: 35%; --cor: #3178C6;"></div>
+          </div>
+        </div>
+
+        <div class="card-aprendendo">
+          <div class="aprendendo-icone" style="color: #00d4ff;">
+            <i class="ri-plug-line"></i>
+          </div>
+          <span class="aprendendo-nome">APIs REST</span>
+          <div class="aprendendo-progresso">
+            <div class="aprendendo-barra" style="--w: 55%; --cor: #00d4ff;"></div>
+          </div>
+        </div>
+
+        <div class="card-aprendendo">
+          <div class="aprendendo-icone" style="color: #00e676;">
+            <i class="ri-database-2-line"></i>
+          </div>
+          <span class="aprendendo-nome">Banco de Dados</span>
+          <div class="aprendendo-progresso">
+            <div class="aprendendo-barra" style="--w: 40%; --cor: #00e676;"></div>
+          </div>
+        </div>
+
+        <div class="card-aprendendo">
+          <div class="aprendendo-icone" style="color: #ff6b6b;">
+            <i class="ri-layout-masonry-line"></i>
+          </div>
+          <span class="aprendendo-nome">Responsividade Avançada</span>
+          <div class="aprendendo-progresso">
+            <div class="aprendendo-barra" style="--w: 70%; --cor: #ff6b6b;"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SEÇÃO PROJETOS
+  =================================================== -->
+  <section id="projetos" class="secao-projetos secao">
+    <div class="container">
+
+      <div class="secao-cabecalho revelar-scroll">
+        <span class="secao-etiqueta">O que construí</span>
+        <h2 class="secao-titulo">Meus <span class="destaque-texto">Projetos</span></h2>
+        <p class="secao-subtitulo">Uma seleção dos meus trabalhos mais relevantes</p>
+      </div>
+
+      <!-- Filtros de projetos -->
+      <div class="projetos-filtros revelar-scroll">
+        <button class="filtro-btn filtro-ativo" data-filtro="todos">Todos</button>
+        <button class="filtro-btn" data-filtro="destaque">Em Destaque</button>
+        <button class="filtro-btn" data-filtro="simples">Projetos Simples</button>
+        <button class="filtro-btn" data-filtro="pessoal">Pessoais</button>
+      </div>
+
+      <!-- =============================================
+           PROJETOS EM DESTAQUE
+      ============================================= -->
+      <div class="projetos-grupo-titulo revelar-scroll">
+        <i class="ri-star-line"></i>
+        <span>Projetos em Destaque</span>
+      </div>
+
+      <div class="grid-projetos-destaque" id="gridProjetosDestaque">
+
+        <!--
+          ╔══════════════════════════════════════════╗
+          ║  MODELO PARA ADICIONAR NOVO PROJETO      ║
+          ║  Duplique este bloco para novos projetos ║
+          ╚══════════════════════════════════════════╝
+          Passos para adicionar:
+          1. Copie o bloco <div class="card-projeto-destaque"> completo
+          2. Substitua data-categoria (pessoal, simples, destaque)
+          3. Substitua o src da imagem em assets/img/
+          4. Altere o nome, descrição e tecnologias
+          5. Substitua os links href dos botões
+        -->
+
+        <!-- ===== CARD DESTAQUE: SITE DE ADVOCACIA ===== -->
+        <article class="card-projeto-destaque" data-categoria="destaque pessoal">
+          <div class="projeto-destaque-imagem">
+            <!-- Substitua pelo caminho real da imagem do projeto -->
+            <img src="projetos/Site de Advocacia/Fotos/Imagem-principal.png" alt="Site de Advocacia" loading="lazy" />
+            <div class="projeto-placeholder-img">
+              <i class="ri-heart-pulse-line"></i>
+              <span>Site de Advocacia</span>
+            </div>
+            <div class="projeto-overlay">
+              <div class="projeto-overlay-links">
+                <a href="projetos/Site de Advocacia/index.html" target="_blank" rel="noopener" class="overlay-btn">
+                  <i class="ri-external-link-line"></i> Ver Projeto
+                </a>
+                <a href="https://github.com/brunoavm/Site-de-Advocacia" target="_blank" rel="noopener" class="overlay-btn overlay-btn-github">
+                  <i class="ri-github-line"></i> GitHub
+                </a>
+              </div>
+            </div>
+            <span class="projeto-badge-destaque">⭐ Destaque</span>
+          </div>
+          <div class="projeto-destaque-info">
+            <h3 class="projeto-nome">Site de Advocacia</h3>
+            <p class="projeto-descricao">
+              Landing page profissional para escritório de advocacia com design sóbrio, formulário de contato e seção de serviços.
+            </p>
+            <div class="projeto-tecnologias">
+              <!-- Substitua as tecnologias conforme o projeto -->
+              <span class="tec-tag tec-html">HTML5</span>
+              <span class="tec-tag tec-css">CSS3</span>
+              <span class="tec-tag tec-js">JavaScript</span>
+            </div>
+            <div class="projeto-acoes">
+              <a href="projetos/Site de Advocacia/index.html" target="_blank" rel="noopener" class="botao-primario botao-projeto">
+                <i class="ri-external-link-line"></i> Ver Projeto
+                <div class="botao-brilho"></div>
+              </a>
+              <a href="https://github.com/brunoavm/Site-de-Advocacia" target="_blank" rel="noopener" class="botao-github">
+                <i class="ri-github-line"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== CARD DESTAQUE: CARTÓRIO ===== -->
+        <article class="card-projeto-destaque" data-categoria="destaque pessoal">
+          <div class="projeto-destaque-imagem">
+            <!-- <img src="assets/img/projeto-controle-contas.jpg" alt="CARTÓRIO" loading="lazy" /> -->
+            <div class="projeto-placeholder-img">
+              <i class="ri-money-dollar-circle-line"></i>
+              <span>Em Desenvolvimento...</span>
+            </div>
+            <div class="projeto-overlay">
+              <div class="projeto-overlay-links">
+                <a href="#" target="_blank" rel="noopener" class="overlay-btn">
+                  <i class="ri-external-link-line"></i> Ver Projeto
+                </a>
+                <a href="#" target="_blank" rel="noopener" class="overlay-btn overlay-btn-github">
+                  <i class="ri-github-line"></i> GitHub
+                </a>
+              </div>
+            </div>
+            <span class="projeto-badge-destaque">⭐ Destaque</span>
+          </div>
+          <div class="projeto-destaque-info">
+            <h3 class="projeto-nome">Site Para Cartórios</h3>
+            <p class="projeto-descricao">
+              Website profissional para cartórios com apresentação de serviços,  
+              informações institucionais e canais de contato para atendimento ao público.
+            </p>
+            <div class="projeto-tecnologias">
+              <span class="tec-tag tec-html">HTML5</span>
+              <span class="tec-tag tec-css">CSS3</span>
+              <span class="tec-tag tec-js">JavaScript</span>
+            </div>
+            <div class="projeto-acoes">
+              <a href="#" target="_blank" rel="noopener" class="botao-primario botao-projeto">
+                <i class="ri-external-link-line"></i> Ver Projeto
+                <div class="botao-brilho"></div>
+              </a>
+              <a href="#" target="_blank" rel="noopener" class="botao-github">
+                <i class="ri-github-line"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /grid-projetos-destaque -->
+
+      <!-- =============================================
+           PROJETOS PESSOAIS
+      ============================================= -->
+      <div class="projetos-grupo-titulo revelar-scroll" style="margin-top: 4rem;">
+        <i class="ri-user-star-line"></i>
+        <span>Projetos Pessoais</span>
+      </div>
+
+      <div class="grid-projetos" id="gridProjetosGeral">
+
+        <!-- ===== CARD: REGISTRO DIÁRIO ===== -->
+        <article class="card-projeto" data-categoria="pessoal">
+          <div class="card-proj-topo">
+            <div class="card-proj-icone">
+              <i class="ri-book-2-line"></i>
+            </div>
+            <div class="card-proj-links">
+              <a href="#" target="_blank" rel="noopener" aria-label="Ver projeto Registro Diário"><i class="ri-external-link-line"></i></a>
+              <a href="#" target="_blank" rel="noopener" aria-label="GitHub do Registro Diário"><i class="ri-github-line"></i></a>
+            </div>
+          </div>
+          <!-- <img src="assets/img/projeto-registro-diario.jpg" alt="Registro Diário" loading="lazy" /> -->
+          <h3 class="card-proj-nome">Registro Diário</h3>
+          <p class="card-proj-descricao">Diário digital com editor rico, categorias, tags, busca e exportação de entradas. Interface minimalista e elegante.</p>
+          <div class="card-proj-tecnologias">
+            <span class="tec-tag tec-html">HTML5</span>
+            <span class="tec-tag tec-css">CSS3</span>
+            <span class="tec-tag tec-js">JavaScript</span>
+          </div>
+        </article>
+
+        <!-- ===== CARD: SITE DE ADVOCACIA ===== -->
+        <article class="card-projeto" data-categoria="pessoal">
+          <div class="card-proj-topo">
+            <div class="card-proj-icone">
+              <i class="ri-scales-line"></i>
+            </div>
+            <div class="card-proj-links">
+              <a href="projetos/Site de Advocacia/index.html" target="_blank" rel="noopener" aria-label="Ver projeto Site de Advocacia"><i class="ri-external-link-line"></i></a>
+              <a href="https://github.com/brunoavm/Site-de-Advocacia" target="_blank" rel="noopener" aria-label="GitHub do Site de Advocacia"><i class="ri-github-line"></i></a>
+            </div>
+          </div>
+          <h3 class="card-proj-nome">Site de Advocacia</h3>
+          <p class="card-proj-descricao">Landing page profissional para escritório de advocacia com design sóbrio, formulário de contato e seção de serviços.</p>
+          <div class="card-proj-tecnologias">
+            <span class="tec-tag tec-html">HTML5</span>
+            <span class="tec-tag tec-css">CSS3</span>
+            <span class="tec-tag tec-js">JavaScript</span>
+          </div>
+        </article>
+
+        <!-- ===== CARD: CARTÓRIOS ===== -->
+        <article class="card-projeto" data-categoria="pessoal">
+          <div class="card-proj-topo">
+            <div class="card-proj-icone">
+              <i class="ri-file-list-3-line"></i>
+            </div>
+            <div class="card-proj-links">
+              <a href="#" target="_blank" rel="noopener" aria-label="Ver projeto do Site para Cartórios"><i class="ri-external-link-line"></i></a>
+              <a href="#" target="_blank" rel="noopener" aria-label="GitHub do Site para Cartórios"><i class="ri-github-line"></i></a>
+            </div>
+          </div>
+          <h3 class="card-proj-nome">Site para Cartórios</h3>
+          <p class="card-proj-descricao">Website profissional para cartórios com apresentação de serviços, informações institucionais 
+            e canais de contato para atendimento ao público.</p>
+          <div class="card-proj-tecnologias">
+            <span class="tec-tag tec-html">HTML5</span>
+            <span class="tec-tag tec-css">CSS3</span>
+            <span class="tec-tag tec-js">JavaScript</span>
+          </div>
+        </article>
+
+      </div><!-- /grid-projetos pessoais -->
+
+      <!-- =============================================
+           PROJETOS SIMPLES
+      ============================================= -->
+      <div class="projetos-grupo-titulo revelar-scroll" style="margin-top: 4rem;">
+        <i class="ri-code-line"></i>
+        <span>Projetos Simples</span>
+      </div>
+
+      <div class="grid-projetos" id="gridProjetosSimples">
+
+        <!-- ===== CARD: CALCULADORA ===== -->
+        <article class="card-projeto" data-categoria="simples">
+          <div class="card-proj-topo">
+            <div class="card-proj-icone" style="background:rgba(247,223,30,.08);border-color:rgba(247,223,30,.2);">
+              <i class="ri-calculator-line" style="color:#f7df1e;"></i>
+            </div>
+            <div class="card-proj-links">
+              <a href="projetos/calculadora/index.html" aria-label="Ver projeto Calculadora"><i class="ri-external-link-line"></i></a>
+              <a href="https://github.com/brunoavm/Calculadora" target="_blank" rel="noopener" aria-label="GitHub da Calculadora"><i class="ri-github-line"></i></a>
+            </div>
+          </div>
+          <h3 class="card-proj-nome">Calculadora</h3>
+          <p class="card-proj-descricao">Calculadora moderna com operações completas, histórico de cálculos, suporte a teclado e interface neon premium.</p>
+          <div class="card-proj-tecnologias">
+            <span class="tec-tag tec-html">HTML5</span>
+            <span class="tec-tag tec-css">CSS3</span>
+            <span class="tec-tag tec-js">JavaScript</span>
+          </div>
+        </article>
+
+        <!-- ===== CARD: TO-DO LIST ===== -->
+        <article class="card-projeto" data-categoria="simples">
+          <div class="card-proj-topo">
+            <div class="card-proj-icone" style="background:rgba(0,230,118,.08);border-color:rgba(0,230,118,.2);">
+              <i class="ri-todo-line" style="color:#00e676;"></i>
+            </div>
+            <div class="card-proj-links">
+              <a href="projetos/todo-list/index.html" aria-label="Ver projeto To-do List"><i class="ri-external-link-line"></i></a>
+              <a href="https://github.com/brunoavm/To-do-list" target="_blank" rel="noopener" aria-label="GitHub da To-do List"><i class="ri-github-line"></i></a>
+            </div>
+          </div>
+          <h3 class="card-proj-nome">To-do List</h3>
+          <p class="card-proj-descricao">Gerenciador de tarefas com prioridades, datas de vencimento, filtros por categoria e persistência via localStorage.</p>
+          <div class="card-proj-tecnologias">
+            <span class="tec-tag tec-html">HTML5</span>
+            <span class="tec-tag tec-css">CSS3</span>
+            <span class="tec-tag tec-js">JavaScript</span>
+          </div>
+        </article>
+
+        <!-- ===== CARD: CONVERSOR DE MOEDAS ===== -->
+        <article class="card-projeto" data-categoria="simples">
+          <div class="card-proj-topo">
+            <div class="card-proj-icone" style="background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.2);">
+              <i class="ri-exchange-dollar-line" style="color:#00d4ff;"></i>
+            </div>
+            <div class="card-proj-links">
+              <a href="projetos/conversor-moedas/index.html" aria-label="Ver projeto Conversor de Moedas"><i class="ri-external-link-line"></i></a>
+              <a href="https://github.com/brunoavm/Conversor-de-Moedas" target="_blank" rel="noopener" aria-label="GitHub do Conversor"><i class="ri-github-line"></i></a>
+            </div>
+          </div>
+          <h3 class="card-proj-nome">Conversor de Moedas</h3>
+          <p class="card-proj-descricao">Conversor com taxas em tempo real via API, tabela de cotações populares, inversão de moedas e fallback offline.</p>
+          <div class="card-proj-tecnologias">
+            <span class="tec-tag tec-html">HTML5</span>
+            <span class="tec-tag tec-css">CSS3</span>
+            <span class="tec-tag tec-js">JavaScript</span>
+          </div>
+        </article>
+
+        <!-- ===== CARD: RELÓGIO DIGITAL ===== -->
+        <article class="card-projeto" data-categoria="simples">
+          <div class="card-proj-topo">
+            <div class="card-proj-icone" style="background:rgba(26,111,255,.08);border-color:rgba(26,111,255,.2);">
+              <i class="ri-time-line" style="color:#1a6fff;"></i>
+            </div>
+            <div class="card-proj-links">
+              <a href="projetos/relogio-digital/index.html" aria-label="Ver projeto Relógio Digital"><i class="ri-external-link-line"></i></a>
+              <a href="https://github.com/brunoavm/Relogio-Digital" target="_blank" rel="noopener" aria-label="GitHub do Relógio Digital"><i class="ri-github-line"></i></a>
+            </div>
+          </div>
+          <h3 class="card-proj-nome">Relógio Digital</h3>
+          <p class="card-proj-descricao">Relógio em tempo real com modo 12/24h, barra de progresso do dia, cronômetro de voltas e timer com alerta sonoro.</p>
+          <div class="card-proj-tecnologias">
+            <span class="tec-tag tec-html">HTML5</span>
+            <span class="tec-tag tec-css">CSS3</span>
+            <span class="tec-tag tec-js">JavaScript</span>
+          </div>
+        </article>
+
+        <!--
+          ╔════════════════════════════════════════════════════╗
+          ║  MODELO VAZIO — ADICIONE SEU PRÓXIMO PROJETO AQUI ║
+          ╚════════════════════════════════════════════════════╝
+
+          Duplique o bloco abaixo e preencha:
+
+          <article class="card-projeto" data-categoria="simples">
+            <div class="card-proj-topo">
+              <div class="card-proj-icone">
+                <i class="ri-[NOME-DO-ICONE]-line"></i>
+              </div>
+              <div class="card-proj-links">
+                <a href="[URL-DO-PROJETO]" target="_blank" rel="noopener"><i class="ri-external-link-line"></i></a>
+                <a href="[URL-GITHUB]" target="_blank" rel="noopener"><i class="ri-github-line"></i></a>
+              </div>
+            </div>
+            <h3 class="card-proj-nome">[NOME DO PROJETO]</h3>
+            <p class="card-proj-descricao">[DESCRIÇÃO DO PROJETO]</p>
+            <div class="card-proj-tecnologias">
+              <span class="tec-tag tec-html">HTML5</span>
+              adicione ou remova tags de tecnologias aqui
+            </div>
+          </article>
+        -->
+
+      </div><!-- /grid-projetos-simples -->
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SEÇÃO JORNADA / TIMELINE
+  =================================================== -->
+  <section id="jornada" class="secao-jornada secao">
+    <div class="container">
+
+      <div class="secao-cabecalho revelar-scroll">
+        <span class="secao-etiqueta">Minha história</span>
+        <h2 class="secao-titulo">Minha <span class="destaque-texto">Jornada</span></h2>
+        <p class="secao-subtitulo">Os marcos que definiram meu crescimento como desenvolvedor</p>
+      </div>
+
+      <div class="timeline">
+
+        <!-- Linha central animada da timeline -->
+        <div class="timeline-linha" aria-hidden="true"></div>
+
+        <!-- ===== ITEM 1: INÍCIO ===== -->
+        <div class="timeline-item timeline-esquerda revelar-scroll">
+          <div class="timeline-marcador">
+            <i class="ri-code-s-slash-line"></i>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-data">2022</span>
+            <h3 class="timeline-titulo">Primeiro Contato com Programação</h3>
+            <p class="timeline-texto">
+              Descobri o mundo do desenvolvimento web através do HTML e CSS.
+              A curiosidade de entender como sites são construídos abriu as
+              portas para uma nova paixão.
+            </p>
+            <div class="timeline-tags">
+              <span>HTML</span><span>CSS</span><span>Curiosidade</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== ITEM 2: JAVASCRIPT ===== -->
+        <div class="timeline-item timeline-direita revelar-scroll">
+          <div class="timeline-marcador">
+            <i class="ri-javascript-line"></i>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-data">2022 — 2023</span>
+            <h3 class="timeline-titulo">Mergulhando no JavaScript</h3>
+            <p class="timeline-texto">
+              JavaScript abriu um universo de possibilidades. Aprendi lógica de
+              programação, manipulação do DOM e comecei a construir os primeiros
+              projetos interativos reais.
+            </p>
+            <div class="timeline-tags">
+              <span>JavaScript</span><span>DOM</span><span>Lógica</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== ITEM 3: ADS ===== -->
+        <div class="timeline-item timeline-esquerda revelar-scroll">
+          <div class="timeline-marcador">
+            <i class="ri-graduation-cap-line"></i>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-data">2023</span>
+            <h3 class="timeline-titulo">Início da Graduação em ADS</h3>
+            <p class="timeline-texto">
+              Ingressei no curso de Análise e Desenvolvimento de Sistemas, consolidando
+              o conhecimento técnico com fundamentos de engenharia de software, banco
+              de dados e algoritmos.
+            </p>
+            <div class="timeline-tags">
+              <span>ADS</span><span>Algoritmos</span><span>BD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== ITEM 4: REACT & FIREBASE ===== -->
+        <div class="timeline-item timeline-direita revelar-scroll">
+          <div class="timeline-marcador">
+            <i class="ri-reactjs-line"></i>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-data">2024</span>
+            <h3 class="timeline-titulo">React, Firebase e Projetos Reais</h3>
+            <p class="timeline-texto">
+              Dei um salto de qualidade ao aprender React e Firebase. Desenvolvi
+              projetos completos como o Site de Advocacia e o Site para Cartórios,
+              aplicando conceitos modernos de front-end.
+            </p>
+            <div class="timeline-tags">
+              <span>React</span><span>Firebase</span><span>Projetos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== ITEM 5: PRESENTE ===== -->
+        <div class="timeline-item timeline-esquerda revelar-scroll">
+          <div class="timeline-marcador marcador-atual">
+            <i class="ri-rocket-line"></i>
+          </div>
+          <div class="timeline-card timeline-card-atual">
+            <span class="timeline-data">2025 — Presente</span>
+            <h3 class="timeline-titulo">Evolução e Mercado</h3>
+            <p class="timeline-texto">
+              Focado em elevar o nível técnico com TypeScript, APIs avançadas e
+              arquitetura de software. Construindo um portfólio sólido e buscando
+              oportunidades no mercado de tecnologia.
+            </p>
+            <div class="timeline-tags">
+              <span>TypeScript</span><span>APIs</span><span>Carreira</span>
+            </div>
+            <div class="timeline-badge-atual">🚀 Agora</div>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SEÇÃO CONTATO
+  =================================================== -->
+  <section id="contato" class="secao-contato secao">
+    <div class="container">
+
+      <div class="secao-cabecalho revelar-scroll">
+        <span class="secao-etiqueta">Vamos trabalhar juntos</span>
+        <h2 class="secao-titulo">Entre em <span class="destaque-texto">Contato</span></h2>
+        <p class="secao-subtitulo">Aberto a oportunidades, freelas e colaborações. Vamos conversar!</p>
+      </div>
+
+      <div class="contato-conteudo">
+
+        <!-- Coluna esquerda: informações e redes -->
+        <div class="contato-info revelar-scroll">
+
+          <p class="contato-descricao">
+            Estou sempre aberto a novas oportunidades, projetos desafiadores e
+            conversas sobre tecnologia. Se você tem uma ideia, uma vaga ou só
+            quer trocar uma ideia — <strong>pode falar comigo!</strong>
+          </p>
+
+          <!-- Links de contato direto -->
+          <div class="contato-links">
+
+            <a href="mailto:brunoavmagalhaes@gmail.com" class="contato-link-item" aria-label="Enviar e-mail">
+              <div class="contato-icone-wrapper contato-icone-email">
+                <i class="ri-mail-send-line"></i>
+              </div>
+              <div class="contato-link-info">
+                <span class="contato-link-titulo">E-mail</span>
+                <span class="contato-link-valor">brunoavmagalhaes@gmail.com</span>
+              </div>
+              <i class="ri-arrow-right-up-line contato-seta"></i>
+            </a>
+
+            <a href="https://github.com/brunoavm" target="_blank" rel="noopener" class="contato-link-item" aria-label="GitHub de Bruno Magalhães">
+              <div class="contato-icone-wrapper contato-icone-github">
+                <i class="ri-github-line"></i>
+              </div>
+              <div class="contato-link-info">
+                <span class="contato-link-titulo">GitHub</span>
+                <span class="contato-link-valor">https://github.com/brunoavm</span>
+              </div>
+              <i class="ri-arrow-right-up-line contato-seta"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/bruno-avm/" target="_blank" rel="noopener" class="contato-link-item" aria-label="LinkedIn de Bruno Magalhães">
+              <div class="contato-icone-wrapper contato-icone-linkedin">
+                <i class="ri-linkedin-box-line"></i>
+              </div>
+              <div class="contato-link-info">
+                <span class="contato-link-titulo">LinkedIn</span>
+                <span class="contato-link-valor">linkedin.com/in/bruno-avm</span>
+              </div>
+              <i class="ri-arrow-right-up-line contato-seta"></i>
+            </a>
+
+            <a href="https://www.instagram.com/bruno_amv?igsh=MTgxMmpwNGk0OThteg==" target="_blank" rel="noopener" class="contato-link-item" aria-label="Instagram de Bruno Magalhães">
+              <div class="contato-icone-wrapper contato-icone-instagram">
+                <i class="ri-instagram-line"></i>
+              </div>
+              <div class="contato-link-info">
+                <span class="contato-link-titulo">Instagram</span>
+                <span class="contato-link-valor">@bruno_amv</span>
+              </div>
+              <i class="ri-arrow-right-up-line contato-seta"></i>
+            </a>
+
+            <a href="https://wa.me/5581988890248" target="_blank" rel="noopener" class="contato-link-item" aria-label="WhatsApp de Bruno Magalhães">
+              <div class="contato-icone-wrapper contato-icone-whatsapp">
+                <i class="ri-whatsapp-line"></i>
+              </div>
+              <div class="contato-link-info">
+                <span class="contato-link-titulo">WhatsApp</span>
+                <span class="contato-link-valor">Clique para conversar</span>
+              </div>
+              <i class="ri-arrow-right-up-line contato-seta"></i>
+            </a>
+
+          </div>
+
+          <!-- Botão download currículo -->
+          <a href="curriculo/curriculo-bruno-magalhaes.pdf" download class="botao-curriculo-contato">
+            <i class="ri-file-download-line"></i>
+            <span>Baixar Currículo PDF</span>
+            <div class="botao-brilho"></div>
+          </a>
+
+        </div>
+
+        <!-- Coluna direita: formulário de contato -->
+        <div class="contato-formulario revelar-scroll">
+          <div class="formulario-card">
+            <h3 class="formulario-titulo">Envie uma mensagem</h3>
+            <p class="formulario-subtitulo">Responderei o mais breve possível.</p>
+
+            <!-- ATENÇÃO: Conecte a um serviço como Formspree, EmailJS ou backend próprio -->
+            <form id="formularioContato" class="formulario" novalidate>
+
+              <div class="campo-grupo campo-grupo-duplo">
+                <div class="campo">
+                  <label for="campoNome" class="campo-label">Seu nome</label>
+                  <input
+                    type="text"
+                    id="campoNome"
+                    name="nome"
+                    class="campo-input"
+                    placeholder="João Silva"
+                    required
+                    autocomplete="name"
+                  />
+                  <span class="campo-erro" id="erroNome"></span>
+                </div>
+                <div class="campo">
+                  <label for="campoEmail" class="campo-label">Seu e-mail</label>
+                  <input
+                    type="email"
+                    id="campoEmail"
+                    name="email"
+                    class="campo-input"
+                    placeholder="joao@email.com"
+                    required
+                    autocomplete="email"
+                  />
+                  <span class="campo-erro" id="erroEmail"></span>
+                </div>
+              </div>
+
+              <div class="campo">
+                <label for="campoAssunto" class="campo-label">Assunto</label>
+                <input
+                  type="text"
+                  id="campoAssunto"
+                  name="assunto"
+                  class="campo-input"
+                  placeholder="Proposta de projeto / Oportunidade / Parceria..."
+                  required
+                />
+                <span class="campo-erro" id="erroAssunto"></span>
+              </div>
+
+              <div class="campo">
+                <label for="campoMensagem" class="campo-label">Mensagem</label>
+                <textarea
+                  id="campoMensagem"
+                  name="mensagem"
+                  class="campo-input campo-textarea"
+                  placeholder="Olá Bruno, tenho uma proposta..."
+                  rows="5"
+                  required
+                ></textarea>
+                <span class="campo-erro" id="erroMensagem"></span>
+              </div>
+
+              <button type="submit" class="botao-enviar" id="botaoEnviar">
+                <span class="enviar-texto"><i class="ri-send-plane-2-line"></i> Enviar Mensagem</span>
+                <span class="enviar-carregando" style="display:none;"><i class="ri-loader-4-line"></i> Enviando...</span>
+                <div class="botao-brilho"></div>
+              </button>
+
+              <!-- Mensagem de sucesso/erro do formulário -->
+              <div id="formularioFeedback" class="formulario-feedback" style="display:none;"></div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       FOOTER
+  =================================================== -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape-conteudo">
+
+        <!-- Logo e frase -->
+        <div class="rodape-esquerda">
+          <a href="#inicio" class="nav-logo rodape-logo" aria-label="Topo da página">
+            <span class="logo-simbolo">&lt;</span>
+            <span class="logo-nome">Bruno<span class="logo-sobrenome">Magalhães</span></span>
+            <span class="logo-simbolo">/&gt;</span>
+          </a>
+          <p class="rodape-frase">
+            "Código bem escrito é a obra de arte de quem constrói o futuro."
+          </p>
+        </div>
+
+        <!-- Links rápidos -->
+        <nav class="rodape-nav" aria-label="Navegação do rodapé">
+          <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </nav>
+
+        <!-- Redes sociais -->
+        <div class="rodape-redes">
+          <a href="https://github.com/brunoavm" target="_blank" rel="noopener" aria-label="GitHub" class="rodape-rede-link">
+            <i class="ri-github-line"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/bruno-avm/" target="_blank" rel="noopener" aria-label="LinkedIn" class="rodape-rede-link">
+            <i class="ri-linkedin-box-line"></i>
+          </a>
+          <a href="https://www.instagram.com/bruno_amv?igsh=MTgxMmpwNGk0OThteg==" target="_blank" rel="noopener" aria-label="Instagram" class="rodape-rede-link">
+            <i class="ri-instagram-line"></i>
+          </a>
+          <a href="https://wa.me/5581988890248" target="_blank" rel="noopener" aria-label="WhatsApp" class="rodape-rede-link">
+            <i class="ri-whatsapp-line"></i>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="rodape-inferior">
+        <p>
+          &copy; <span id="anoAtual"></span> Bruno Magalhães. Todos os direitos reservados.
+        </p>
+        <p class="rodape-credito">
+          Desenvolvido com esforço por Bruno Magalhães
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Botão voltar ao topo -->
+  <button id="botaoTopo" class="botao-topo" aria-label="Voltar ao topo">
+    <i class="ri-arrow-up-line"></i>
+  </button>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="js/animacoes.js"></script>
+  <script src="js/menu-mobile.js"></script>
+  <script src="js/scroll-effects.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
