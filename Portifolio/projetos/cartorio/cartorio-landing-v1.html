@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cartório de Registro de Imóveis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1f33;
+      --navy-mid: #162b44;
+      --gold: #b8882a;
+      --gold-light: #d4a44c;
+      --cream: #f7f3ec;
+      --cream-dark: #ede7db;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 70px;
+      background: rgba(13, 31, 51, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(184,136,42,0.25);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .nav-logo .seal {
+      width: 38px; height: 38px; border: 2px solid var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold); font-size: 16px; font-weight: 600;
+    }
+    .nav-logo span {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--white); font-size: 15px; letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+    .nav-logo span em { display: block; font-style: italic; font-size: 11px; color: var(--gold-light); letter-spacing: 0.1em; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta {
+      background: var(--gold); color: var(--navy); padding: 9px 20px;
+      border-radius: 2px; font-size: 12px; font-weight: 500;
+      text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 0 5vw;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(184,136,42,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(184,136,42,0.05) 0%, transparent 50%);
+    }
+    .hero-lines {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.5) 39px, rgba(255,255,255,0.5) 40px);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--gold); font-size: 11px; letter-spacing: 0.2em;
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-eyebrow::before { content:''; width: 32px; height: 1px; background: var(--gold); }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 300; line-height: 1.1;
+      color: var(--white); margin-bottom: 20px;
+    }
+    h1 strong { font-weight: 600; color: var(--gold-light); }
+    .hero-sub {
+      font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7;
+      max-width: 480px; margin-bottom: 40px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--navy); padding: 14px 28px;
+      border-radius: 2px; font-size: 13px; font-weight: 500;
+      text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 14px 28px;
+      border-radius: 2px; font-size: 13px; text-decoration: none;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+    .hero-stats {
+      position: absolute; right: 5vw; bottom: 60px; z-index: 2;
+      display: flex; gap: 40px;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px; font-weight: 300; color: var(--gold-light);
+      line-height: 1;
+    }
+    .stat-label { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+    .hero-scroll {
+      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.3); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll::after { content:''; width: 1px; height: 40px; background: rgba(255,255,255,0.2); }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 90px 5vw; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--gold); font-size: 11px; letter-spacing: 0.2em;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .section-tag::before { content:''; width: 24px; height: 1px; background: var(--gold); }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 46px); font-weight: 300;
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .section-desc { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 560px; }
+
+    /* ── SERVIÇOS ── */
+    .servicos { background: var(--cream); }
+    .servicos-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2px; margin-top: 52px;
+      border: 2px solid var(--cream-dark);
+    }
+    .servico-card {
+      background: var(--white); padding: 36px 30px;
+      border: 1px solid transparent;
+      transition: border-color 0.25s, background 0.25s;
+      cursor: default;
+    }
+    .servico-card:hover { background: var(--navy); border-color: var(--gold); }
+    .servico-icon {
+      width: 44px; height: 44px; border: 1px solid var(--cream-dark);
+      border-radius: 2px; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 20px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .servico-card:hover .servico-icon { border-color: var(--gold); background: rgba(184,136,42,0.1); }
+    .servico-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 400; margin-bottom: 10px;
+      transition: color 0.25s;
+    }
+    .servico-card:hover h3 { color: var(--white); }
+    .servico-card p { font-size: 13px; color: var(--muted); line-height: 1.65; transition: color 0.25s; }
+    .servico-card:hover p { color: rgba(255,255,255,0.55); }
+
+    /* ── LINKS ÚTEIS ── */
+    .links-uteis { background: var(--navy-mid); }
+    .links-uteis h2 { color: var(--white); }
+    .links-uteis .section-desc { color: rgba(255,255,255,0.5); }
+    .links-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px; margin-top: 50px;
+    }
+    .link-item {
+      border: 1px solid rgba(184,136,42,0.2); border-radius: 4px;
+      padding: 22px 20px;
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; color: var(--white);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .link-item:hover { background: rgba(184,136,42,0.12); border-color: var(--gold); transform: translateY(-2px); }
+    .link-item .link-icon { font-size: 22px; flex-shrink: 0; }
+    .link-item strong { display: block; font-size: 13px; font-weight: 500; margin-bottom: 3px; }
+    .link-item span { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .link-item .arrow { margin-left: auto; color: var(--gold); opacity: 0; transition: opacity 0.2s; }
+    .link-item:hover .arrow { opacity: 1; }
+
+    /* ── CERTIDÕES ── */
+    .certidoes { background: var(--cream); }
+    .certidoes-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 52px; }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: flex; gap: 20px; padding: 24px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 300; color: var(--gold); line-height: 1;
+      min-width: 36px;
+    }
+    .step h4 { font-size: 15px; font-weight: 500; margin-bottom: 5px; }
+    .step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .highlight-box {
+      background: var(--navy); border-radius: 4px; padding: 36px;
+      position: sticky; top: 90px;
+    }
+    .highlight-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 300; color: var(--white); margin-bottom: 20px;
+    }
+    .highlight-box ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .highlight-box li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.55;
+    }
+    .highlight-box li::before { content:'—'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+    .highlight-box .btn-primary { display: inline-block; margin-top: 28px; }
+
+    /* ── FAQ ── */
+    .faq { background: var(--white); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 52px; }
+    .faq-item {
+      border: 1px solid var(--cream-dark); border-radius: 3px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      padding: 20px 22px; display: flex; justify-content: space-between; align-items: center;
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      color: var(--text); text-align: left;
+      transition: background 0.2s;
+    }
+    .faq-q:hover { background: var(--cream); }
+    .faq-q .icon { font-size: 18px; color: var(--gold); transition: transform 0.3s; flex-shrink: 0; margin-left: 12px; }
+    .faq-q.open .icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.3s;
+      font-size: 13px; color: var(--muted); line-height: 1.7;
+      padding: 0 22px;
+    }
+    .faq-a.open { max-height: 200px; padding: 0 22px 18px; }
+
+    /* ── CONTATO ── */
+    .contato { background: var(--navy); }
+    .contato h2 { color: var(--white); }
+    .contato .section-desc { color: rgba(255,255,255,0.5); }
+    .contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 52px; align-items: start; }
+    .contato-info { display: flex; flex-direction: column; gap: 28px; }
+    .info-item { display: flex; gap: 16px; align-items: flex-start; }
+    .info-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border: 1px solid rgba(184,136,42,0.4); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+    .info-label { font-size: 11px; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .info-value { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.55; }
+    .horario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .horario-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 3px; padding: 14px 16px;
+    }
+    .horario-card .dia { font-size: 11px; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+    .horario-card .hora { font-size: 14px; color: rgba(255,255,255,0.75); }
+    .map-placeholder {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(184,136,42,0.2);
+      border-radius: 4px; min-height: 320px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px; color: rgba(255,255,255,0.3);
+      font-size: 13px; letter-spacing: 0.05em;
+    }
+    .map-placeholder .map-icon { font-size: 36px; opacity: 0.4; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #070f1a; padding: 40px 5vw;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+      border-top: 1px solid rgba(184,136,42,0.15);
+    }
+    .footer-left { font-family: 'Cormorant Garamond', serif; }
+    .footer-left strong { font-size: 16px; color: var(--white); display: block; margin-bottom: 4px; }
+    .footer-left span { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-right { font-size: 11px; color: rgba(255,255,255,0.2); text-align: right; }
+
+    /* ── ANIMAÇÕES ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { display: none; }
+      .certidoes-content, .contato-grid, .faq-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="seal">§</div>
+    <span>Cartório de Registro de Imóveis<em>1ª Circunscrição · Recife/PE</em></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#certidoes">Certidões</a></li>
+    <li><a href="#links">Links Úteis</a></li>
+    <li><a href="#faq">Dúvidas</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="#contato" class="nav-cta">Fale Conosco</a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content fade-in">
+    <p class="hero-eyebrow">Registros Públicos Oficiais</p>
+    <h1>Segurança jurídica<br>para o seu <strong>patrimônio</strong></h1>
+    <p class="hero-sub">
+      Serviços de registro de imóveis, certidões, averbações e escriturações com agilidade, transparência e respaldo legal.
+    </p>
+    <div class="hero-actions">
+      <a href="#certidoes" class="btn-primary">Solicitar Certidão</a>
+      <a href="#servicos" class="btn-outline">Ver Serviços</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">+30</div><div class="stat-label">Anos de Atuação</div></div>
+    <div class="stat"><div class="stat-num">+50k</div><div class="stat-label">Atos Registrados</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Digital Ready</div></div>
+  </div>
+  <div class="hero-scroll">Rolar</div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="servicos" id="servicos">
+  <p class="section-tag fade-in">O que fazemos</p>
+  <h2 class="fade-in">Nossos <em style="font-style:italic">Serviços</em></h2>
+  <p class="section-desc fade-in">Todos os serviços de registro imobiliário previstos em lei, realizados por profissionais habilitados e em conformidade com as normas do CNJ e TJPE.</p>
+  <div class="servicos-grid">
+    <div class="servico-card fade-in">
+      <div class="servico-icon">🏠</div>
+      <h3>Registro de Imóveis</h3>
+      <p>Registro de compra e venda, doação, herança, usucapião e demais atos que geram ou transferem direitos reais sobre imóveis.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <div class="servico-icon">📜</div>
+      <h3>Certidões</h3>
+      <p>Emissão de certidão de matrícula, vintenária, de ônus reais, inteiro teor e negativa de propriedade, presencialmente ou pelo portal oficial.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <div class="servico-icon">🔏</div>
+      <h3>Averbações</h3>
+      <p>Averbação de construção, demolição, casamento, divórcio, mudança de nome, convenção de condomínio e outras alterações na matrícula.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <div class="servico-icon">⚖️</div>
+      <h3>Penhoras e Gravames</h3>
+      <p>Registro e averbação de hipotecas, penhoras, alienação fiduciária, servidões e demais ônus reais sobre propriedades.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <div class="servico-icon">🏢</div>
+      <h3>Loteamentos</h3>
+      <p>Registro de loteamentos, condomínios, remembramento e desmembramento de terrenos conforme a Lei nº 6.766/79.</p>
+    </div>
+    <div class="servico-card fade-in">
+      <div class="servico-icon">📋</div>
+      <h3>Protocolo e Consulta</h3>
+      <p>Protocolo de títulos, acompanhamento de andamento de processos e consulta ao acervo de matrículas e transcrições.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIDÕES -->
+<section class="certidoes" id="certidoes">
+  <p class="section-tag fade-in">Passo a passo</p>
+  <h2 class="fade-in">Como solicitar<br>sua <em style="font-style:italic">Certidão</em></h2>
+  <div class="certidoes-content">
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-num">01</div>
+        <div>
+          <h4>Identifique a matrícula</h4>
+          <p>Localize o número da matrícula ou a descrição do imóvel (endereço completo, nome do proprietário anterior, número de transcrição).</p>
+        </div>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">02</div>
+        <div>
+          <h4>Escolha o canal de solicitação</h4>
+          <p>Você pode solicitar pelo portal ONR (online), diretamente no balcão do cartório ou pelo e-mail de atendimento oficial.</p>
+        </div>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">03</div>
+        <div>
+          <h4>Efetue o pagamento</h4>
+          <p>Os emolumentos são tabelados pelo TJPE. Você receberá um boleto ou guia de pagamento via PIX após a solicitação.</p>
+        </div>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">04</div>
+        <div>
+          <h4>Receba a certidão</h4>
+          <p>O prazo legal é de até 5 dias úteis. Certidões digitais são entregues por e-mail com assinatura eletrônica válida pelo ICP-Brasil.</p>
+        </div>
+      </div>
+    </div>
+    <div class="highlight-box fade-in">
+      <h3>Documentos necessários para Registro</h3>
+      <ul>
+        <li>Título original (escritura, formal de partilha, carta de adjudicação etc.)</li>
+        <li>Certidão de casamento ou nascimento atualizada das partes</li>
+        <li>CPF e RG de todos os envolvidos</li>
+        <li>Certidão negativa de débitos municipais (IPTU)</li>
+        <li>Comprovante de pagamento do ITBI (para compra e venda)</li>
+        <li>Declaração de ITCMD (para doações e heranças)</li>
+        <li>Planta e memorial descritivo (para construção/averbação)</li>
+      </ul>
+      <a href="#contato" class="btn-primary">Tirar dúvidas</a>
+    </div>
+  </div>
+</section>
+
+<!-- LINKS ÚTEIS -->
+<section class="links-uteis" id="links">
+  <p class="section-tag fade-in">Acesso rápido</p>
+  <h2 class="fade-in" style="color:var(--white)">Links e Portais <em style="font-style:italic">Oficiais</em></h2>
+  <p class="section-desc fade-in">Acesse diretamente os sistemas e órgãos parceiros para consultas, serviços online e informações complementares.</p>
+  <div class="links-grid">
+    <a href="https://www.tjpe.jus.br" target="_blank" class="link-item fade-in">
+      <span class="link-icon">⚖️</span>
+      <div><strong>TJPE</strong><span>Tribunal de Justiça de Pernambuco</span></div>
+      <span class="arrow">↗</span>
+    </a>
+    <a href="https://www.onr.org.br" target="_blank" class="link-item fade-in">
+      <span class="link-icon">🌐</span>
+      <div><strong>ONR</strong><span>Operador Nacional do Registro</span></div>
+      <span class="arrow">↗</span>
+    </a>
+    <a href="https://registradores.onr.org.br" target="_blank" class="link-item fade-in">
+      <span class="link-icon">📂</span>
+      <div><strong>Portal Registradores</strong><span>Certidões e consultas online</span></div>
+      <span class="arrow">↗</span>
+    </a>
+    <a href="https://www.cnj.jus.br" target="_blank" class="link-item fade-in">
+      <span class="link-icon">🏛️</span>
+      <div><strong>CNJ</strong><span>Conselho Nacional de Justiça</span></div>
+      <span class="arrow">↗</span>
+    </a>
+    <a href="https://www.ipojuca.pe.gov.br" target="_blank" class="link-item fade-in">
+      <span class="link-icon">🏙️</span>
+      <div><strong>Prefeitura de Ipojuca</strong><span>IPTU, ITBI e certidões fiscais</span></div>
+      <span class="arrow">↗</span>
+    </a>
+    <a href="https://www.receita.fazenda.gov.br" target="_blank" class="link-item fade-in">
+      <span class="link-icon">🔎</span>
+      <div><strong>Receita Federal</strong><span>Consulta CPF/CNPJ</span></div>
+      <span class="arrow">↗</span>
+    </a>
+    <a href="https://www.anoreg.org.br" target="_blank" class="link-item fade-in">
+      <span class="link-icon">📋</span>
+      <div><strong>ANOREG</strong><span>Associação dos Notários e Registradores</span></div>
+      <span class="arrow">↗</span>
+    </a>
+    <a href="#" class="link-item fade-in">
+      <span class="link-icon">💰</span>
+      <div><strong>Tabela de Emolumentos</strong><span>Custas e taxas — TJPE 2025</span></div>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <p class="section-tag fade-in">Dúvidas frequentes</p>
+  <h2 class="fade-in">Perguntas mais<br><em style="font-style:italic">comuns</em></h2>
+  <div class="faq-grid">
+    <div class="faq-item fade-in">
+      <button class="faq-q">Qual o prazo para registro de um imóvel? <span class="icon">+</span></button>
+      <div class="faq-a">O prazo legal é de 30 dias corridos a partir do protocolo do título. Na prática, dependendo da complexidade do ato e do volume de serviço, pode ser menor. O andamento pode ser acompanhado pelo número de protocolo.</div>
+    </div>
+    <div class="faq-item fade-in">
+      <button class="faq-q">Posso solicitar certidão online? <span class="icon">+</span></button>
+      <div class="faq-a">Sim. Pelo portal ONR (onr.org.br) é possível solicitar certidões de qualquer cartório do Brasil com pagamento eletrônico e entrega digital com validade jurídica.</div>
+    </div>
+    <div class="faq-item fade-in">
+      <button class="faq-q">Preciso de escritura para transferir um imóvel? <span class="icon">+</span></button>
+      <div class="faq-a">Para imóveis acima de 30 salários mínimos, a escritura pública é obrigatória. Abaixo desse valor, é possível usar contrato particular com reconhecimento de firma para fins de registro.</div>
+    </div>
+    <div class="faq-item fade-in">
+      <button class="faq-q">Como averbar uma construção? <span class="icon">+</span></button>
+      <div class="faq-a">É necessário apresentar o Habite-se emitido pela Prefeitura, planta e memorial descritivo aprovados, AVCB (se aplicável), e o recolhimento dos emolumentos calculados sobre o valor da obra.</div>
+    </div>
+    <div class="faq-item fade-in">
+      <button class="faq-q">O cartório atende por agendamento? <span class="icon">+</span></button>
+      <div class="faq-a">O balcão de atendimento é por ordem de chegada, das 08h às 16h. Para dúvidas específicas ou casos complexos, recomendamos contato prévio pelo WhatsApp para orientação antes da visita.</div>
+    </div>
+    <div class="faq-item fade-in">
+      <button class="faq-q">Onde verifico a autenticidade de uma certidão? <span class="icon">+</span></button>
+      <div class="faq-a">Certidões digitais possuem QR Code e código de verificação. Certidões físicas devem ser confrontadas diretamente com o cartório emissor pelo número de protocolo ou pelo código de autenticação impresso.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato" id="contato">
+  <p class="section-tag fade-in">Fale conosco</p>
+  <h2 class="fade-in">Contato e <em style="font-style:italic">Localização</em></h2>
+  <p class="section-desc fade-in">Nossa equipe está disponível para orientações sobre serviços, documentação necessária e andamento de processos.</p>
+  <div class="contato-grid">
+    <div class="contato-info">
+      <div class="info-item fade-in">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Endereço</div>
+          <div class="info-value">Rua [Nome da Rua], nº 000<br>Ipojuca — PE, CEP 55590-000</div>
+        </div>
+      </div>
+      <div class="info-item fade-in">
+        <div class="info-icon">📱</div>
+        <div>
+          <div class="info-label">WhatsApp</div>
+          <div class="info-value">(81) 98970-7241</div>
+        </div>
+      </div>
+      <div class="info-item fade-in">
+        <div class="info-icon">✉️</div>
+        <div>
+          <div class="info-label">E-mail</div>
+          <div class="info-value">contato@riipojuca.com.br</div>
+        </div>
+      </div>
+      <div class="fade-in" style="margin-top:8px">
+        <div class="info-label" style="margin-bottom:12px">Horário de Atendimento</div>
+        <div class="horario-grid">
+          <div class="horario-card"><div class="dia">Seg — Sex</div><div class="hora">08h às 16h</div></div>
+          <div class="horario-card"><div class="dia">Sábado</div><div class="hora">Fechado</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="map-placeholder fade-in">
+      <div class="map-icon">🗺️</div>
+      <span>Mapa será integrado via Google Maps</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <strong>Serventia Registral de Ipojuca</strong>
+    <span>Ipojuca / Pernambuco · Registro de Imóveis · RTD · PJ</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#links">Links</a></li>
+    <li><a href="#faq">Dúvidas</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <div class="footer-right">
+    Fiscalizado pelo TJPE e CNJ<br>
+    © 2025 Todos os direitos reservados
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+      if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+    });
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) current = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold-light)' : '';
+    });
+  });
+</script>
+</body>
+</html>

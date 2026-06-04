@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Serventia Registral de Ipojuca</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #1b2d3e;
+      --navy2:     #233346;
+      --gold:      #c9973d;
+      --gold2:     #e0b565;
+      --beige:     #f2ead9;
+      --beige2:    #e8ddc8;
+      --white:     #ffffff;
+      --text:      #1a2535;
+      --muted:     #64748b;
+      --light:     #f8f5f0;
+      --border:    #e2d9c8;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--beige); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--navy); color: rgba(255,255,255,0.6);
+      font-size: 12px; padding: 8px 6vw;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;
+    }
+    .topbar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color .2s; }
+    .topbar a:hover { color: var(--gold2); }
+    .topbar-left { display: flex; gap: 24px; align-items: center; }
+    .topbar-left span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6vw; height: 76px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .logo-mark {
+      width: 46px; height: 46px; background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; color: var(--gold2);
+      font-size: 22px; font-style: italic; flex-shrink: 0;
+    }
+    .logo-text strong {
+      display: block; font-family: 'Playfair Display', serif;
+      font-size: 16px; color: var(--navy); line-height: 1.2; font-weight: 500;
+    }
+    .logo-text span { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; }
+    .nav-menu { display: flex; gap: 6px; list-style: none; align-items: center; }
+    .nav-menu a {
+      padding: 8px 14px; font-size: 13px; color: var(--text); text-decoration: none;
+      border-radius: 6px; font-weight: 400; transition: background .2s, color .2s;
+    }
+    .nav-menu a:hover { background: var(--beige); color: var(--navy); }
+    .nav-menu a.active { color: var(--gold); font-weight: 500; }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+    .btn-nav-outline {
+      border: 1.5px solid var(--border); color: var(--text); background: none;
+      padding: 9px 18px; border-radius: 8px; font-size: 13px; text-decoration: none;
+      transition: border-color .2s, color .2s; font-family: 'Outfit', sans-serif;
+    }
+    .btn-nav-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-nav-filled {
+      background: var(--gold); color: var(--white);
+      padding: 9px 20px; border-radius: 8px; font-size: 13px; font-weight: 500;
+      text-decoration: none; transition: background .2s, transform .2s;
+    }
+    .btn-nav-filled:hover { background: var(--gold2); transform: translateY(-1px); }
+    .mob-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .mob-menu-btn span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 4px 0; border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid; grid-template-columns: 1fr 420px;
+      min-height: calc(100vh - 116px);
+      background: var(--light); overflow: hidden;
+    }
+    .hero-content {
+      padding: 80px 6vw 80px;
+      display: flex; flex-direction: column; justify-content: center;
+      background: var(--white);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--beige); border: 1px solid var(--beige2);
+      color: var(--gold); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 20px; margin-bottom: 28px; width: fit-content;
+    }
+    .hero-badge::before { content:''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 4.5vw, 60px); font-weight: 500; line-height: 1.12;
+      color: var(--navy); margin-bottom: 22px;
+    }
+    h1 em { font-style: italic; color: var(--gold); }
+    .hero-desc {
+      font-size: 16px; color: var(--muted); line-height: 1.75;
+      max-width: 500px; margin-bottom: 40px; font-weight: 300;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+    .btn-primary {
+      background: var(--navy); color: var(--white);
+      padding: 14px 28px; border-radius: 8px; font-size: 14px; font-weight: 500;
+      text-decoration: none; transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--navy2); transform: translateY(-2px); }
+    .btn-secondary {
+      background: var(--beige); color: var(--navy);
+      padding: 14px 28px; border-radius: 8px; font-size: 14px; font-weight: 500;
+      text-decoration: none; border: 1.5px solid var(--beige2);
+      transition: border-color .2s, background .2s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); background: var(--beige2); }
+    .hero-stats { display: flex; gap: 40px; }
+    .h-stat {}
+    .h-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; font-weight: 700; color: var(--navy); line-height: 1;
+    }
+    .h-stat-num span { font-size: 18px; }
+    .h-stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .hero-divider { width: 1px; background: var(--border); align-self: stretch; }
+    .hero-visual {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .hero-visual-img {
+      flex: 1;
+      background: linear-gradient(160deg, var(--navy2) 0%, var(--navy) 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px; position: relative;
+    }
+    .hero-visual-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(27,45,62,0.9));
+    }
+    .photo-placeholder {
+      width: 120px; height: 120px; border-radius: 50%;
+      border: 3px solid rgba(201,151,61,0.4);
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.05); position: relative; z-index: 2;
+    }
+    .photo-placeholder svg { width: 60px; height: 60px; opacity: 0.3; }
+    .photo-label {
+      position: relative; z-index: 2; text-align: center;
+      font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em;
+    }
+    .hero-card {
+      padding: 24px 28px; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-card p { font-size: 11px; color: var(--gold2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+    .hero-card-services { display: flex; flex-direction: column; gap: 8px; }
+    .hcs {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: rgba(255,255,255,0.7); padding: 8px 10px;
+      background: rgba(255,255,255,0.05); border-radius: 6px;
+    }
+    .hcs-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .hero-contact-bar {
+      background: var(--gold); padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .hero-contact-bar span { font-size: 13px; color: var(--white); font-weight: 500; }
+    .hero-contact-bar a {
+      font-size: 13px; color: var(--white); font-weight: 600;
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ── SOBRE ── */
+    .sobre {
+      padding: 100px 6vw;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      background: var(--white);
+    }
+    .sobre-img {
+      position: relative;
+    }
+    .sobre-img-main {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(145deg, var(--navy) 0%, var(--navy2) 100%);
+      border-radius: 16px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 14px;
+    }
+    .sobre-img-main svg { width: 80px; height: 80px; opacity: 0.2; }
+    .sobre-img-main span { font-size: 13px; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+    .sobre-floater {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--beige); border: 3px solid var(--white);
+      border-radius: 12px; padding: 18px 22px; text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+    .sobre-floater-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; font-weight: 700; color: var(--navy); line-height: 1;
+    }
+    .sobre-floater-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .section-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); background: rgba(201,151,61,0.1); border: 1px solid rgba(201,151,61,0.2);
+      padding: 6px 14px; border-radius: 20px; margin-bottom: 16px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 42px); font-weight: 500; line-height: 1.2;
+      color: var(--navy); margin-bottom: 20px;
+    }
+    h2 em { font-style: italic; color: var(--gold); }
+    .sobre-text p {
+      font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 16px; font-weight: 300;
+    }
+    .sobre-creds { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+    .cred-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 13px; color: var(--text);
+    }
+    .cred-icon { width: 32px; height: 32px; background: var(--beige); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .btn-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--gold); font-size: 14px; font-weight: 500; text-decoration: none;
+      border-bottom: 1.5px solid var(--gold); padding-bottom: 2px;
+      transition: gap .2s;
+    }
+    .btn-link:hover { gap: 12px; }
+
+    /* ── SERVIÇOS ── */
+    .servicos { padding: 100px 6vw; background: var(--light); }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 52px; flex-wrap: wrap; gap: 20px; }
+    .section-header-text {}
+    .section-header p { font-size: 15px; color: var(--muted); max-width: 480px; line-height: 1.65; font-weight: 300; margin-top: 8px; }
+    .servicos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .serv-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px 32px;
+      transition: box-shadow .25s, transform .25s, border-color .25s;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .serv-card:hover {
+      box-shadow: 0 12px 40px rgba(27,45,62,0.1);
+      transform: translateY(-4px); border-color: var(--gold);
+    }
+    .serv-card-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--beige); display: flex; align-items: center; justify-content: center; font-size: 24px;
+    }
+    .serv-card h3 {
+      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: var(--navy);
+    }
+    .serv-card p { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300; flex: 1; }
+    .serv-card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--gold); font-weight: 500; text-decoration: none;
+      margin-top: 4px;
+    }
+
+    /* ── MATERIAIS ── */
+    .materiais { padding: 100px 6vw; background: var(--navy); }
+    .materiais .section-chip { color: var(--gold2); background: rgba(201,151,61,0.15); border-color: rgba(201,151,61,0.25); }
+    .materiais h2 { color: var(--white); }
+    .materiais h2 em { color: var(--gold2); }
+    .materiais .section-header p { color: rgba(255,255,255,0.5); }
+    .mat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+    .mat-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 28px 24px;
+      transition: background .25s, border-color .25s, transform .25s;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .mat-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(201,151,61,0.4); transform: translateY(-3px); }
+    .mat-icon { font-size: 28px; }
+    .mat-card h4 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--white); font-weight: 400; line-height: 1.3; }
+    .mat-card p { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.6; font-weight: 300; flex: 1; }
+    .mat-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,151,61,0.15); border: 1px solid rgba(201,151,61,0.3);
+      color: var(--gold2); padding: 9px 16px; border-radius: 8px;
+      font-size: 12px; font-weight: 500; text-decoration: none;
+      transition: background .2s; width: fit-content;
+    }
+    .mat-btn:hover { background: rgba(201,151,61,0.25); }
+
+    /* ── LINKS ── */
+    .links { padding: 100px 6vw; background: var(--beige); }
+    .links .section-chip {}
+    .links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
+    .link-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 22px 20px;
+      text-decoration: none; color: var(--text);
+      display: flex; flex-direction: column; gap: 10px;
+      transition: box-shadow .2s, transform .2s, border-color .2s;
+    }
+    .link-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-3px); border-color: var(--gold); }
+    .link-card .li { font-size: 24px; }
+    .link-card strong { font-size: 13px; font-weight: 600; color: var(--navy); }
+    .link-card span { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .link-card .arr { font-size: 14px; color: var(--gold); margin-top: auto; }
+
+    /* ── FAQ ── */
+    .faq { padding: 100px 6vw; background: var(--white); }
+    .faq-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 52px; align-items: start; }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      transition: border-color .2s;
+    }
+    .faq-item:hover { border-color: var(--gold); }
+    .faq-btn {
+      width: 100%; background: none; border: none; cursor: pointer;
+      padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 14px;
+      font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500;
+      color: var(--text); text-align: left;
+    }
+    .faq-btn .ico {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--beige); color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0; transition: transform .3s, background .2s;
+    }
+    .faq-btn.open .ico { transform: rotate(45deg); background: var(--gold); color: var(--white); }
+    .faq-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, padding .3s;
+      font-size: 13px; color: var(--muted); line-height: 1.75; font-weight: 300;
+      padding: 0 22px;
+    }
+    .faq-body.open { max-height: 200px; padding: 0 22px 18px; }
+    .faq-cta {
+      background: var(--navy); border-radius: 16px; padding: 40px 36px;
+      position: sticky; top: 90px;
+    }
+    .faq-cta h3 {
+      font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500;
+      color: var(--white); margin-bottom: 12px; line-height: 1.2;
+    }
+    .faq-cta p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 30px; font-weight: 300; }
+    .faq-cta .btn-gold {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: var(--white);
+      padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 500;
+      text-decoration: none; transition: background .2s; margin-bottom: 12px; width: 100%; justify-content: center;
+    }
+    .faq-cta .btn-gold:hover { background: var(--gold2); }
+    .faq-cta .btn-ghost2 {
+      display: inline-flex; align-items: center; gap: 8px; justify-content: center;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7); padding: 14px 24px; border-radius: 8px;
+      font-size: 14px; text-decoration: none; width: 100%;
+      transition: background .2s;
+    }
+    .faq-cta .btn-ghost2:hover { background: rgba(255,255,255,0.1); }
+    .faq-cta-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 24px 0; }
+    .faq-info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; color: rgba(255,255,255,0.5); font-size: 13px; }
+    .faq-info-row span:first-child { color: var(--gold2); font-size: 16px; }
+
+    /* ── GALERIA ── */
+    .galeria { padding: 80px 6vw; background: var(--light); }
+    .galeria h2 { margin-bottom: 10px; }
+    .galeria > p { font-size: 15px; color: var(--muted); margin-bottom: 40px; font-weight: 300; }
+    .gal-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 220px 220px;
+      gap: 12px;
+    }
+    .gal-item {
+      border-radius: 12px; overflow: hidden;
+      background: var(--navy2); position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gal-item:first-child { grid-row: 1 / 3; }
+    .gal-item::before {
+      content: attr(data-label);
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(27,45,62,0.85));
+      color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 0.06em;
+      padding: 24px 16px 14px; z-index: 2;
+    }
+    .gal-placeholder { font-size: 32px; opacity: 0.2; }
+
+    /* ── CONTATO ── */
+    .contato { padding: 100px 6vw; background: var(--white); }
+    .contato-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; margin-top: 52px; align-items: start; }
+    .contato-form-wrap {}
+    .contato-form-wrap h3 {
+      font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;
+      color: var(--navy); margin-bottom: 8px;
+    }
+    .contato-form-wrap > p { font-size: 14px; color: var(--muted); margin-bottom: 28px; font-weight: 300; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 6px; letter-spacing: 0.04em; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 16px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 14px;
+      color: var(--text); background: var(--white); outline: none;
+      transition: border-color .2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: none; height: 110px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .btn-submit {
+      width: 100%; background: var(--navy); color: var(--white);
+      padding: 14px; border-radius: 8px; font-family: 'Outfit', sans-serif;
+      font-size: 14px; font-weight: 500; border: none; cursor: pointer;
+      transition: background .2s, transform .2s; margin-top: 8px;
+    }
+    .btn-submit:hover { background: var(--navy2); transform: translateY(-1px); }
+    .contato-info {}
+    .contato-info-cards { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+    .ci-card {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 20px;
+    }
+    .ci-icon {
+      width: 42px; height: 42px; background: var(--beige); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+    }
+    .ci-label { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+    .ci-val { font-size: 14px; color: var(--text); font-weight: 500; }
+    .ci-val a { color: var(--text); text-decoration: none; }
+    .ci-val a:hover { color: var(--gold); }
+    .map-embed {
+      width: 100%; height: 240px; border-radius: 12px; overflow: hidden;
+      border: 1.5px solid var(--border); background: var(--beige);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px; color: var(--muted); font-size: 13px;
+    }
+    .map-embed span:first-child { font-size: 32px; }
+    .horario-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .horario-row:last-child { border-bottom: none; }
+    .horario-row .day { color: var(--muted); font-weight: 300; }
+    .horario-row .time { font-weight: 500; color: var(--text); }
+    .horario-row .closed { color: var(--muted); font-weight: 300; font-style: italic; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); padding: 60px 6vw 30px; }
+    .footer-top {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px;
+      padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 30px;
+    }
+    .footer-brand {}
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; text-decoration: none; }
+    .footer-logo-mark {
+      width: 38px; height: 38px; background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; color: var(--white); font-size: 18px; font-style: italic;
+    }
+    .footer-logo-text strong { display: block; font-family: 'Playfair Display', serif; color: var(--white); font-size: 14px; }
+    .footer-logo-text span { font-size: 11px; color: rgba(255,255,255,0.3); }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; font-weight: 300; }
+    .footer-col h5 { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color .2s; }
+    .footer-col a:hover { color: var(--gold2); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
+    .footer-bottom a { color: rgba(255,255,255,0.2); text-decoration: none; }
+    .footer-bottom a:hover { color: rgba(255,255,255,0.4); }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 500;
+      width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      text-decoration: none; font-size: 26px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(37,211,102,0.5); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .links-grid { grid-template-columns: repeat(2, 1fr); }
+      .mat-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .topbar { display: none; }
+      .nav-menu, .nav-actions { display: none; }
+      .mob-menu-btn { display: block; }
+      .sobre, .contato-layout, .faq-layout, .cert-layout { grid-template-columns: 1fr; }
+      .servicos-grid { grid-template-columns: 1fr; }
+      .gal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gal-item:first-child { grid-row: auto; }
+      h1 { font-size: 34px; }
+      .hero-stats { gap: 24px; }
+      .mat-grid { grid-template-columns: 1fr; }
+      .links-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span>📍 Ipojuca, Pernambuco</span>
+    <span>⏰ Seg–Sex: 08h–16h</span>
+  </div>
+  <div>
+    <a href="mailto:contato@riipojuca.com.br">✉️ contato@riipojuca.com.br</a>
+    &nbsp;&nbsp;
+    <a href="https://wa.me/5581989707241">📱 (81) 98970-7241</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">S</div>
+    <div class="logo-text">
+      <strong>Serventia Registral de Ipojuca</strong>
+      <span>Registro de Imóveis · RTD · PJ</span>
+    </div>
+  </a>
+  <ul class="nav-menu">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#materiais">Materiais</a></li>
+    <li><a href="#links">Links Úteis</a></li>
+    <li><a href="#faq">Dúvidas</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn-nav-outline">Emolumentos</a>
+    <a href="#contato" class="btn-nav-filled">Contato</a>
+  </div>
+  <button class="mob-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-badge">Serventia Extrajudicial · Ipojuca/PE</span>
+    <h1>Segurança jurídica<br>para <em>seus atos</em><br>e patrimônio</h1>
+    <p class="hero-desc">A Serventia Registral de Ipojuca oferece Registro de Imóveis, Registro Civil de Pessoas Jurídicas e Registro de Títulos e Documentos com transparência, eficiência e atendimento humanizado.</p>
+    <div class="hero-btns">
+      <a href="#servicos" class="btn-primary">Conheça os Serviços</a>
+      <a href="#contato" class="btn-secondary">Fale Conosco</a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat">
+        <div class="h-stat-num">3<span>+</span></div>
+        <div class="h-stat-label">Especialidades</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="h-stat">
+        <div class="h-stat-num">08<span>h</span></div>
+        <div class="h-stat-label">Abertura diária</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="h-stat">
+        <div class="h-stat-num">100<span>%</span></div>
+        <div class="h-stat-label">Digital Ready</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-visual-img">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="22" r="12" stroke="white" stroke-width="1.5"/>
+          <path d="M8 56c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="white" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="photo-label">Dra. Andréa Walmsley · Titular</div>
+    </div>
+    <div class="hero-card">
+      <p>Nossos Registros</p>
+      <div class="hero-card-services">
+        <div class="hcs"><span class="hcs-dot"></span>Registro de Imóveis</div>
+        <div class="hcs"><span class="hcs-dot"></span>Registro Civil de Pessoas Jurídicas</div>
+        <div class="hcs"><span class="hcs-dot"></span>Registro de Títulos e Documentos</div>
+      </div>
+    </div>
+    <div class="hero-contact-bar">
+      <span>Fale pelo WhatsApp</span>
+      <a href="https://wa.me/5581989707241" target="_blank">💬 (81) 98970-7241 ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="sobre-img reveal">
+    <div class="sobre-img-main">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="22" r="12" stroke="white" stroke-width="1.2"/>
+        <path d="M8 56c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="white" stroke-width="1.2"/>
+      </svg>
+      <span>Foto da Titular</span>
+    </div>
+    <div class="sobre-floater">
+      <div class="sobre-floater-num">UFPE</div>
+      <div class="sobre-floater-label">Doutora em Direito</div>
+    </div>
+  </div>
+  <div class="sobre-text reveal">
+    <span class="section-chip">Quem somos</span>
+    <h2>Dra. Andréa<br><em>Walmsley</em></h2>
+    <p>Graduada, mestre e doutora em Direito pela Universidade Federal de Pernambuco, professora e autora de obras jurídicas. Assume a Serventia Registral de Ipojuca com o compromisso de oferecer um serviço público eficiente, seguro e alinhado à sua importante função social.</p>
+    <p>A serventia inicia essa nova etapa com dedicação à inovação, à qualidade no atendimento e à promoção da segurança jurídica para toda a comunidade de Ipojuca e região.</p>
+    <div class="sobre-creds">
+      <div class="cred-item"><div class="cred-icon">🎓</div> Doutora em Direito — UFPE</div>
+      <div class="cred-item"><div class="cred-icon">📚</div> Professora universitária de Direito Registral</div>
+      <div class="cred-item"><div class="cred-icon">✍️</div> Autora de obras jurídicas publicadas</div>
+      <div class="cred-item"><div class="cred-icon">⚖️</div> Titular da Serventia Registral de Ipojuca</div>
+    </div>
+    <a href="#contato" class="btn-link">Entre em contato →</a>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="servicos" id="servicos">
+  <div class="section-header">
+    <div class="section-header-text">
+      <span class="section-chip reveal">O que fazemos</span>
+      <h2 class="reveal">Nossos <em>Serviços</em></h2>
+      <p class="reveal">Atos notariais e registrais realizados com transparência, eficiência e orientação especializada.</p>
+    </div>
+  </div>
+  <div class="servicos-grid">
+    <a href="https://ridigital.org.br/" target="_blank" class="serv-card reveal">
+      <div class="serv-card-icon">🏠</div>
+      <h3>Registro de Imóveis</h3>
+      <p>Transferências, compra e venda, doação, herança, usucapião, loteamentos, averbações de construção, penhoras, hipotecas e demais atos que constituem direitos reais sobre imóveis.</p>
+      <span class="serv-card-link">Acessar portal RI →</span>
+    </a>
+    <a href="https://www.rtdbrasil.org.br/" target="_blank" class="serv-card reveal">
+      <div class="serv-card-icon">📋</div>
+      <h3>Títulos e Documentos</h3>
+      <p>Registro de contratos, procurações, notificações, cartas de crédito e documentos que exigem publicidade e eficácia perante terceiros para segurança jurídica.</p>
+      <span class="serv-card-link">Acessar portal RTD →</span>
+    </a>
+    <a href="#contato" class="serv-card reveal">
+      <div class="serv-card-icon">🏢</div>
+      <h3>Registro Civil de PJ</h3>
+      <p>Registro de associações, fundações, cooperativas, sindicatos e demais pessoas jurídicas de direito privado para obtenção de personalidade jurídica e CNPJ.</p>
+      <span class="serv-card-link">Saiba mais →</span>
+    </a>
+    <a href="https://www.onr.org.br/" target="_blank" class="serv-card reveal">
+      <div class="serv-card-icon">📜</div>
+      <h3>Certidões Online</h3>
+      <p>Solicite certidões de matrícula, inteiro teor, ônus reais e negativa de propriedade pelo portal ONR, com entrega digital e validade jurídica pelo ICP-Brasil.</p>
+      <span class="serv-card-link">Acessar ONR →</span>
+    </a>
+  </div>
+</section>
+
+<!-- MATERIAIS -->
+<section class="materiais" id="materiais">
+  <div class="section-header">
+    <div class="section-header-text">
+      <span class="section-chip reveal">Documentação</span>
+      <h2 class="reveal">Materiais e <em>Check-lists</em></h2>
+      <p class="reveal">Conteúdos explicativos para ajudar você a preparar a documentação e entender os principais serviços.</p>
+    </div>
+  </div>
+  <div class="mat-grid">
+    <div class="mat-card reveal">
+      <div class="mat-icon">🏠</div>
+      <h4>Check-list: Registro de Compra e Venda</h4>
+      <p>Documentos necessários para registrar a transferência de imóvel por compra e venda.</p>
+      <a href="#" class="mat-btn">📥 Baixar PDF</a>
+    </div>
+    <div class="mat-card reveal">
+      <div class="mat-icon">🏗️</div>
+      <h4>Check-list: Averbação de Construção</h4>
+      <p>Lista de documentos exigidos para averbar construção ou reforma na matrícula do imóvel.</p>
+      <a href="#" class="mat-btn">📥 Baixar PDF</a>
+    </div>
+    <div class="mat-card reveal">
+      <div class="mat-icon">🤝</div>
+      <h4>Check-list: Doação de Imóvel</h4>
+      <p>Tudo o que é preciso para registrar uma doação de imóvel com segurança jurídica.</p>
+      <a href="#" class="mat-btn">📥 Baixar PDF</a>
+    </div>
+    <div class="mat-card reveal">
+      <div class="mat-icon">⚖️</div>
+      <h4>Check-list: Inventário e Partilha</h4>
+      <p>Documentos necessários para registro de formal de partilha ou carta de adjudicação.</p>
+      <a href="#" class="mat-btn">📥 Baixar PDF</a>
+    </div>
+    <div class="mat-card reveal">
+      <div class="mat-icon">🏛️</div>
+      <h4>Guia: Abertura de Associação</h4>
+      <p>Passo a passo para constituir e registrar uma associação ou fundação.</p>
+      <a href="#" class="mat-btn">📥 Baixar PDF</a>
+    </div>
+    <div class="mat-card reveal">
+      <div class="mat-icon">💰</div>
+      <h4>Tabela de Emolumentos 2025</h4>
+      <p>Tabela oficial de custas e taxas do TJPE vigente para todos os atos registrais.</p>
+      <a href="#" class="mat-btn">📥 Baixar PDF</a>
+    </div>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section class="links" id="links">
+  <span class="section-chip reveal">Acesso rápido</span>
+  <h2 class="reveal">Portais e Links <em>Oficiais</em></h2>
+  <div class="links-grid">
+    <a href="https://www.tjpe.jus.br" target="_blank" class="link-card reveal">
+      <span class="li">⚖️</span>
+      <strong>TJPE</strong>
+      <span>Tribunal de Justiça de Pernambuco</span>
+      <span class="arr">↗</span>
+    </a>
+    <a href="https://www.onr.org.br" target="_blank" class="link-card reveal">
+      <span class="li">🌐</span>
+      <strong>ONR</strong>
+      <span>Certidões online e portal registradores</span>
+      <span class="arr">↗</span>
+    </a>
+    <a href="https://www.cnj.jus.br" target="_blank" class="link-card reveal">
+      <span class="li">🏛️</span>
+      <strong>CNJ</strong>
+      <span>Conselho Nacional de Justiça</span>
+      <span class="arr">↗</span>
+    </a>
+    <a href="https://www.ipojuca.pe.gov.br" target="_blank" class="link-card reveal">
+      <span class="li">🏙️</span>
+      <strong>Prefeitura de Ipojuca</strong>
+      <span>IPTU, ITBI e certidões fiscais</span>
+      <span class="arr">↗</span>
+    </a>
+    <a href="https://www.receita.fazenda.gov.br" target="_blank" class="link-card reveal">
+      <span class="li">🔎</span>
+      <strong>Receita Federal</strong>
+      <span>Consulta CPF/CNPJ</span>
+      <span class="arr">↗</span>
+    </a>
+    <a href="https://ridigital.org.br/" target="_blank" class="link-card reveal">
+      <span class="li">📂</span>
+      <strong>RI Digital</strong>
+      <span>Portal de Registro de Imóveis</span>
+      <span class="arr">↗</span>
+    </a>
+    <a href="https://www.rtdbrasil.org.br/" target="_blank" class="link-card reveal">
+      <span class="li">📋</span>
+      <strong>RTD Brasil</strong>
+      <span>Registro de Títulos e Documentos</span>
+      <span class="arr">↗</span>
+    </a>
+    <a href="https://www.anoreg.org.br" target="_blank" class="link-card reveal">
+      <span class="li">📚</span>
+      <strong>ANOREG</strong>
+      <span>Associação dos Notários e Registradores</span>
+      <span class="arr">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <span class="section-chip reveal">Tire suas dúvidas</span>
+  <h2 class="reveal">Perguntas <em>Frequentes</em></h2>
+  <div class="faq-layout">
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-btn">O que é a matrícula do imóvel? <span class="ico">+</span></button>
+        <div class="faq-body">É o documento que reúne toda a vida jurídica do imóvel: quem foram os proprietários, quais ônus ou gravames existem e todas as alterações feitas ao longo do tempo. É a "certidão de nascimento" da propriedade.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">Por que registrar um imóvel? <span class="ico">+</span></button>
+        <div class="faq-body">No Brasil, o registro é o único ato que transfere oficialmente a propriedade. Sem ele, mesmo tendo pago pelo imóvel e possuindo a escritura, o comprador não é juridicamente o dono — o imóvel ainda pertence ao vendedor perante a lei.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">Documentos também podem ser registrados? <span class="ico">+</span></button>
+        <div class="faq-body">Sim. O Registro de Títulos e Documentos permite registrar contratos, notificações, procurações e outros documentos para que tenham publicidade, autenticidade e eficácia perante terceiros.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">Como solicitar uma certidão online? <span class="ico">+</span></button>
+        <div class="faq-body">Pelo portal ONR (onr.org.br) é possível solicitar certidões de qualquer cartório do Brasil com pagamento eletrônico. A entrega é digital, com assinatura eletrônica válida pelo ICP-Brasil.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">Meu imóvel passou por mudanças. O que fazer? <span class="ico">+</span></button>
+        <div class="faq-body">Qualquer alteração no imóvel (construção, demolição, mudança de nome por casamento/divórcio, quitação de dívidas) deve ser averbada na matrícula para que o registro reflita a situação real. Procure o cartório para regularizar.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">Qual o prazo para o registro ficar pronto? <span class="ico">+</span></button>
+        <div class="faq-body">O prazo legal é de 30 dias corridos a partir do protocolo. Dependendo do tipo de ato e do fluxo, pode ser concluído antes. Você pode acompanhar pelo número de protocolo ou pelo WhatsApp.</div>
+      </div>
+    </div>
+    <div class="faq-cta reveal">
+      <h3>Ainda tem dúvidas?</h3>
+      <p>Nossa equipe está pronta para orientar você sobre documentação, prazos e procedimentos. Entre em contato!</p>
+      <a href="https://wa.me/5581989707241" target="_blank" class="btn-gold">💬 WhatsApp (81) 98970-7241</a>
+      <a href="mailto:contato@riipojuca.com.br" class="btn-ghost2">✉️ contato@riipojuca.com.br</a>
+      <hr class="faq-cta-divider"/>
+      <div class="faq-info-row"><span>⏰</span><span>Seg–Sex: 08h às 16h</span></div>
+      <div class="faq-info-row"><span>📍</span><span>Ipojuca, Pernambuco</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="galeria">
+  <span class="section-chip reveal">Nossa Estrutura</span>
+  <h2 class="reveal">Conheça o <em>Espaço</em></h2>
+  <p class="reveal">Estrutura moderna e acessível para oferecer o melhor atendimento à comunidade.</p>
+  <div class="gal-grid">
+    <div class="gal-item reveal" data-label="Fachada da Serventia">
+      <div class="gal-placeholder">🏛️</div>
+    </div>
+    <div class="gal-item reveal" data-label="Recepção">
+      <div class="gal-placeholder">🏢</div>
+    </div>
+    <div class="gal-item reveal" data-label="Sala de Atendimento">
+      <div class="gal-placeholder">🪑</div>
+    </div>
+    <div class="gal-item reveal" data-label="Balcão de Protocolo">
+      <div class="gal-placeholder">📋</div>
+    </div>
+    <div class="gal-item reveal" data-label="Área de Espera">
+      <div class="gal-placeholder">☕</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato" id="contato">
+  <span class="section-chip reveal">Fale conosco</span>
+  <h2 class="reveal">Entre em <em>Contato</em></h2>
+  <div class="contato-layout">
+    <div class="contato-form-wrap reveal">
+      <h3>Envie uma mensagem</h3>
+      <p>Preencha o formulário e entraremos em contato em breve.</p>
+      <div class="form-row">
+        <div class="form-group"><label>Nome completo</label><input type="text" placeholder="Seu nome"/></div>
+        <div class="form-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Telefone</label><input type="tel" placeholder="(81) 99999-9999"/></div>
+        <div class="form-group">
+          <label>Assunto</label>
+          <select>
+            <option value="">Selecione...</option>
+            <option>Registro de Imóveis</option>
+            <option>Certidões</option>
+            <option>Registro de PJ</option>
+            <option>Títulos e Documentos</option>
+            <option>Outros</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Mensagem</label><textarea placeholder="Descreva sua dúvida ou solicitação..."></textarea></div>
+      <button class="btn-submit" type="button">Enviar Mensagem</button>
+    </div>
+    <div class="contato-info reveal">
+      <div class="contato-info-cards">
+        <div class="ci-card">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">Endereço</div>
+            <div class="ci-val">Rua [Nome], nº 000 — Ipojuca/PE<br>CEP 55590-000</div>
+          </div>
+        </div>
+        <div class="ci-card">
+          <div class="ci-icon">📱</div>
+          <div>
+            <div class="ci-label">WhatsApp</div>
+            <div class="ci-val"><a href="https://wa.me/5581989707241">(81) 98970-7241</a></div>
+          </div>
+        </div>
+        <div class="ci-card">
+          <div class="ci-icon">✉️</div>
+          <div>
+            <div class="ci-label">E-mail</div>
+            <div class="ci-val"><a href="mailto:contato@riipojuca.com.br">contato@riipojuca.com.br</a></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom:20px">
+        <div class="horario-row"><span class="day">Segunda — Sexta</span><span class="time">08h às 16h</span></div>
+        <div class="horario-row"><span class="day">Sábado</span><span class="closed">Fechado</span></div>
+        <div class="horario-row"><span class="day">Domingo</span><span class="closed">Fechado</span></div>
+      </div>
+      <div class="map-embed">
+        <span>🗺️</span>
+        <span>Mapa via Google Maps</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">
+        <div class="footer-logo-mark">S</div>
+        <div class="footer-logo-text">
+          <strong>Serventia Registral de Ipojuca</strong>
+          <span>Registro de Imóveis · RTD · PJ</span>
+        </div>
+      </a>
+      <p>Segurança jurídica para seus atos e patrimônio. Fiscalizada pelo TJPE e CNJ. Ipojuca, Pernambuco.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Serviços</h5>
+      <ul>
+        <li><a href="#servicos">Registro de Imóveis</a></li>
+        <li><a href="#servicos">Reg. Civil de PJ</a></li>
+        <li><a href="#servicos">Títulos e Documentos</a></li>
+        <li><a href="#servicos">Certidões</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Acesso Rápido</h5>
+      <ul>
+        <li><a href="https://www.onr.org.br" target="_blank">Portal ONR</a></li>
+        <li><a href="https://www.tjpe.jus.br" target="_blank">TJPE</a></li>
+        <li><a href="https://ridigital.org.br/" target="_blank">RI Digital</a></li>
+        <li><a href="#materiais">Materiais</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contato</h5>
+      <ul>
+        <li><a href="https://wa.me/5581989707241">(81) 98970-7241</a></li>
+        <li><a href="mailto:contato@riipojuca.com.br">contato@riipojuca.com.br</a></li>
+        <li><a href="#contato">Enviar mensagem</a></li>
+        <li><a href="#">LGPD</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Serventia Registral de Ipojuca · Todos os direitos reservados</p>
+    <p>Fiscalizada pelo <a href="https://www.tjpe.jus.br" target="_blank">TJPE</a> e <a href="https://www.cnj.jus.br" target="_blank">CNJ</a></p>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/5581989707241" target="_blank" class="wa-float" title="WhatsApp">💬</a>
+
+<script>
+  // FAQ
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = btn.nextElementSibling;
+      const open = body.classList.contains('open');
+      document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.faq-btn').forEach(b => b.classList.remove('open'));
+      if (!open) { body.classList.add('open'); btn.classList.add('open'); }
+    });
+  });
+
+  // Reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 50);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Nav active
+  const secs = document.querySelectorAll('section[id]');
+  const nls = document.querySelectorAll('.nav-menu a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    nls.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+    });
+  });
+
+  // Form submit feedback
+  document.querySelector('.btn-submit').addEventListener('click', function() {
+    this.textContent = '✓ Mensagem enviada!';
+    this.style.background = '#2e7d32';
+    setTimeout(() => { this.textContent = 'Enviar Mensagem'; this.style.background = ''; }, 3000);
+  });
+</script>
+</body>
+</html>
