@@ -174,7 +174,7 @@
       <!-- Indicadores de stats rápidos -->
       <div class="hero-stats revelar-scroll">
         <div class="stat-item">
-          <span class="stat-numero">10+</span>
+          <span class="stat-numero">6+</span>
           <span class="stat-label">Projetos</span>
         </div>
         <div class="stat-divisor"></div>
@@ -571,7 +571,7 @@
         <!--
           ╔══════════════════════════════════════════╗
           ║  MODELO PARA ADICIONAR NOVO PROJETO      ║
-          ║  Duplique este bloco para novos projetos ║
+          ║  Duplicar este bloco para novos projetos ║
           ╚══════════════════════════════════════════╝
           Passos para adicionar:
           1. Copie o bloco <div class="card-projeto-destaque"> completo
@@ -835,7 +835,7 @@
 
         <!--
           ╔════════════════════════════════════════════════════╗
-          ║  MODELO VAZIO — ADICIONE SEU PRÓXIMO PROJETO AQUI ║
+          ║  MODELO VAZIO — ADICIONAR O PRÓXIMO PROJETO AQUI   ║ 
           ╚════════════════════════════════════════════════════╝
 
           Duplique o bloco abaixo e preencha:
@@ -873,12 +873,113 @@
       <div class="secao-cabecalho revelar-scroll">
         <span class="secao-etiqueta">Minha história</span>
         <h2 class="secao-titulo">Minha <span class="destaque-texto">Jornada</span></h2>
-        <p class="secao-subtitulo">Os marcos que definiram meu crescimento como desenvolvedor</p>
+        <p class="secao-subtitulo">Os marcos que definiram quem eu sou e o que eu sei fazer</p>
       </div>
 
-      <div class="timeline">
+      <!-- ===== ABAS DE NAVEGAÇÃO DA JORNADA ===== -->
+      <div class="jornada-abas revelar-scroll">
+        <button class="jornada-aba jornada-aba-ativa" data-aba="profissional">
+          <i class="ri-briefcase-line"></i>
+          <span>Profissional</span>
+        </button>
+        <button class="jornada-aba" data-aba="dev">
+          <i class="ri-code-s-slash-line"></i>
+          <span>Dev</span>
+        </button>
+      </div>
 
-        <!-- Linha central animada da timeline -->
+      <!-- =============================================
+           ABA: PROFISSIONAL
+      ============================================= -->
+      <div class="timeline jornada-conteudo jornada-conteudo-ativo" id="abaConteudoProfissional">
+        <div class="timeline-linha" aria-hidden="true"></div>
+
+        <!-- ===== ITEM PROFISSIONAL 1 ===== -->
+        <div class="timeline-item timeline-esquerda revelar-scroll">
+          <div class="timeline-marcador">
+            <i class="ri-briefcase-line"></i>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-data">[2020 — 2021]</span>
+            <h3 class="timeline-titulo">Auxiliar de Cartório</h3>
+            <h4 class="timeline-titulo">Cartório de Ofício Único de Ipojuca</h4>
+            <p class="timeline-texto">
+              Autenticação de documentos, reconhecimento de firma por autenticidade
+              e semelhança, abertura de firmas e organização de cartões de autógrafo.
+              Primeiro contato com o ambiente cartorial.
+            </p>
+            <div class="timeline-tags">
+              <span>Autenticação</span><span>Reconhecimento de firma</span><span>Cartório de Notas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== ITEM PROFISSIONAL 2 ===== -->
+        <div class="timeline-item timeline-direita revelar-scroll">
+          <div class="timeline-marcador">
+            <i class="ri-building-line"></i>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-data">[2021 — 2025]</span>
+            <h3 class="timeline-titulo">Escrevente</h3>
+            <h4 class="timeline-titulo">1ª Serventia Registral de Ipojuca</h4>
+            <p class="timeline-texto">
+              Análise e Registros de Processos, elaboração de certidões de imóveis, preenchimento e envio de
+              relatórios para DOI, DOITU e ITBI.
+            </p>
+            <div class="timeline-tags">
+              <span>Registros</span><span>Certidões</span><span>RGI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== ITEM PROFISSIONAL 3 ===== -->
+        <div class="timeline-item timeline-esquerda revelar-scroll">
+          <div class="timeline-marcador">
+            <i class="ri-briefcase-line"></i>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-data">[2025 — 2026]</span>
+            <h3 class="timeline-titulo">Auxiliar Administrativo</h3>
+            <h4 class="timeline-titulo">1ª Serventia Registral de Ipojuca</h4>
+            <p class="timeline-texto">
+              Responsável por minutas, conferência de documentos e análise de
+              processos de registro de imóveis. Atuação direta no atendimento ao
+              público e suporte à rotina operacional do cartório.
+            </p>
+            <div class="timeline-tags">
+              <span>Análises</span><span>Registros</span><span>RGI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== ITEM PROFISSIONAL ATUAL ===== -->
+        <div class="timeline-item timeline-direita revelar-scroll">
+          <div class="timeline-marcador marcador-atual">
+            <i class="ri-star-line"></i>
+          </div>
+          <div class="timeline-card timeline-card-atual">
+            <span class="timeline-data">2026 — Presente</span>
+            <h3 class="timeline-titulo">Auxiliar Administrativo</h3>
+            <p class="timeline-texto">
+              Atuo na elaboração e conferência de minutas, análise de documentos
+              e processos de registros e averbações de imóveis. Responsável pelo
+              atendimento ao público e consulta ao protocolo do Registro de Imóveis.
+            </p>
+            <div class="timeline-tags">
+              <span>Análises</span><span>Registros</span><span>RGI</span>
+            </div>
+            <div class="timeline-badge-atual">⭐ Agora</div>
+          </div>
+        </div>
+
+      </div><!-- /aba profissional -->
+
+      <!-- =============================================
+           ABA: DEV
+           Trajetória de estudos e evolução como desenvolvedor.
+      ============================================= -->
+      <div class="timeline jornada-conteudo" id="abaConteudoDev">
         <div class="timeline-linha" aria-hidden="true"></div>
 
         <!-- ===== ITEM 1: INÍCIO ===== -->
@@ -977,7 +1078,8 @@
           </div>
         </div>
 
-      </div><!-- /timeline -->
+      </div><!-- /aba dev -->
+
     </div>
   </section>
 

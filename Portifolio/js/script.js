@@ -425,7 +425,60 @@ function iniciarAlternarTema() {
 }
 
 /* ============================================================
-   7. INICIALIZAÇÃO GERAL
+   7. ABAS DA JORNADA (Profissional / Dev)
+   ============================================================ */
+
+/**
+ * iniciarAbasJornada
+ * Controla a alternância entre as abas "Profissional" e "Dev"
+ * na seção Jornada. Ao clicar numa aba:
+ *   1. Remove o estilo ativo de todas as abas
+ *   2. Ativa a aba clicada
+ *   3. Oculta todos os painéis de conteúdo
+ *   4. Exibe o painel correspondente à aba clicada
+ */
+function iniciarAbasJornada() {
+  const abas      = document.querySelectorAll('.jornada-aba');
+  const paineis   = document.querySelectorAll('.jornada-conteudo');
+
+  if (!abas.length) return;
+
+  abas.forEach(aba => {
+    aba.addEventListener('click', () => {
+      const alvo = aba.dataset.aba; /* ex: "profissional" ou "dev" */
+
+      /* Remove ativo de todas as abas */
+      abas.forEach(a => a.classList.remove('jornada-aba-ativa'));
+
+      /* Oculta todos os painéis */
+      paineis.forEach(p => p.classList.remove('jornada-conteudo-ativo'));
+
+      /* Ativa a aba clicada */
+      aba.classList.add('jornada-aba-ativa');
+
+      /* Exibe o painel correspondente */
+      const painel = document.getElementById('abaConteudo' + capitalizar(alvo));
+      if (painel) {
+        painel.classList.add('jornada-conteudo-ativo');
+
+        /* Re-dispara as animações revelar-scroll dos itens do painel */
+        painel.querySelectorAll('.revelar-scroll').forEach(el => {
+          el.classList.remove('visivel');
+          /* Pequeno delay para o CSS detectar a mudança e animar */
+          setTimeout(() => el.classList.add('visivel'), 50);
+        });
+      }
+    });
+  });
+}
+
+/* Capitaliza a primeira letra e mantém o resto igual */
+function capitalizar(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/* ============================================================
+   8. INICIALIZAÇÃO GERAL
    ============================================================ */
 
 /**
@@ -441,6 +494,7 @@ function inicializar() {
   iniciarBotaoTopo();
   iniciarEfeitoRipple();
   iniciarAlternarTema();
+  iniciarAbasJornada();
 }
 
 /* --- Utilitário: capitaliza a primeira letra de uma string --- */

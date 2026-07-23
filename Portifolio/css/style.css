@@ -2423,6 +2423,86 @@ html[data-tema="claro"] .menu-mobile-tema i {
   border-radius: 100px;
 }
 
+/* ── Abas da Jornada (Profissional / Dev) ── */
+.jornada-abas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  margin-bottom: 3rem;
+}
+
+.jornada-aba {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .65rem 1.75rem;
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: 100px;
+  color: var(--cor-texto-suave);
+  font-family: var(--fonte-corpo);
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicao-media);
+}
+
+.jornada-aba i {
+  font-size: 1rem;
+}
+
+.jornada-aba:hover {
+  border-color: var(--cor-borda-hover);
+  color: var(--cor-azul-neon);
+  background: var(--cor-fundo-card-hover);
+}
+
+/* Aba ativa — gradiente igual aos botões primários */
+.jornada-aba-ativa {
+  background: var(--grad-primario);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: var(--sombra-botao);
+}
+
+.jornada-aba-ativa:hover {
+  color: #fff;
+  filter: brightness(1.1);
+}
+
+/* Painéis de conteúdo das abas */
+.jornada-conteudo {
+  display: none;
+  animation: fadeInAba .35s ease;
+}
+
+.jornada-conteudo-ativo {
+  display: block;
+}
+
+@keyframes fadeInAba {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Tema claro — abas */
+html[data-tema="claro"] .jornada-aba {
+  background: #ffffff;
+  border-color: rgba(26,111,255,.2);
+  color: var(--cor-texto-suave);
+}
+html[data-tema="claro"] .jornada-aba:hover {
+  background: #f0f6ff;
+  border-color: rgba(26,111,255,.4);
+  color: var(--cor-azul-royal);
+}
+html[data-tema="claro"] .jornada-aba-ativa {
+  background: var(--grad-primario);
+  border-color: transparent;
+  color: #fff;
+}
+
 /* ============================================================
    14. CONTATO
    ============================================================ */
