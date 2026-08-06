@@ -520,3 +520,27 @@
   .avatar-anel-medio   { width: 160px; height: 160px; }
   .avatar-placeholder  { width: 130px; height: 130px; }
 }
+
+/* ── Formação & Certificados — Responsivo ── */
+@media (max-width: 768px) {
+  .grid-formacao-academica {
+    grid-template-columns: 1fr;
+  }
+  .grid-eventos {
+    grid-template-columns: 1fr;
+  }
+  .card-plataforma-topo {
+    gap: .75rem;
+  }
+  .plataforma-resumo {
+    margin-left: 0;
+    text-align: left;
+  }
+  .cert-item {
+    flex-wrap: wrap;
+    gap: .4rem;
+  }
+  .cert-item-info {
+    margin-left: 1.75rem;
+  }
+}

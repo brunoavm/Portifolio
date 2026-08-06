@@ -2504,6 +2504,372 @@ html[data-tema="claro"] .jornada-aba-ativa {
 }
 
 /* ============================================================
+   13.5 FORMAÇÃO & CERTIFICADOS
+   ============================================================ */
+.secao-formacao {
+  background: var(--cor-fundo);
+}
+
+/* Bloco com título e conteúdo */
+.formacao-bloco {
+  margin-bottom: 3rem;
+}
+
+.formacao-bloco-titulo {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  font-family: var(--fonte-display);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+  margin-bottom: 1.5rem;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.formacao-bloco-titulo i {
+  font-size: 1rem;
+  color: var(--cor-azul-neon);
+}
+
+/* ── Formação Acadêmica ── */
+.grid-formacao-academica {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.card-formacao-academica {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-card);
+  padding: 1.5rem;
+  transition: var(--transicao-media);
+}
+
+.card-formacao-academica:hover {
+  border-color: var(--cor-borda-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-card);
+}
+
+.formacao-acad-icone {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.formacao-acad-info {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.formacao-acad-periodo {
+  font-family: var(--fonte-display);
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--cor-azul-neon);
+  letter-spacing: .05em;
+}
+
+.formacao-acad-nome {
+  font-family: var(--fonte-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cor-titulo);
+  line-height: 1.3;
+}
+
+.formacao-acad-instituicao {
+  font-size: .82rem;
+  color: var(--cor-texto-suave);
+}
+
+.formacao-acad-status {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .72rem;
+  font-weight: 700;
+  font-family: var(--fonte-display);
+  padding: .2rem .7rem;
+  border-radius: 100px;
+  width: fit-content;
+  margin-top: .25rem;
+}
+
+.formacao-status-cursando {
+  background: rgba(255, 202, 40, .12);
+  color: #ffca28;
+  border: 1px solid rgba(255, 202, 40, .3);
+}
+
+.formacao-status-concluido {
+  background: rgba(0, 230, 118, .1);
+  color: #00e676;
+  border: 1px solid rgba(0, 230, 118, .3);
+}
+
+/* ── Card de plataforma (Alura) ── */
+.card-plataforma {
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-card);
+  overflow: hidden;
+  transition: var(--transicao-media);
+}
+
+.card-plataforma:hover {
+  border-color: var(--cor-borda-hover);
+  box-shadow: var(--sombra-card);
+}
+
+.card-plataforma-topo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--cor-borda);
+  flex-wrap: wrap;
+}
+
+.plataforma-logo {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--fonte-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.plataforma-logo-alura {
+  color: var(--cor-azul-neon);
+}
+
+.plataforma-logo i {
+  font-size: 1.3rem;
+}
+
+.plataforma-resumo {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  text-align: right;
+}
+
+.plataforma-total {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.plataforma-horas {
+  font-size: .75rem;
+  color: var(--cor-texto-fraco);
+}
+
+/* Destaque da formação completa */
+.cert-destaque {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.5rem;
+  background: rgba(0, 212, 255, .05);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.cert-destaque > i {
+  font-size: 1.5rem;
+  color: #ffca28;
+  flex-shrink: 0;
+}
+
+.cert-destaque-label {
+  display: block;
+  font-size: .7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--cor-texto-fraco);
+}
+
+.cert-destaque-nome {
+  display: block;
+  font-family: var(--fonte-display);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--cor-titulo);
+}
+
+.cert-destaque-info {
+  display: block;
+  font-size: .75rem;
+  color: var(--cor-texto-suave);
+  margin-top: .15rem;
+}
+
+/* Lista de cursos individuais */
+.cert-lista {
+  list-style: none;
+  padding: .5rem 0;
+}
+
+.cert-item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .65rem 1.5rem;
+  font-size: .85rem;
+  color: var(--cor-texto-suave);
+  transition: background .15s;
+  border-bottom: 1px solid rgba(0,212,255,.05);
+}
+
+.cert-item:last-child {
+  border-bottom: none;
+}
+
+.cert-item:hover {
+  background: rgba(0, 212, 255, .04);
+}
+
+.cert-item > i {
+  color: #00e676;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.cert-item > span:first-of-type {
+  flex: 1;
+}
+
+.cert-item-info {
+  font-family: var(--fonte-display);
+  font-size: .7rem;
+  color: var(--cor-texto-fraco);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Grade de Eventos ── */
+.grid-eventos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.card-evento {
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-card);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+  transition: var(--transicao-media);
+}
+
+.card-evento:hover {
+  border-color: var(--cor-borda-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-card);
+}
+
+.evento-fonte {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+}
+
+.evento-fonte-icone {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.evento-fonte-nome {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--cor-texto-fraco);
+  font-family: var(--fonte-display);
+  letter-spacing: .05em;
+}
+
+.evento-nome {
+  font-family: var(--fonte-display);
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--cor-titulo);
+  line-height: 1.4;
+}
+
+.evento-meta {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+  font-size: .75rem;
+  color: var(--cor-texto-fraco);
+}
+
+.evento-meta i {
+  margin-right: .2rem;
+}
+
+.evento-tipo {
+  font-size: .68rem;
+  font-weight: 700;
+  font-family: var(--fonte-display);
+  padding: .15rem .65rem;
+  border-radius: 100px;
+  letter-spacing: .05em;
+}
+
+.evento-tipo-participacao {
+  background: rgba(0, 212, 255, .08);
+  border: 1px solid rgba(0, 212, 255, .2);
+  color: var(--cor-azul-neon);
+}
+
+/* ── Tema Claro ── */
+html[data-tema="claro"] .secao-formacao { background: var(--cor-fundo); }
+html[data-tema="claro"] .card-formacao-academica,
+html[data-tema="claro"] .card-plataforma,
+html[data-tema="claro"] .card-evento {
+  background: #ffffff;
+  border-color: rgba(26,111,255,.16);
+  box-shadow: 0 2px 12px rgba(13,27,42,.06);
+}
+html[data-tema="claro"] .card-formacao-academica:hover,
+html[data-tema="claro"] .card-plataforma:hover,
+html[data-tema="claro"] .card-evento:hover {
+  border-color: rgba(26,111,255,.35);
+  box-shadow: 0 8px 28px rgba(13,27,42,.1);
+}
+html[data-tema="claro"] .formacao-bloco-titulo { border-bottom-color: rgba(26,111,255,.15); }
+html[data-tema="claro"] .card-plataforma-topo  { border-bottom-color: rgba(26,111,255,.12); }
+html[data-tema="claro"] .cert-destaque         { background: rgba(26,111,255,.05); border-bottom-color: rgba(26,111,255,.1); }
+html[data-tema="claro"] .cert-item             { color: var(--cor-texto-suave); border-bottom-color: rgba(26,111,255,.06); }
+html[data-tema="claro"] .cert-item:hover       { background: rgba(26,111,255,.04); }
+
+/* ============================================================
    14. CONTATO
    ============================================================ */
 .secao-contato {
