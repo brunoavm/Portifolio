@@ -4,10 +4,10 @@
     let tarefas    = JSON.parse(localStorage.getItem(CHAVE_LS) || '[]');
     let filtroAtual = 'todas';
 
-    const inputTarefa      = document.getElementById('inputTarefa');
-    const inputData        = document.getElementById('inputData');
+    const inputTarefa = document.getElementById('inputTarefa');
+    const inputData = document.getElementById('inputData');
     const selectPrioridade = document.getElementById('selectPrioridade');
-    const listaTarefas     = document.getElementById('listaTarefas');
+    const listaTarefas = document.getElementById('listaTarefas');
 
     /* ── Salvar no localStorage ── */
     function salvar() {
@@ -20,12 +20,12 @@
       if (!texto) { inputTarefa.focus(); return; }
 
       tarefas.unshift({
-        id:         Date.now(),
+        id: Date.now(),
         texto,
         prioridade: selectPrioridade.value,
-        data:       inputData.value,
-        concluida:  false,
-        criadaEm:   new Date().toISOString(),
+        data: inputData.value,
+        concluida: false,
+        criadaEm: new Date().toISOString(),
       });
 
       inputTarefa.value = '';

@@ -79,8 +79,8 @@ function iniciarRevelacaoAoScroll() {
    ============================================================ */
 
 function iniciarDestaqueNavegacao() {
-  const secoes      = document.querySelectorAll('section[id]');
-  const linksNav    = document.querySelectorAll('.nav-lista-links a');
+  const secoes = document.querySelectorAll('section[id]');
+  const linksNav = document.querySelectorAll('.nav-lista-links a');
 
   if (!secoes.length || !linksNav.length) return;
 
@@ -112,8 +112,8 @@ function iniciarDestaqueNavegacao() {
 
 function iniciarMenuMobile() {
   const botaoHamburguer = document.getElementById('botaoHamburguer');
-  const menuMobile      = document.getElementById('menuMobile');
-  const overlay         = document.getElementById('menuMobileOverlay');
+  const menuMobile = document.getElementById('menuMobile');
+  const overlay  = document.getElementById('menuMobileOverlay');
 
   if (!botaoHamburguer || !menuMobile) return;
 

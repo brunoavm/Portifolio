@@ -29,19 +29,19 @@ function iniciarParticulas() {
   const canvas  = document.getElementById('canvasParticulas');
   if (!canvas) return;
 
-  const ctx     = canvas.getContext('2d');
-  let largura   = canvas.width  = window.innerWidth;
-  let altura    = canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  let largura = canvas.width  = window.innerWidth;
+  let altura = canvas.height = window.innerHeight;
 
   /* --- Configurações das partículas --- */
   const CONFIG = {
-    quantidade:       60,          /* Número de partículas */
-    velocidadeBase:   0.4,         /* Velocidade de movimento */
-    raioParticula:    2,           /* Tamanho das partículas */
-    distanciaConexao: 130,         /* Distância máxima para conectar */
-    corParticula:     '0, 212, 255', /* RGB da cor (azul neon) */
-    corConexao:       '0, 180, 255', /* Cor das linhas de conexão */
-    opacidadeMax:     0.6,         /* Opacidade máxima das partículas */
+    quantidade: 60,               /* Número de partículas */
+    velocidadeBase: 0.4,          /* Velocidade de movimento */
+    raioParticula: 2,             /* Tamanho das partículas */
+    distanciaConexao: 130,        /* Distância máxima para conectar */
+    corParticula: '0, 212, 255',  /* RGB da cor (azul neon) */
+    corConexao: '0, 180, 255',    /* Cor das linhas de conexão */
+    opacidadeMax: 0.6,            /* Opacidade máxima das partículas */
   };
 
   /* Array de partículas ativas */
@@ -81,9 +81,9 @@ function iniciarParticulas() {
       if (p.y < 0 || p.y > altura)   p.vy *= -1;
 
       /* Interação suave com o mouse (repulsão leve) */
-      const dx          = mouse.x - p.x;
-      const dy          = mouse.y - p.y;
-      const distMouse   = Math.sqrt(dx * dx + dy * dy);
+      const dx = mouse.x - p.x;
+      const dy = mouse.y - p.y;
+      const distMouse = Math.sqrt(dx * dx + dy * dy);
       const raioInfluencia = 120;
 
       if (distMouse < raioInfluencia) {
@@ -109,8 +109,8 @@ function iniciarParticulas() {
     /* Desenha as conexões entre partículas próximas */
     for (let i = 0; i < particulas.length; i++) {
       for (let j = i + 1; j < particulas.length; j++) {
-        const dx   = particulas[i].x - particulas[j].x;
-        const dy   = particulas[i].y - particulas[j].y;
+        const dx = particulas[i].x - particulas[j].x;
+        const dy = particulas[i].y - particulas[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < CONFIG.distanciaConexao) {
@@ -145,7 +145,7 @@ function iniciarParticulas() {
 
   /* --- Redimensiona o canvas quando a janela muda de tamanho --- */
   window.addEventListener('resize', () => {
-    largura  = canvas.width  = window.innerWidth;
+    largura  = canvas.width = window.innerWidth;
     altura   = canvas.height = window.innerHeight;
     inicializarParticulas();
   }, { passive: true });
@@ -183,15 +183,15 @@ function iniciarEfeitoTyping() {
     'Amante de Código Limpo',
   ];
 
-  let indiceTexto  = 0; /* Índice do texto atual */
-  let indiceChar   = 0; /* Índice do caractere atual */
+  let indiceTexto = 0;      /* Índice do texto atual */
+  let indiceChar = 0;       /* Índice do caractere atual */
   let estaApagando = false; /* Se está apagando ou digitando */
 
   /* --- Velocidades --- */
-  const velocidadeDigitar  = 80;   /* ms por caractere ao digitar */
-  const velocidadeApagar   = 40;   /* ms por caractere ao apagar */
-  const pausaEntreTextos   = 2000; /* ms de pausa no texto completo */
-  const pausaAposApagar    = 400;  /* ms de pausa antes de digitar o próximo */
+  const velocidadeDigitar = 80;  /* ms por caractere ao digitar */
+  const velocidadeApagar = 40;   /* ms por caractere ao apagar */
+  const pausaEntreTextos = 2000; /* ms de pausa no texto completo */
+  const pausaAposApagar = 400;   /* ms de pausa antes de digitar o próximo */
 
   function digitarTexto() {
     const textoAtual = textos[indiceTexto];
@@ -275,8 +275,8 @@ function iniciarContadores() {
     entradas.forEach(entrada => {
       if (!entrada.isIntersecting) return;
 
-      const elemento     = entrada.target;
-      const valorTexto   = elemento.textContent.trim();
+      const elemento = entrada.target;
+      const valorTexto = elemento.textContent.trim();
       const apenasNumero = parseInt(valorTexto.replace(/\D/g, ''));
 
       /* Se não é um número (ex: "ADS"), não anima */
@@ -306,7 +306,7 @@ function animarContador(elemento, inicio, fim, duracao, sufixo) {
   function atualizar(tempoAtual) {
     const progresso  = Math.min((tempoAtual - inicioTempo) / duracao, 1);
     /* Easing easeOut para desacelerar no final */
-    const eased      = 1 - Math.pow(1 - progresso, 3);
+    const eased = 1 - Math.pow(1 - progresso, 3);
     const valorAtual = Math.floor(inicio + (fim - inicio) * eased);
 
     elemento.textContent = valorAtual + sufixo;
@@ -329,10 +329,10 @@ function animarContador(elemento, inicio, fim, duracao, sufixo) {
  * movendo o avatar e os elementos do hero em velocidades diferentes.
  */
 function iniciarParallax() {
-  const heroConteudo  = document.querySelector('.hero-conteudo');
-  const heroAvatar    = document.querySelector('.hero-avatar-wrapper');
-  const heroGlow1     = document.querySelector('.hero-glow-1');
-  const heroGlow2     = document.querySelector('.hero-glow-2');
+  const heroConteudo = document.querySelector('.hero-conteudo');
+  const heroAvatar = document.querySelector('.hero-avatar-wrapper');
+  const heroGlow1 = document.querySelector('.hero-glow-1');
+  const heroGlow2 = document.querySelector('.hero-glow-2');
 
   if (!heroConteudo || !heroAvatar) return;
 

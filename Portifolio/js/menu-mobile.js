@@ -22,8 +22,8 @@
  * Gerencia foco, acessibilidade e animações do hambúrguer.
  */
 function iniciarMenuMobile() {
-  const botaoMenuMobile   = document.getElementById('botaoMenuMobile');
-  const menuMobile        = document.getElementById('menuMobile');
+  const botaoMenuMobile = document.getElementById('botaoMenuMobile');
+  const menuMobile = document.getElementById('menuMobile');
   const menuMobileOverlay = document.getElementById('menuMobileOverlay');
 
   if (!botaoMenuMobile || !menuMobile) return;

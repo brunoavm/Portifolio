@@ -1,15 +1,15 @@
     'use strict';
     /* ── Estado ── */
-    let valorAtual    = '0';
+    let valorAtual = '0';
     let valorAnterior = '';
-    let operador      = null;
+    let operador = null;
     let esperandoProx = false;
-    let historico     = [];
+    let historico = [];
 
-    const elResultado  = document.getElementById('displayResultado');
-    const elExpressao  = document.getElementById('displayExpressao');
-    const elHistorico  = document.getElementById('displayHistorico');
-    const elLista      = document.getElementById('historicoLista');
+    const elResultado = document.getElementById('displayResultado');
+    const elExpressao = document.getElementById('displayExpressao');
+    const elHistorico = document.getElementById('displayHistorico');
+    const elLista = document.getElementById('historicoLista');
 
     /* ── Atualiza display ── */
     function atualizarDisplay() {
@@ -56,8 +56,8 @@
       /* Clicar no histórico preenche o resultado */
       elLista.querySelectorAll('.historico-item').forEach(item => {
         item.addEventListener('click', () => {
-          valorAtual    = item.dataset.res;
-          operador      = null;
+          valorAtual = item.dataset.res;
+          operador = null;
           valorAnterior = '';
           esperandoProx = false;
           atualizarDisplay();
@@ -97,11 +97,11 @@
       if (operador && !esperandoProx) {
         const res = calcular(valorAnterior, operador, valorAtual);
         valorAnterior = res;
-        valorAtual    = res;
+        valorAtual = res;
       } else {
         valorAnterior = valorAtual;
       }
-      operador      = op;
+      operador = op;
       esperandoProx = true;
       atualizarDisplay();
     }
@@ -113,8 +113,8 @@
       adicionarHistorico(expressaoTexto, res);
       elHistorico.textContent = expressaoTexto + ' =';
       animarResultado();
-      valorAtual    = res;
-      operador      = null;
+      valorAtual = res;
+      operador = null;
       valorAnterior = '';
       esperandoProx = false;
       atualizarDisplay();
@@ -152,12 +152,12 @@
       if (!btn) return;
       const { acao, val } = btn.dataset;
       switch (acao) {
-        case 'numero':   aoDigitarNumero(val); break;
+        case 'numero': aoDigitarNumero(val); break;
         case 'operador': aoDigitarOperador(val); break;
-        case 'igual':    aoIgual(); break;
-        case 'limpar':   aoLimpar(); break;
-        case 'apagar':   aoApagar(); break;
-        case 'virgula':  aoVirgula(); break;
+        case 'igual': aoIgual(); break;
+        case 'limpar': aoLimpar(); break;
+        case 'apagar': aoApagar(); break;
+        case 'virgula': aoVirgula(); break;
         case 'porcento': aoPorcento(); break;
       }
     });
@@ -165,10 +165,10 @@
     /* ── Teclado ── */
     document.addEventListener('keydown', (e) => {
       if (e.key >= '0' && e.key <= '9') aoDigitarNumero(e.key);
-      else if (e.key === '+')  aoDigitarOperador('+');
-      else if (e.key === '-')  aoDigitarOperador('−');
-      else if (e.key === '*')  aoDigitarOperador('×');
-      else if (e.key === '/')  { e.preventDefault(); aoDigitarOperador('÷'); }
+      else if (e.key === '+') aoDigitarOperador('+');
+      else if (e.key === '-') aoDigitarOperador('−');
+      else if (e.key === '*') aoDigitarOperador('×');
+      else if (e.key === '/') { e.preventDefault(); aoDigitarOperador('÷'); }
       else if (e.key === 'Enter' || e.key === '=') aoIgual();
       else if (e.key === 'Backspace') aoApagar();
       else if (e.key === 'Escape') aoLimpar();

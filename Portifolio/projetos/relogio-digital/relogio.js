@@ -8,12 +8,12 @@
     const DIAS_SEMANA = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
     const MESES       = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 
-    const elData       = document.getElementById('relogioData');
-    const elAmpm       = document.getElementById('relogioAmpm');
-    const elFuso       = document.getElementById('relogioFuso');
-    const btnFormato   = document.getElementById('btnFormato');
-    const elProgresso  = document.getElementById('progressoPreenchimento');
-    const elPorcentagem= document.getElementById('progressoPorcentagem');
+    const elData = document.getElementById('relogioData');
+    const elAmpm = document.getElementById('relogioAmpm');
+    const elFuso = document.getElementById('relogioFuso');
+    const btnFormato = document.getElementById('btnFormato');
+    const elProgresso = document.getElementById('progressoPreenchimento');
+    const elPorcentagem = document.getElementById('progressoPorcentagem');
 
     const digitos = {
       hora1: document.getElementById('dHora1'),
@@ -46,8 +46,8 @@
     }
 
     function atualizarRelogio() {
-      const agora   = new Date();
-      let horas     = agora.getHours();
+      const agora = new Date();
+      let horas = agora.getHours();
       const minutos = agora.getMinutes();
       const segundos= agora.getSeconds();
       let ampm      = '';
@@ -94,10 +94,10 @@
        CRONÔMETRO
     ════════════════════════════════════ */
     let cronoInterval = null;
-    let cronoAtivo    = false;
-    let cronoMs       = 0;
-    let voltaMs       = 0;
-    let numeroVolta   = 1;
+    let cronoAtivo = false;
+    let cronoMs = 0;
+    let voltaMs = 0;
+    let numeroVolta = 1;
 
     const elCronoHH = document.getElementById('cronoHH');
     const elCronoMM = document.getElementById('cronoMM');
@@ -191,12 +191,12 @@
     let timerRestanteMs  = 0;
     const CIRCUM         = 314; /* 2π × r(50) */
 
-    const timerCirculo      = document.getElementById('timerCirculo');
-    const timerLabelSVG     = document.getElementById('timerLabelSVG');
-    const timerProgressoW   = document.getElementById('timerProgressoWrapper');
-    const timerInputsW      = document.getElementById('timerInputsWrapper');
-    const btnTimerIniciar   = document.getElementById('btnTimerIniciar');
-    const btnTimerPausar    = document.getElementById('btnTimerPausar');
+    const timerCirculo = document.getElementById('timerCirculo');
+    const timerLabelSVG = document.getElementById('timerLabelSVG');
+    const timerProgressoW = document.getElementById('timerProgressoWrapper');
+    const timerInputsW = document.getElementById('timerInputsWrapper');
+    const btnTimerIniciar = document.getElementById('btnTimerIniciar');
+    const btnTimerPausar = document.getElementById('btnTimerPausar');
 
     function msParaMMSS(ms) {
       const m = Math.floor(ms / 60000);
@@ -218,19 +218,19 @@
     function iniciarTimer() {
       if (timerAtivo) return;
       if (!timerRestanteMs) {
-        const h = parseInt(document.getElementById('timerHoras').value)   || 0;
+        const h = parseInt(document.getElementById('timerHoras').value) || 0;
         const m = parseInt(document.getElementById('timerMinutos').value) || 0;
-        const s = parseInt(document.getElementById('timerSegundos').value)|| 0;
+        const s = parseInt(document.getElementById('timerSegundos').value) || 0;
         timerTotalMs    = (h * 3600 + m * 60 + s) * 1000;
         timerRestanteMs = timerTotalMs;
         if (!timerTotalMs) return;
       }
 
       timerAtivo = true;
-      timerInputsW.style.display     = 'none';
-      timerProgressoW.style.display  = 'flex';
-      btnTimerIniciar.style.display  = 'none';
-      btnTimerPausar.style.display   = '';
+      timerInputsW.style.display = 'none';
+      timerProgressoW.style.display = 'flex';
+      btnTimerIniciar.style.display = 'none';
+      btnTimerPausar.style.display = '';
 
       let ultimo = Date.now();
       timerInterval = setInterval(() => {
@@ -256,19 +256,19 @@
     function pausarTimer() {
       clearInterval(timerInterval);
       timerAtivo = false;
-      btnTimerPausar.style.display  = 'none';
+      btnTimerPausar.style.display = 'none';
       btnTimerIniciar.style.display = '';
-      btnTimerIniciar.innerHTML     = '<i class="ri-play-line"></i> Continuar';
+      btnTimerIniciar.innerHTML = '<i class="ri-play-line"></i> Continuar';
     }
 
     function zerarTimer() {
       clearInterval(timerInterval);
       timerAtivo = false; timerTotalMs = 0; timerRestanteMs = 0;
-      timerInputsW.style.display    = '';
+      timerInputsW.style.display = '';
       timerProgressoW.style.display = 'none';
       btnTimerIniciar.style.display = '';
-      btnTimerIniciar.innerHTML     = '<i class="ri-play-line"></i> Iniciar Timer';
-      btnTimerPausar.style.display  = 'none';
+      btnTimerIniciar.innerHTML = '<i class="ri-play-line"></i> Iniciar Timer';
+      btnTimerPausar.style.display = 'none';
       timerCirculo.style.strokeDashoffset = 0;
     }
 

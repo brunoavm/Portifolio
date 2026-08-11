@@ -13,14 +13,14 @@
  * garantindo consistência de tema entre todas as páginas.
  */
 (function iniciarTemaSubprojeto() {
-  const html         = document.documentElement;
-  const botaoTema    = document.getElementById('botaoTema');
-  const iconeTema    = document.getElementById('iconeTema');
+  const html = document.documentElement;
+  const botaoTema = document.getElementById('botaoTema');
+  const iconeTema = document.getElementById('iconeTema');
 
   /* Lê a preferência: localStorage → sistema → padrão escuro */
-  const temaSalvo         = localStorage.getItem('bm-tema');
-  const prefereSistema    = window.matchMedia('(prefers-color-scheme: light)').matches;
-  const temaInicial       = temaSalvo || (prefereSistema ? 'claro' : 'escuro');
+  const temaSalvo = localStorage.getItem('bm-tema');
+  const prefereSistema = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const temaInicial = temaSalvo || (prefereSistema ? 'claro' : 'escuro');
 
   aplicarTema(temaInicial);
 
