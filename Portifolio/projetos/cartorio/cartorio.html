@@ -3,84 +3,122 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Serventia Registral de Sua Cidade — Registro de Imóveis, RTD e Pessoas Jurídicas com segurança e agilidade." />
     <title>Serventia Registral de Sua Cidade</title>
+
+    <!-- Fontes Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- NAV -->
-    <nav>
-      <a href="#" class="nav-logo">
-        <div class="nav-seal">§</div>
-        <div class="nav-title">
+
+    <!-- ═══════════════════════════════════════════════
+         NAVEGAÇÃO PRINCIPAL
+    ═══════════════════════════════════════════════ -->
+    <nav class="navegacao" id="navegacao">
+
+      <!-- Logo / Identidade -->
+      <a href="#" class="nav-logo" aria-label="Ir para o início">
+        <div class="nav-selo">§</div>
+        <div class="nav-identidade">
           <strong>Serventia Registral de Sua Cidade</strong>
           <span>Registro de Imóveis · RTD · PJ</span>
         </div>
       </a>
-      <ul class="nav-links">
+
+      <!-- Links de navegação (desktop) -->
+      <ul class="nav-lista-links" id="navListaLinks">
         <li><a href="#servicos">Serviços</a></li>
         <li><a href="#certidoes">Certidões</a></li>
-        <li><a href="#links">Links Úteis</a></li>
-        <li><a href="#faq">Dúvidas</a></li>
+        <li><a href="#links-uteis">Links Úteis</a></li>
+        <li><a href="#duvidas">Dúvidas</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
-      <a href="https://wa.me/5581989707241" target="_blank" class="nav-btn"
-        >WhatsApp</a
-      >
-      <button class="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
+
+      <!-- Botão WhatsApp (desktop) -->
+      <a href="https://wa.me/5581900000000" target="_blank" rel="noopener" class="nav-botao-whatsapp">
+        WhatsApp
+      </a>
+
+      <!-- Botão hambúrguer (mobile) -->
+      <button class="botao-hamburguer" id="botaoHamburguer" aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
+
     </nav>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-bg-texture"></div>
-      <div class="hero-glow"></div>
-      <div class="hero-divider"></div>
-      <div class="hero-inner">
-        <div class="hero-text">
-          <p class="hero-eyebrow reveal">Segurança Jurídica para seus Atos</p>
-          <h1 class="reveal">
+    <!-- Menu mobile (drawer) -->
+    <div class="menu-mobile" id="menuMobile" aria-hidden="true">
+      <ul class="menu-mobile-lista">
+        <li><a href="#servicos"    class="menu-mobile-link">Serviços</a></li>
+        <li><a href="#certidoes"   class="menu-mobile-link">Certidões</a></li>
+        <li><a href="#links-uteis" class="menu-mobile-link">Links Úteis</a></li>
+        <li><a href="#duvidas"     class="menu-mobile-link">Dúvidas</a></li>
+        <li><a href="#contato"     class="menu-mobile-link">Contato</a></li>
+        <li>
+          <a href="https://wa.me/5581900000000" target="_blank" rel="noopener" class="menu-mobile-link menu-mobile-botao-wpp">
+            WhatsApp
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-mobile-overlay" id="menuMobileOverlay"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         SEÇÃO HERO — ABERTURA
+    ═══════════════════════════════════════════════ -->
+    <section class="secao-hero" id="inicio">
+
+      <!-- Elementos decorativos de fundo -->
+      <div class="hero-textura-fundo"   aria-hidden="true"></div>
+      <div class="hero-brilho-fundo"    aria-hidden="true"></div>
+      <div class="hero-painel-lateral"  aria-hidden="true"></div>
+
+      <div class="hero-conteudo">
+
+        <!-- Coluna esquerda: texto principal -->
+        <div class="hero-texto">
+          <p class="hero-subtag revelar">Segurança Jurídica para seus Atos</p>
+          <h1 class="revelar">
             Proteja seu<br />patrimônio com<br /><em>segurança jurídica</em>
           </h1>
-          <p class="hero-desc reveal">
+          <p class="hero-descricao revelar">
             A Serventia Registral de Sua Cidade oferece serviços de Registro de
             Imóveis, Registro Civil de Pessoas Jurídicas e Registro de Títulos e
             Documentos com rigor, transparência e agilidade.
           </p>
-          <div class="hero-actions reveal">
-            <a href="#certidoes" class="btn-gold">Solicitar Certidão</a>
-            <a href="#servicos" class="btn-ghost">Nossos Serviços</a>
+          <div class="hero-botoes revelar">
+            <a href="#certidoes" class="botao-dourado">Solicitar Certidão</a>
+            <a href="#servicos"  class="botao-fantasma">Nossos Serviços</a>
           </div>
         </div>
-        <div class="hero-right reveal">
-          <div
-            style="
-              display: flex;
-              gap: 12px;
-              width: 100%;
-              justify-content: flex-end;
-            "
-          >
+
+        <!-- Coluna direita: badges e lista de serviços -->
+        <div class="hero-lado-direito revelar">
+
+          <!-- Badges das áreas de atuação -->
+          <div class="hero-grupo-badges">
             <div class="hero-badge">
-              <div class="badge-num">RTD</div>
-              <div class="badge-label">Títulos e Docs.</div>
+              <div class="badge-sigla">RTD</div>
+              <div class="badge-descricao">Títulos e Docs.</div>
             </div>
             <div class="hero-badge">
-              <div class="badge-num">PJ</div>
-              <div class="badge-label">Pessoas Jurídicas</div>
+              <div class="badge-sigla">PJ</div>
+              <div class="badge-descricao">Pessoas Jurídicas</div>
             </div>
             <div class="hero-badge">
-              <div class="badge-num">RI</div>
-              <div class="badge-label">Reg. de Imóveis</div>
+              <div class="badge-sigla">RI</div>
+              <div class="badge-descricao">Reg. de Imóveis</div>
             </div>
           </div>
-          <div class="hero-services-preview" style="max-width: 380px">
+
+          <!-- Lista de serviços adicionais -->
+          <div class="hero-lista-servicos">
             <p>Atendemos também</p>
             <ul>
               <li>Registro de contratos e instrumentos particulares</li>
@@ -89,483 +127,443 @@
               <li>Depósito de testamentos</li>
             </ul>
           </div>
+
         </div>
       </div>
-      <div class="hero-scroll-hint">
-        <div class="scroll-line"></div>
+
+      <!-- Indicador de scroll -->
+      <div class="hero-indicador-scroll" aria-hidden="true">
+        <div class="indicador-linha"></div>
         Rolar
       </div>
+
     </section>
 
-    <!-- SOBRE -->
-    <section class="sobre" id="sobre">
-      <div class="sobre-img-wrap reveal">
-        <div class="sobre-top-tag">Titular</div>
-        <div class="sobre-img-frame">
-          <div class="sobre-img-placeholder">
-            <svg
-              viewBox="0 0 64 64"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="32"
-                cy="22"
-                r="12"
-                stroke="white"
-                stroke-width="1.5"
-              />
-              <path
-                d="M8 56c0-13.255 10.745-24 24-24s24 10.745 24 24"
-                stroke="white"
-                stroke-width="1.5"
-              />
+    <!-- ═══════════════════════════════════════════════
+         SEÇÃO SOBRE — APRESENTAÇÃO DA TITULAR
+    ═══════════════════════════════════════════════ -->
+    <section class="secao-sobre" id="sobre">
+
+      <!-- Imagem da titular -->
+      <div class="sobre-imagem-wrapper revelar">
+        <div class="sobre-etiqueta-titular">Titular</div>
+        <div class="sobre-imagem-moldura">
+          <div class="sobre-imagem-placeholder">
+            <!-- Substitua pelo caminho real da foto:
+                 <img src="assets/foto-titular.jpg" alt="Dra. Seu Nome" /> -->
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="32" cy="22" r="12" stroke="white" stroke-width="1.5" />
+              <path d="M8 56c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="white" stroke-width="1.5" />
             </svg>
             <span>Foto da Titular</span>
           </div>
         </div>
-        <div class="sobre-accent"></div>
+        <div class="sobre-detalhe-decorativo" aria-hidden="true"></div>
       </div>
-      <div class="sobre-text">
-        <p class="section-label reveal">Quem somos</p>
-        <h2 class="reveal">Dra. Seu Nome<br /></h2>
-        <p class="reveal">
+
+      <!-- Texto de apresentação -->
+      <div class="sobre-texto">
+        <p class="etiqueta-secao revelar">Quem somos</p>
+        <h2 class="revelar">Dra. Seu Nome</h2>
+        <p class="revelar">
           Graduada, mestre e doutora em Direito pela Universidade Federal de
           Pernambuco, professora e autora de obras jurídicas. Assume a Serventia
           Registral de Sua Cidade com o compromisso de oferecer um serviço
           público eficiente, seguro e alinhado à sua importante função social.
         </p>
-        <p class="reveal">
+        <p class="revelar">
           A serventia inicia essa nova etapa com dedicação à inovação, à
           qualidade no atendimento e à promoção da segurança jurídica para toda
           a comunidade.
         </p>
-        <div class="sobre-creds reveal">
-          <div class="cred">Doutora em Direito — UFPE</div>
-          <div class="cred">Professora universitária de Direito Registral</div>
-          <div class="cred">Autora de obras jurídicas publicadas</div>
-          <div class="cred">Titular da Serventia Registral de Sua Cidade</div>
+
+        <!-- Credenciais -->
+        <div class="sobre-credenciais revelar">
+          <div class="credencial">Doutora em Direito — UFPE</div>
+          <div class="credencial">Professora universitária de Direito Registral</div>
+          <div class="credencial">Autora de obras jurídicas publicadas</div>
+          <div class="credencial">Titular da Serventia Registral de Sua Cidade</div>
         </div>
       </div>
+
     </section>
 
-    <!-- SERVIÇOS -->
-    <section class="servicos" id="servicos">
-      <p class="section-label reveal">O que fazemos</p>
-      <h2 class="reveal">Nossos <em>Serviços</em></h2>
-      <div class="servicos-grid">
-        <div class="serv-card reveal">
-          <div class="serv-icon">🏠</div>
+    <!-- ═══════════════════════════════════════════════
+         SEÇÃO SERVIÇOS
+    ═══════════════════════════════════════════════ -->
+    <section class="secao-servicos" id="servicos">
+      <p class="etiqueta-secao revelar">O que fazemos</p>
+      <h2 class="revelar">Nossos <em>Serviços</em></h2>
+
+      <div class="grade-servicos">
+
+        <div class="card-servico revelar">
+          <div class="servico-numero">01</div>
+          <div class="servico-icone">🏠</div>
           <h3>Registro de Imóveis</h3>
-          <p>
-            Transferências, compra e venda, doação, herança, usucapião,
-            loteamentos e demais atos que constituem ou transmitem direitos
-            reais sobre imóveis.
-          </p>
+          <p>Transferências, compra e venda, doação, herança, usucapião, loteamentos e demais atos que constituem ou transmitem direitos reais sobre imóveis.</p>
         </div>
-        <div class="serv-card reveal">
-          <div class="serv-icon">🏢</div>
+
+        <div class="card-servico revelar">
+          <div class="servico-numero">02</div>
+          <div class="servico-icone">🏢</div>
           <h3>Registro Civil de PJ</h3>
-          <p>
-            Registro de associações, fundações, cooperativas, sindicatos e
-            demais pessoas jurídicas de direito privado que não se enquadram
-            como empresas.
-          </p>
+          <p>Registro de associações, fundações, cooperativas, sindicatos e demais pessoas jurídicas de direito privado que não se enquadram como empresas.</p>
         </div>
-        <div class="serv-card reveal">
-          <div class="serv-icon">📋</div>
+
+        <div class="card-servico revelar">
+          <div class="servico-numero">03</div>
+          <div class="servico-icone">📋</div>
           <h3>Títulos e Documentos</h3>
-          <p>
-            Registro de contratos, procurações, cartas de crédito, notificações,
-            intimações e documentos que exigem publicidade e eficácia perante
-            terceiros.
-          </p>
+          <p>Registro de contratos, procurações, cartas de crédito, notificações, intimações e documentos que exigem publicidade e eficácia perante terceiros.</p>
         </div>
-        <div class="serv-card reveal">
-          <div class="serv-icon">📜</div>
+
+        <div class="card-servico revelar">
+          <div class="servico-numero">04</div>
+          <div class="servico-icone">📜</div>
           <h3>Certidões</h3>
-          <p>
-            Emissão de certidão de matrícula, inteiro teor, ônus reais, negativa
-            de propriedade e vintenária — presencial ou pelo portal ONR.
-          </p>
+          <p>Emissão de certidão de matrícula, inteiro teor, ônus reais, negativa de propriedade e vintenária — presencial ou pelo portal ONR.</p>
         </div>
-        <div class="serv-card reveal">
-          <div class="serv-icon">🔏</div>
+
+        <div class="card-servico revelar">
+          <div class="servico-numero">05</div>
+          <div class="servico-icone">🔏</div>
           <h3>Averbações</h3>
-          <p>
-            Averbação de construção, demolição, casamento, divórcio, mudança de
-            nome, penhora, hipoteca e demais alterações na matrícula do imóvel.
-          </p>
+          <p>Averbação de construção, demolição, casamento, divórcio, mudança de nome, penhora, hipoteca e demais alterações na matrícula do imóvel.</p>
         </div>
-        <div class="serv-card reveal">
-          <div class="serv-icon">🔎</div>
+
+        <div class="card-servico revelar">
+          <div class="servico-numero">06</div>
+          <div class="servico-icone">🔎</div>
           <h3>Pesquisa e Protocolo</h3>
-          <p>
-            Busca de matrículas e transcrições, protocolo de títulos e
-            acompanhamento do andamento dos processos registrais em aberto.
-          </p>
+          <p>Busca de matrículas e transcrições, protocolo de títulos e acompanhamento do andamento dos processos registrais em aberto.</p>
         </div>
+
       </div>
     </section>
 
-    <!-- CERTIDÕES -->
-    <section class="certidoes" id="certidoes">
-      <p class="section-label reveal">Passo a passo</p>
-      <h2 class="reveal">Como solicitar<br />sua <em>Certidão</em></h2>
-      <div class="cert-layout">
-        <div class="steps-list">
-          <div class="step-item reveal">
-            <div>
-              <h4>Identifique o imóvel ou documento</h4>
-              <p>
-                Localize o número da matrícula, transcrição ou o endereço
-                completo do imóvel. Para documentos, tenha em mãos o número de
-                protocolo ou data do registro.
-              </p>
+    <!-- ═══════════════════════════════════════════════
+         SEÇÃO CERTIDÕES — COMO SOLICITAR
+    ═══════════════════════════════════════════════ -->
+    <section class="secao-certidoes" id="certidoes">
+      <div class="certidoes-layout">
+
+        <!-- Passos para solicitar -->
+        <div class="certidoes-passos">
+          <p class="etiqueta-secao revelar">Como solicitar</p>
+          <h2 class="revelar">Certidões de <em>Imóveis</em></h2>
+
+          <div class="lista-passos">
+
+            <div class="passo-item revelar">
+              <div class="passo-numero">1</div>
+              <div class="passo-conteudo">
+                <h4>Identifique o imóvel</h4>
+                <p>Informe o número da matrícula ou os dados do imóvel (endereço, nome do proprietário ou número de transcrição).</p>
+              </div>
             </div>
-          </div>
-          <div class="step-item reveal">
-            <div>
-              <h4>Escolha o canal de solicitação</h4>
-              <p>
-                Você pode solicitar pelo portal ONR (online), presencialmente no
-                balcão ou pelo WhatsApp <strong>(81) 90000-0000</strong> para
-                orientações prévias.
-              </p>
+
+            <div class="passo-item revelar">
+              <div class="passo-numero">2</div>
+              <div class="passo-conteudo">
+                <h4>Escolha o tipo de certidão</h4>
+                <p>Matrícula atualizada, inteiro teor, ônus reais, vintenária ou negativa de propriedade — conforme sua necessidade.</p>
+              </div>
             </div>
-          </div>
-          <div class="step-item reveal">
-            <div>
-              <h4>Realize o pagamento</h4>
-              <p>
-                Os emolumentos são tabelados pelo TJPE. Você receberá a guia de
-                pagamento por boleto ou PIX após a confirmação da solicitação.
-              </p>
+
+            <div class="passo-item revelar">
+              <div class="passo-numero">3</div>
+              <div class="passo-conteudo">
+                <h4>Solicite presencialmente ou pelo ONR</h4>
+                <p>Você pode comparecer à serventia ou solicitar pelo portal <a href="https://onr.org.br" target="_blank" rel="noopener">ONR</a> com pagamento eletrônico e entrega digital.</p>
+              </div>
             </div>
-          </div>
-          <div class="step-item reveal">
-            <div>
-              <h4>Receba a certidão</h4>
-              <p>
-                Prazo legal de até 5 dias úteis. Certidões digitais chegam por
-                e-mail com assinatura eletrônica válida pelo ICP-Brasil.
-              </p>
+
+            <div class="passo-item revelar">
+              <div class="passo-numero">4</div>
+              <div class="passo-conteudo">
+                <h4>Receba sua certidão</h4>
+                <p>A certidão é emitida com autenticidade garantida pelo ICP-Brasil, com validade jurídica em todo o território nacional.</p>
+              </div>
             </div>
+
           </div>
         </div>
-        <div class="cert-aside reveal">
-          <h3>Documentos para Registro de Imóvel</h3>
-          <p>Tenha em mãos antes de comparecer</p>
-          <ul class="doc-list">
-            <li>
-              Título original (escritura, formal de partilha, adjudicação)
-            </li>
-            <li>CPF e RG de todos os envolvidos</li>
-            <li>Certidão de casamento ou nascimento atualizada</li>
-            <li>Certidão negativa de IPTU atualizada</li>
-            <li>Comprovante de pagamento do ITBI (compra e venda)</li>
-            <li>Declaração de ITCMD (doação ou herança)</li>
-            <li>Planta e memorial descritivo (construção/averbação)</li>
+
+        <!-- Painel lateral: documentos necessários -->
+        <div class="certidoes-painel-lateral">
+          <h3>Documentos necessários</h3>
+          <p>Para certidão de imóvel</p>
+          <ul class="lista-documentos">
+            <li>Número da matrícula ou transcrição do imóvel</li>
+            <li>Nome completo do proprietário (se não souber a matrícula)</li>
+            <li>Endereço completo do imóvel</li>
+            <li>Indicação do tipo de certidão desejado</li>
+            <li>Documento de identificação do solicitante</li>
           </ul>
-          <a href="https://wa.me/5581989707241" target="_blank" class="btn-gold"
-            >Tirar dúvidas pelo WhatsApp</a
-          >
-          <p class="cert-note">
-            Os documentos exigidos podem variar conforme o tipo de ato. Entre em
-            contato para orientação específica.
+          <a href="https://onr.org.br" target="_blank" rel="noopener" class="botao-dourado">
+            Solicitar pelo ONR
+          </a>
+          <p class="certidoes-aviso">
+            Também é possível solicitar pelo WhatsApp ou comparecer diretamente à serventia durante o horário de atendimento.
           </p>
         </div>
+
       </div>
     </section>
 
-    <!-- LINKS ÚTEIS -->
-    <section class="links" id="links">
-      <p class="section-label reveal">Acesso rápido</p>
-      <h2 class="reveal">Portais e Links <em>Úteis</em></h2>
-      <p
-        style="
-          font-size: 14px;
-          color: var(--text-mid);
-          max-width: 520px;
-          line-height: 1.7;
-          margin-top: 10px;
-          font-weight: 300;
-        "
-        class="reveal"
-      >
-        Acesse os sistemas e órgãos oficiais para consultas, serviços online e
-        informações complementares.
-      </p>
-      <div class="links-grid">
-        <a
-          href="https://www.tjpe.jus.br"
-          target="_blank"
-          class="link-card reveal"
-        >
-          <span class="lic">⚖️</span>
+    <!-- ═══════════════════════════════════════════════
+         SEÇÃO LINKS ÚTEIS
+    ═══════════════════════════════════════════════ -->
+    <section class="secao-links-uteis" id="links-uteis">
+      <p class="etiqueta-secao revelar">Acesso rápido</p>
+      <h2 class="revelar">Links <em>Úteis</em></h2>
+
+      <div class="grade-links">
+
+        <a href="https://onr.org.br" target="_blank" rel="noopener" class="cartao-link revelar">
+          <span class="cartao-link-icone">🏛️</span>
           <div>
-            <strong>TJPE</strong><span>Tribunal de Justiça de Pernambuco</span>
+            <strong>ONR</strong>
+            <span>Solicitar certidão online</span>
           </div>
-          <span class="arr">↗</span>
+          <span class="cartao-link-seta">↗</span>
         </a>
-        <a
-          href="https://www.onr.org.br"
-          target="_blank"
-          class="link-card reveal"
-        >
-          <span class="lic">🌐</span>
+
+        <a href="https://www.tjpe.jus.br" target="_blank" rel="noopener" class="cartao-link revelar">
+          <span class="cartao-link-icone">⚖️</span>
           <div>
-            <strong>ONR</strong
-            ><span>Operador Nacional do Registro — certidões online</span>
+            <strong>TJPE</strong>
+            <span>Tribunal de Justiça de Pernambuco</span>
           </div>
-          <span class="arr">↗</span>
+          <span class="cartao-link-seta">↗</span>
         </a>
-        <a
-          href="https://registradores.onr.org.br"
-          target="_blank"
-          class="link-card reveal"
-        >
-          <span class="lic">📂</span>
+
+        <a href="https://www.gov.br/receitafederal" target="_blank" rel="noopener" class="cartao-link revelar">
+          <span class="cartao-link-icone">🔎</span>
           <div>
-            <strong>Portal Registradores</strong
-            ><span>Consultas e serviços do registro</span>
+            <strong>Receita Federal</strong>
+            <span>Consulta de CPF e CNPJ</span>
           </div>
-          <span class="arr">↗</span>
+          <span class="cartao-link-seta">↗</span>
         </a>
-        <a
-          href="https://www.cnj.jus.br"
-          target="_blank"
-          class="link-card reveal"
-        >
-          <span class="lic">🏛️</span>
+
+        <a href="https://www.anoreg.org.br" target="_blank" rel="noopener" class="cartao-link revelar">
+          <span class="cartao-link-icone">📋</span>
           <div>
-            <strong>CNJ</strong><span>Conselho Nacional de Justiça</span>
+            <strong>ANOREG</strong>
+            <span>Associação dos Notários e Registradores</span>
           </div>
-          <span class="arr">↗</span>
+          <span class="cartao-link-seta">↗</span>
         </a>
-        <a
-          href="https://www.Sua Cidade.pe.gov.br"
-          target="_blank"
-          class="link-card reveal"
-        >
-          <span class="lic">🏙️</span>
+
+        <a href="#" class="cartao-link revelar">
+          <span class="cartao-link-icone">💰</span>
           <div>
-            <strong>Prefeitura de Sua Cidade</strong
-            ><span>IPTU, ITBI e certidões fiscais</span>
+            <strong>Tabela de Emolumentos</strong>
+            <span>Custas e taxas TJPE vigentes</span>
           </div>
-          <span class="arr">↗</span>
+          <span class="cartao-link-seta">↗</span>
         </a>
-        <a
-          href="https://www.receita.fazenda.gov.br"
-          target="_blank"
-          class="link-card reveal"
-        >
-          <span class="lic">🔎</span>
-          <div>
-            <strong>Receita Federal</strong><span>Consulta de CPF e CNPJ</span>
-          </div>
-          <span class="arr">↗</span>
-        </a>
-        <a
-          href="https://www.anoreg.org.br"
-          target="_blank"
-          class="link-card reveal"
-        >
-          <span class="lic">📋</span>
-          <div>
-            <strong>ANOREG</strong
-            ><span>Associação dos Notários e Registradores</span>
-          </div>
-          <span class="arr">↗</span>
-        </a>
-        <a href="#" class="link-card reveal">
-          <span class="lic">💰</span>
-          <div>
-            <strong>Tabela de Emolumentos</strong
-            ><span>Custas e taxas TJPE vigentes</span>
-          </div>
-          <span class="arr">↗</span>
-        </a>
+
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="faq" id="faq">
-      <p class="section-label reveal">Tire suas dúvidas</p>
-      <h2 class="reveal">Perguntas <em>Frequentes</em></h2>
-      <div class="faq-wrap">
-        <div class="faq-item reveal">
-          <button class="faq-btn">
-            O que é a matrícula do imóvel? <span class="plus">+</span>
+    <!-- ═══════════════════════════════════════════════
+         SEÇÃO FAQ — PERGUNTAS FREQUENTES
+    ═══════════════════════════════════════════════ -->
+    <section class="secao-duvidas" id="duvidas">
+      <p class="etiqueta-secao revelar">Tire suas dúvidas</p>
+      <h2 class="revelar">Perguntas <em>Frequentes</em></h2>
+
+      <div class="lista-duvidas">
+
+        <div class="duvida-item revelar">
+          <button class="duvida-botao" aria-expanded="false">
+            O que é a matrícula do imóvel?
+            <span class="duvida-icone-mais">+</span>
           </button>
-          <div class="faq-body">
-            A matrícula é a "certidão de nascimento" da propriedade. É o
-            documento que reúne toda a história jurídica do imóvel: quem foram
-            os proprietários, quais dívidas ou gravames existem e todas as
-            alterações feitas ao longo do tempo.
+          <div class="duvida-resposta">
+            A matrícula é a "certidão de nascimento" da propriedade. É o documento que reúne toda a história jurídica do imóvel: quem foram os proprietários, quais dívidas ou gravames existem e todas as alterações feitas ao longo do tempo.
           </div>
         </div>
-        <div class="faq-item reveal">
-          <button class="faq-btn">
-            Por que registrar um imóvel? <span class="plus">+</span>
+
+        <div class="duvida-item revelar">
+          <button class="duvida-botao" aria-expanded="false">
+            Por que registrar um imóvel?
+            <span class="duvida-icone-mais">+</span>
           </button>
-          <div class="faq-body">
-            O registro é o único ato que transfere a propriedade no Brasil. Sem
-            ele, mesmo com escritura, o imóvel juridicamente ainda pertence ao
-            vendedor. Só com o registro no cartório o comprador se torna
-            oficialmente dono.
+          <div class="duvida-resposta">
+            O registro é o único ato que transfere a propriedade no Brasil. Sem ele, mesmo com escritura, o imóvel juridicamente ainda pertence ao vendedor. Só com o registro no cartório o comprador se torna oficialmente dono.
           </div>
         </div>
-        <div class="faq-item reveal">
-          <button class="faq-btn">
-            O que é a certidão de imóvel? <span class="plus">+</span>
+
+        <div class="duvida-item revelar">
+          <button class="duvida-botao" aria-expanded="false">
+            O que é a certidão de imóvel?
+            <span class="duvida-icone-mais">+</span>
           </button>
-          <div class="faq-body">
-            A certidão mostra toda a situação jurídica atual da propriedade:
-            proprietário, área, localização, eventuais ônus (hipotecas,
-            penhoras, alienação fiduciária) e histórico de transmissões. É
-            exigida em financiamentos, compras e processos judiciais.
+          <div class="duvida-resposta">
+            A certidão mostra toda a situação jurídica atual da propriedade: proprietário, área, localização, eventuais ônus (hipotecas, penhoras, alienação fiduciária) e histórico de transmissões. É exigida em financiamentos, compras e processos judiciais.
           </div>
         </div>
-        <div class="faq-item reveal">
-          <button class="faq-btn">
-            Documentos também podem ser registrados? <span class="plus">+</span>
+
+        <div class="duvida-item revelar">
+          <button class="duvida-botao" aria-expanded="false">
+            Documentos também podem ser registrados?
+            <span class="duvida-icone-mais">+</span>
           </button>
-          <div class="faq-body">
-            Sim. Pelo Registro de Títulos e Documentos é possível registrar
-            contratos, notificações, procurações e outros documentos para que
-            tenham publicidade e validade perante terceiros, mesmo sem ser
-            escritura.
+          <div class="duvida-resposta">
+            Sim. Pelo Registro de Títulos e Documentos é possível registrar contratos, notificações, procurações e outros documentos para que tenham publicidade e validade perante terceiros, mesmo sem ser escritura.
           </div>
         </div>
-        <div class="faq-item reveal">
-          <button class="faq-btn">
+
+        <div class="duvida-item revelar">
+          <button class="duvida-botao" aria-expanded="false">
             Meu imóvel passou por alguma mudança. E agora?
-            <span class="plus">+</span>
+            <span class="duvida-icone-mais">+</span>
           </button>
-          <div class="faq-body">
-            Qualquer alteração no imóvel (construção, demolição, mudança de nome
-            do dono por casamento/divórcio, dívidas quitadas) precisa ser
-            averbada na matrícula para que o registro reflita a situação real.
-            Procure o cartório para regularizar.
+          <div class="duvida-resposta">
+            Qualquer alteração no imóvel (construção, demolição, mudança de nome do dono por casamento/divórcio, dívidas quitadas) precisa ser averbada na matrícula para que o registro reflita a situação real. Procure o cartório para regularizar.
           </div>
         </div>
-        <div class="faq-item reveal">
-          <button class="faq-btn">
-            Posso solicitar certidão online? <span class="plus">+</span>
+
+        <div class="duvida-item revelar">
+          <button class="duvida-botao" aria-expanded="false">
+            Posso solicitar certidão online?
+            <span class="duvida-icone-mais">+</span>
           </button>
-          <div class="faq-body">
-            Sim. Pelo portal ONR (onr.org.br) é possível solicitar certidões de
-            qualquer cartório do Brasil com pagamento eletrônico e entrega
-            digital com validade jurídica garantida pelo ICP-Brasil.
+          <div class="duvida-resposta">
+            Sim. Pelo portal ONR (onr.org.br) é possível solicitar certidões de qualquer cartório do Brasil com pagamento eletrônico e entrega digital com validade jurídica garantida pelo ICP-Brasil.
           </div>
         </div>
-        <div class="faq-item reveal">
-          <button class="faq-btn">
+
+        <div class="duvida-item revelar">
+          <button class="duvida-botao" aria-expanded="false">
             Vou abrir uma associação ou fundação. O que preciso?
-            <span class="plus">+</span>
+            <span class="duvida-icone-mais">+</span>
           </button>
-          <div class="faq-body">
-            É necessário registrar o estatuto social da entidade no Registro
-            Civil de Pessoas Jurídicas. O registro confere personalidade
-            jurídica à organização, habilitando-a a ter CNPJ, abrir conta
-            bancária e firmar contratos.
+          <div class="duvida-resposta">
+            É necessário registrar o estatuto social da entidade no Registro Civil de Pessoas Jurídicas. O registro confere personalidade jurídica à organização, habilitando-a a ter CNPJ, abrir conta bancária e firmar contratos.
           </div>
         </div>
-        <div class="faq-item reveal">
-          <button class="faq-btn">
+
+        <div class="duvida-item revelar">
+          <button class="duvida-botao" aria-expanded="false">
             Qual o prazo para meu registro ficar pronto?
-            <span class="plus">+</span>
+            <span class="duvida-icone-mais">+</span>
           </button>
-          <div class="faq-body">
-            O prazo legal é de 30 dias corridos a partir do protocolo. Na
-            prática, dependendo do tipo de ato e do fluxo, pode ser concluído
-            antes. Você pode acompanhar pelo número de protocolo ou consultar
-            pelo WhatsApp.
+          <div class="duvida-resposta">
+            O prazo legal é de 30 dias corridos a partir do protocolo. Na prática, dependendo do tipo de ato e do fluxo, pode ser concluído antes. Você pode acompanhar pelo número de protocolo ou consultar pelo WhatsApp.
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- CONTATO -->
-    <section class="contato" id="contato">
-      <p class="section-label reveal">Fale conosco</p>
-      <h2 class="reveal">Contato e Atendimento</h2>
+    <!-- ═══════════════════════════════════════════════
+         SEÇÃO CONTATO
+    ═══════════════════════════════════════════════ -->
+    <section class="secao-contato" id="contato">
+      <p class="etiqueta-secao revelar">Fale conosco</p>
+      <h2 class="revelar">Contato e <em>Atendimento</em></h2>
+
       <div class="contato-layout">
-        <div>
-          <div class="contato-info">
-            <div class="info-row reveal">
-              <div class="info-ic">📍</div>
+
+        <!-- Informações de contato -->
+        <div class="contato-informacoes">
+
+          <div class="contato-info-lista">
+
+            <div class="contato-linha-info revelar">
+              <div class="contato-icone">📍</div>
               <div>
-                <div class="info-lbl">Endereço</div>
-                <div class="info-val">
+                <div class="contato-rotulo">Endereço</div>
+                <div class="contato-valor">
                   Rua [Nome], nº 000 — Sua Cidade, PE<br />CEP 55590-000
                 </div>
               </div>
             </div>
-            <div class="info-row reveal">
-              <div class="info-ic">📱</div>
+
+            <div class="contato-linha-info revelar">
+              <div class="contato-icone">📱</div>
               <div>
-                <div class="info-lbl">WhatsApp</div>
-                <div class="info-val">
-                  <a href="https://wa.me/5581989707241">(81) 90000-0000</a>
+                <div class="contato-rotulo">WhatsApp</div>
+                <div class="contato-valor">
+                  <a href="https://wa.me/5581900000000">(81) 90000-0000</a>
                 </div>
               </div>
             </div>
-            <div class="info-row reveal">
-              <div class="info-ic">✉️</div>
+
+            <div class="contato-linha-info revelar">
+              <div class="contato-icone">✉️</div>
               <div>
-                <div class="info-lbl">E-mail</div>
-                <div class="info-val">
-                  <a href="mailto:contato@riSua Cidade.com.br"
-                    >contato@riSua Cidade.com.br</a
-                  >
+                <div class="contato-rotulo">E-mail</div>
+                <div class="contato-valor">
+                  <a href="mailto:contato@risu acidade.com.br">contato@risua cidade.com.br</a>
                 </div>
               </div>
             </div>
+
           </div>
-          <div class="horario-boxes reveal">
-            <div class="hr-box">
-              <div class="d">Seg — Sex</div>
-              <div class="h">08h às 16h</div>
+
+          <!-- Horários de atendimento -->
+          <div class="grade-horarios revelar">
+            <div class="caixa-horario">
+              <div class="horario-dia">Seg — Sex</div>
+              <div class="horario-hora">08h às 16h</div>
             </div>
-            <div class="hr-box">
-              <div class="d">Sábado e Domingo</div>
-              <div class="h">Fechado</div>
+            <div class="caixa-horario">
+              <div class="horario-dia">Sábado</div>
+              <div class="horario-hora">Fechado</div>
             </div>
           </div>
-          <a
-            href="https://wa.me/5581989707241"
-            target="_blank"
-            class="whatsapp-btn reveal"
-          >
+
+          <!-- Botão WhatsApp -->
+          <a href="https://wa.me/5581900000000" target="_blank" rel="noopener" class="botao-whatsapp revelar">
             <span>💬</span> Falar pelo WhatsApp
           </a>
+
         </div>
-        <div class="map-box reveal">
-          <div class="mi">🗺️</div>
-          <span>Mapa integrado via Google Maps</span>
+
+        <!-- Mapa -->
+        <div class="contato-mapa revelar">
+          <!--
+            Para adicionar o mapa real do Google Maps:
+            1. Acesse maps.google.com.br
+            2. Pesquise o endereço do cartório
+            3. Clique em "Compartilhar" → "Incorporar mapa"
+            4. Copie o <iframe> e cole aqui substituindo este bloco
+          -->
+          <div class="mapa-placeholder">
+            <div class="mapa-icone">🗺️</div>
+            <span>Mapa integrado via Google Maps</span>
+          </div>
         </div>
+
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-      <div class="foot-brand">
+    <!-- ═══════════════════════════════════════════════
+         RODAPÉ
+    ═══════════════════════════════════════════════ -->
+    <footer class="rodape">
+      <div class="rodape-identidade">
         <strong>Serventia Registral de Sua Cidade</strong>
         <span>Registro de Imóveis · RTD · PJ · Sua Cidade/PE</span>
       </div>
-      <ul class="foot-links">
+      <ul class="rodape-lista-links">
         <li><a href="#servicos">Serviços</a></li>
         <li><a href="#certidoes">Certidões</a></li>
-        <li><a href="#links">Links Úteis</a></li>
-        <li><a href="#faq">Dúvidas</a></li>
+        <li><a href="#links-uteis">Links Úteis</a></li>
+        <li><a href="#duvidas">Dúvidas</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
-      <div class="foot-copy">
-        Fiscalizado pelo TJPE e CNJ<br />© 2025 Todos os direitos reservados
+      <div class="rodape-direitos">
+        Fiscalizado pelo TJPE e CNJ<br />© <span id="anoAtual"></span> Todos os direitos reservados
       </div>
     </footer>
+
     <script src="script.js"></script>
   </body>
 </html>
