@@ -2094,6 +2094,34 @@ html[data-tema="claro"] .menu-mobile-tema i {
   backdrop-filter: blur(10px);
 }
 
+/* Badge "Online" — indicador de projeto publicado no ar */
+.projeto-badge-online {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #00e676;
+  border-color: rgba(0, 230, 118, 0.4);
+}
+
+.badge-online-ponto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00e676;
+  box-shadow: 0 0 8px #00e676;
+  animation: pulsarPonto 2s ease-in-out infinite;
+}
+
+html[data-tema="claro"] .projeto-badge-online {
+  color: #0a8f4a;
+  border-color: rgba(10, 143, 74, 0.45);
+}
+
+html[data-tema="claro"] .badge-online-ponto {
+  background: #0a8f4a;
+  box-shadow: 0 0 6px rgba(10, 143, 74, 0.7);
+}
+
 /* Info do projeto destaque */
 .projeto-destaque-info {
   padding: 1.75rem;
