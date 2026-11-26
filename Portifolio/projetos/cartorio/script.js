@@ -1,195 +1,314 @@
 /* ============================================================
-   SCRIPT.JS — Scripts do Site do Cartório
+   SCRIPT.JS — Scripts do Site do Cartório (molde genérico)
    ============================================================
 
    ÍNDICE:
-   1. Acordeão de Dúvidas (FAQ)
-   2. Revelar Elementos ao Scroll
-   3. Destaque Ativo na Navegação
-   4. Menu Mobile
-   5. Ano Atual no Rodapé
-   6. Inicialização
+   1. Utilidades
+   2. Abas de Serviços (por especialidade)
+   3. Acordeão de Dúvidas (FAQ)
+   4. Revelar Elementos ao Scroll
+   5. Destaque Ativo na Navegação
+   6. Menu Mobile
+   7. Estado de Rolagem (navbar + botão "topo")
+   8. Ano Atual no Rodapé
+   9. Inicialização
    ============================================================ */
 
 'use strict';
 
 /* ============================================================
-   1. ACORDEÃO DE DÚVIDAS (FAQ)
-   Abre e fecha as respostas ao clicar nas perguntas.
-   Só uma resposta fica aberta por vez.
+   1. UTILIDADES
    ============================================================ */
 
-function iniciarAcordeaoDuvidas() {
-  const botoesDuvidas = document.querySelectorAll('.duvida-botao');
-  if (!botoesDuvidas.length) return;
+/* true se o usuário pediu "reduzir movimento" no sistema */
+const reduzirMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  botoesDuvidas.forEach(botao => {
-    botao.addEventListener('click', () => {
-      const resposta   = botao.nextElementSibling;   /* .duvida-resposta */
-      const estaAberto = resposta.classList.contains('aberto');
+/* Largura a partir da qual o menu desktop aparece (igual ao CSS) */
+const LARGURA_DESKTOP = 1100;
 
-      /* Fecha todas as respostas abertas */
-      document.querySelectorAll('.duvida-resposta').forEach(r => r.classList.remove('aberto'));
-      document.querySelectorAll('.duvida-botao').forEach(b => {
-        b.classList.remove('aberto');
-        b.setAttribute('aria-expanded', 'false');
-      });
+/* ============================================================
+   2. ABAS DE SERVIÇOS
+   Troca o painel visível ao clicar numa especialidade.
+   Também funciona pelo teclado (setas, Home e End) e pelos
+   selos do topo (atributo data-aba-alvo="notas", etc.).
+   ============================================================ */
 
-      /* Se não estava aberto, abre o clicado */
-      if (!estaAberto) {
-        resposta.classList.add('aberto');
-        botao.classList.add('aberto');
-        botao.setAttribute('aria-expanded', 'true');
+function iniciarAbasServicos() {
+  const lista = document.querySelector('.abas-lista');
+  if (!lista) return;
+
+  const abas = Array.from(lista.querySelectorAll('[role="tab"]'));
+  if (!abas.length) return;
+
+  function ativarAba(aba, focar) {
+    abas.forEach(a => {
+      const ativa  = a === aba;
+      const painel = document.getElementById(a.getAttribute('aria-controls'));
+      a.classList.toggle('ativa', ativa);
+      a.setAttribute('aria-selected', ativa ? 'true' : 'false');
+      a.tabIndex = ativa ? 0 : -1;
+      if (painel) painel.hidden = !ativa;
+    });
+
+    if (focar) aba.focus({ preventScroll: true });
+
+    /* No celular, centraliza a aba escolhida na faixa rolável */
+    if (lista.scrollWidth > lista.clientWidth) {
+      const alvo = aba.offsetLeft - (lista.clientWidth - aba.offsetWidth) / 2;
+      lista.scrollTo({ left: alvo, behavior: reduzirMovimento ? 'auto' : 'smooth' });
+    }
+  }
+
+  abas.forEach((aba, indice) => {
+    aba.addEventListener('click', () => ativarAba(aba, false));
+
+    aba.addEventListener('keydown', (e) => {
+      let destino = null;
+      if (e.key === 'ArrowRight') destino = abas[(indice + 1) % abas.length];
+      if (e.key === 'ArrowLeft')  destino = abas[(indice - 1 + abas.length) % abas.length];
+      if (e.key === 'Home')       destino = abas[0];
+      if (e.key === 'End')        destino = abas[abas.length - 1];
+      if (destino) {
+        e.preventDefault();
+        ativarAba(destino, true);
       }
+    });
+  });
+
+  /* Selos do hero: abrem direto a aba correspondente */
+  document.querySelectorAll('[data-aba-alvo]').forEach(link => {
+    link.addEventListener('click', () => {
+      const aba = document.getElementById('aba-' + link.dataset.abaAlvo);
+      if (aba) ativarAba(aba, false);
     });
   });
 }
 
 /* ============================================================
-   2. REVELAR ELEMENTOS AO SCROLL
-   Usa IntersectionObserver para adicionar a classe 'visivel'
-   nos elementos com a classe 'revelar' quando entram na tela.
+   3. ACORDEÃO DE DÚVIDAS (FAQ)
+   Abre e fecha as respostas ao clicar nas perguntas.
+   A altura é calculada pelo tamanho real do texto, então
+   respostas longas nunca ficam cortadas no celular.
+   Só uma resposta fica aberta por vez.
+   ============================================================ */
+
+function iniciarAcordeaoDuvidas() {
+  const botoes = document.querySelectorAll('.duvida-botao');
+  if (!botoes.length) return;
+
+  function fechar(botao) {
+    const resposta = botao.nextElementSibling;
+    botao.classList.remove('aberto');
+    botao.setAttribute('aria-expanded', 'false');
+    resposta.classList.remove('aberto');
+    resposta.style.maxHeight = '';
+  }
+
+  function abrir(botao) {
+    const resposta = botao.nextElementSibling;
+    botao.classList.add('aberto');
+    botao.setAttribute('aria-expanded', 'true');
+    resposta.classList.add('aberto');
+    resposta.style.maxHeight = resposta.scrollHeight + 'px';
+  }
+
+  botoes.forEach(botao => {
+    botao.addEventListener('click', () => {
+      const estavaAberto = botao.getAttribute('aria-expanded') === 'true';
+      botoes.forEach(fechar);
+      if (!estavaAberto) abrir(botao);
+    });
+  });
+
+  /* Recalcula a altura se a tela girar ou mudar de tamanho */
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.duvida-resposta.aberto').forEach(r => {
+      r.style.maxHeight = r.scrollHeight + 'px';
+    });
+  }, { passive: true });
+}
+
+/* ============================================================
+   4. REVELAR ELEMENTOS AO SCROLL
+   Adiciona a classe 'visivel' nos elementos com 'revelar'
+   quando entram na tela.
    ============================================================ */
 
 function iniciarRevelacaoAoScroll() {
-  const elementosParaRevelar = document.querySelectorAll('.revelar');
-  if (!elementosParaRevelar.length) return;
+  const elementos = document.querySelectorAll('.revelar');
+  if (!elementos.length) return;
+
+  /* Sem suporte ou com "reduzir movimento": mostra tudo de uma vez */
+  if (!('IntersectionObserver' in window) || reduzirMovimento) {
+    elementos.forEach(el => el.classList.add('visivel'));
+    return;
+  }
 
   const observador = new IntersectionObserver((entradas) => {
-    entradas.forEach((entrada, indice) => {
+    let ordem = 0;
+    entradas.forEach(entrada => {
       if (!entrada.isIntersecting) return;
 
-      /* Atraso escalonado para efeito em cascata (55ms por elemento) */
-      setTimeout(() => {
-        entrada.target.classList.add('visivel');
-      }, indice * 55);
+      /* Atraso escalonado para efeito em cascata (60ms por elemento) */
+      const atraso = Math.min(ordem++ * 60, 360);
+      setTimeout(() => entrada.target.classList.add('visivel'), atraso);
 
-      /* Para de observar após revelar */
       observador.unobserve(entrada.target);
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
 
-  elementosParaRevelar.forEach(el => observador.observe(el));
+  elementos.forEach(el => observador.observe(el));
 }
 
 /* ============================================================
-   3. DESTAQUE ATIVO NA NAVEGAÇÃO
-   Marca o link da navbar correspondente à seção
-   que está visível na tela enquanto o usuário rola.
+   5. DESTAQUE ATIVO NA NAVEGAÇÃO
+   Marca o link (desktop e menu mobile) da seção visível.
    ============================================================ */
 
 function iniciarDestaqueNavegacao() {
-  const secoes = document.querySelectorAll('section[id]');
-  const linksNav = document.querySelectorAll('.nav-lista-links a');
+  const links = document.querySelectorAll('.nav-lista-links a, .menu-mobile-link');
+  if (!links.length || !('IntersectionObserver' in window)) return;
 
-  if (!secoes.length || !linksNav.length) return;
+  const ids = new Set();
+  links.forEach(l => {
+    const href = l.getAttribute('href');
+    if (href && href.length > 1 && href.startsWith('#')) ids.add(href);
+  });
 
-  function atualizarLinkAtivo() {
-    let secaoAtual = '';
-    const alturaNav = 80; /* compensa a navbar fixa */
+  const secoes = Array.from(ids)
+    .map(id => document.querySelector(id))
+    .filter(Boolean);
 
-    secoes.forEach(secao => {
-      if (window.scrollY >= secao.offsetTop - alturaNav) {
-        secaoAtual = secao.getAttribute('id');
-      }
+  /* Observa também o topo, para limpar o destaque ao voltar ao início */
+  const inicio = document.getElementById('inicio');
+  if (inicio) secoes.push(inicio);
+
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (!entrada.isIntersecting) return;
+      const id = '#' + entrada.target.id;
+      links.forEach(l => l.classList.toggle('ativo', l.getAttribute('href') === id));
     });
+  }, { rootMargin: '-45% 0px -50% 0px' });
 
-    linksNav.forEach(link => {
-      const ehAtivo = link.getAttribute('href') === '#' + secaoAtual;
-      link.style.color = ehAtivo ? 'var(--dourado-claro)' : '';
-    });
-  }
-
-  window.addEventListener('scroll', atualizarLinkAtivo, { passive: true });
-  atualizarLinkAtivo(); /* verifica na inicialização */
+  secoes.forEach(s => observador.observe(s));
 }
 
 /* ============================================================
-   4. MENU MOBILE
-   Controla a abertura e fechamento do menu mobile
-   ao clicar no botão hambúrguer.
+   6. MENU MOBILE
+   Abre e fecha a gaveta ao tocar no botão hambúrguer.
    ============================================================ */
 
 function iniciarMenuMobile() {
-  const botaoHamburguer = document.getElementById('botaoHamburguer');
-  const menuMobile = document.getElementById('menuMobile');
-  const overlay  = document.getElementById('menuMobileOverlay');
+  const botao   = document.getElementById('botaoHamburguer');
+  const menu    = document.getElementById('menuMobile');
+  const overlay = document.getElementById('menuMobileOverlay');
 
-  if (!botaoHamburguer || !menuMobile) return;
+  if (!botao || !menu) return;
 
   let menuAberto = false;
 
   function abrirMenu() {
     menuAberto = true;
-    botaoHamburguer.classList.add('aberto');
-    botaoHamburguer.setAttribute('aria-expanded', 'true');
-    menuMobile.classList.add('aberto');
-    menuMobile.setAttribute('aria-hidden', 'false');
-    if (overlay) {
-      overlay.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    }
+    botao.classList.add('aberto');
+    botao.setAttribute('aria-expanded', 'true');
+    botao.setAttribute('aria-label', 'Fechar menu');
+    menu.classList.add('aberto');
+    menu.setAttribute('aria-hidden', 'false');
+    if (overlay) overlay.classList.add('visivel');
+    document.body.classList.add('menu-aberto');
   }
 
-  function fecharMenu() {
+  function fecharMenu(devolverFoco) {
+    if (!menuAberto) return;
     menuAberto = false;
-    botaoHamburguer.classList.remove('aberto');
-    botaoHamburguer.setAttribute('aria-expanded', 'false');
-    menuMobile.classList.remove('aberto');
-    menuMobile.setAttribute('aria-hidden', 'true');
-    if (overlay) {
-      overlay.style.display = 'none';
-      document.body.style.overflow = '';
-    }
+    botao.classList.remove('aberto');
+    botao.setAttribute('aria-expanded', 'false');
+    botao.setAttribute('aria-label', 'Abrir menu');
+    menu.classList.remove('aberto');
+    menu.setAttribute('aria-hidden', 'true');
+    if (overlay) overlay.classList.remove('visivel');
+    document.body.classList.remove('menu-aberto');
+    if (devolverFoco) botao.focus();
   }
 
-  /* Alterna ao clicar no hambúrguer */
-  botaoHamburguer.addEventListener('click', () => {
-    menuAberto ? fecharMenu() : abrirMenu();
+  /* Alterna ao tocar no hambúrguer */
+  botao.addEventListener('click', () => {
+    menuAberto ? fecharMenu(false) : abrirMenu();
   });
 
-  /* Fecha ao clicar no overlay */
-  if (overlay) {
-    overlay.addEventListener('click', fecharMenu);
-  }
+  /* Fecha ao tocar fora (overlay) */
+  if (overlay) overlay.addEventListener('click', () => fecharMenu(false));
 
-  /* Fecha ao clicar em qualquer link do menu */
-  menuMobile.querySelectorAll('.menu-mobile-link').forEach(link => {
-    link.addEventListener('click', () => setTimeout(fecharMenu, 150));
+  /* Fecha ao escolher qualquer link ou botão do menu
+     (destrava a rolagem antes de a página navegar até a seção) */
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => fecharMenu(false));
   });
 
   /* Fecha ao pressionar ESC */
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menuAberto) fecharMenu();
+    if (e.key === 'Escape') fecharMenu(true);
   });
 
   /* Fecha ao redimensionar para desktop */
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 600 && menuAberto) fecharMenu();
+    if (window.innerWidth >= LARGURA_DESKTOP) fecharMenu(false);
   }, { passive: true });
 }
 
 /* ============================================================
-   5. ANO ATUAL NO RODAPÉ
-   Preenche o span com o ano corrente automaticamente.
+   7. ESTADO DE ROLAGEM
+   Sombra na navbar após rolar e botão "voltar ao topo".
+   ============================================================ */
+
+function iniciarEstadoRolagem() {
+  const navegacao  = document.getElementById('navegacao');
+  const botaoTopo  = document.getElementById('botaoTopo');
+  let agendado = false;
+
+  function atualizar() {
+    agendado = false;
+    const y = window.scrollY;
+    if (navegacao) navegacao.classList.toggle('rolada', y > 8);
+    if (botaoTopo) botaoTopo.classList.toggle('visivel', y > 700);
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!agendado) {
+      agendado = true;
+      requestAnimationFrame(atualizar);
+    }
+  }, { passive: true });
+
+  if (botaoTopo) {
+    botaoTopo.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: reduzirMovimento ? 'auto' : 'smooth' });
+    });
+  }
+
+  atualizar();
+}
+
+/* ============================================================
+   8. ANO ATUAL NO RODAPÉ
    ============================================================ */
 
 function preencherAnoAtual() {
   const spanAno = document.getElementById('anoAtual');
-  if (spanAno) {
-    spanAno.textContent = new Date().getFullYear();
-  }
+  if (spanAno) spanAno.textContent = new Date().getFullYear();
 }
 
 /* ============================================================
-   6. INICIALIZAÇÃO
-   Chama todas as funções quando o DOM estiver pronto.
+   9. INICIALIZAÇÃO
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  iniciarAbasServicos();
   iniciarAcordeaoDuvidas();
   iniciarRevelacaoAoScroll();
   iniciarDestaqueNavegacao();
   iniciarMenuMobile();
+  iniciarEstadoRolagem();
   preencherAnoAtual();
 });

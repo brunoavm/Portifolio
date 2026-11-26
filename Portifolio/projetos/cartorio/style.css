@@ -1,22 +1,28 @@
 /* ============================================================
-   STYLE.CSS — Estilos do Site do Cartório
+   STYLE.CSS — Estilos do Site do Cartório (molde genérico)
+   Escrito "mobile-first": o estilo base é o do celular e as
+   media queries (min-width) acrescentam o layout de tablet e PC.
    ============================================================
 
    ÍNDICE:
    1.  Reset & Variáveis
-   2.  Base
-   3.  Navegação
-   4.  Menu Mobile
-   5.  Hero
-   6.  Sobre
-   7.  Serviços
-   8.  Certidões
-   9.  Links Úteis
-   10. Dúvidas (FAQ)
-   11. Contato
-   12. Rodapé
-   13. Animações
-   14. Responsivo
+   2.  Base & Acessibilidade
+   3.  Botões
+   4.  Navegação
+   5.  Menu Mobile
+   6.  Hero
+   7.  Sobre
+   8.  Serviços (abas)
+   9.  Como Solicitar
+   10. Links Úteis
+   11. Dúvidas (FAQ)
+   12. Contato
+   13. Rodapé
+   14. Botões flutuantes
+   15. Animações
+   16. Tablet  (≥ 640px)
+   17. Tablet grande (≥ 900px)
+   18. Desktop (≥ 1100px)
    ============================================================ */
 
 /* ============================================================
@@ -37,6 +43,7 @@
 
   /* ── Dourado (cor de destaque) ── */
   --dourado:          #c8a96e;
+  --dourado-escuro:   #b08f52;
   --dourado-claro:    #d9bc8a;
   --dourado-palido:   #f0e6d3;
 
@@ -47,26 +54,42 @@
   /* ── Branco puro ── */
   --branco:           #ffffff;
 
+  /* ── WhatsApp ── */
+  --verde-whatsapp:        #25d366;
+  --verde-whatsapp-escuro: #1ebe5a;
+
   /* ── Textos ── */
   --texto-escuro:     #1a2530;
   --texto-medio:      #4a5568;
-  --texto-suave:      #8a9ab0;
+  --texto-suave:      #7a8aa0;
 
   /* ── Tipografia ── */
-  --fonte-titulo: 'Cormorant Garamond', serif;
-  --fonte-corpo:  'Jost', sans-serif;
+  --fonte-titulo: 'Cormorant Garamond', Georgia, serif;
+  --fonte-corpo:  'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* ── Espaçamentos ── */
-  --padding-lateral:   6vw;
-  --padding-secao:     90px;
-  --altura-navegacao:  72px;
+  --padding-lateral:  clamp(20px, 6vw, 96px);
+  --largura-maxima:   1200px;
+  --padding-secao:    clamp(64px, 10vw, 104px);
+  --altura-navegacao: 64px;
+
+  /* Recuo lateral que centraliza o conteúdo em telas muito largas */
+  --recuo: max(var(--padding-lateral), calc((100% - var(--largura-maxima)) / 2));
+
+  /* ── Formas e sombras ── */
+  --raio:          10px;
+  --raio-pequeno:  8px;
+  --sombra-suave:  0 6px 24px rgba(14, 24, 32, 0.08);
+  --sombra-media:  0 12px 36px rgba(14, 24, 32, 0.14);
+  --transicao:     0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 /* ============================================================
-   2. BASE
+   2. BASE & ACESSIBILIDADE
    ============================================================ */
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -74,16 +97,54 @@ body {
   background: var(--creme);
   color: var(--texto-escuro);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
+
+/* Trava a rolagem enquanto o menu mobile está aberto */
+body.menu-aberto {
+  overflow: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+/* As seções não ficam escondidas atrás da navbar fixa ao clicar nos links */
+section[id] {
+  scroll-margin-top: var(--altura-navegacao);
+}
+
+/* Contorno de foco visível ao navegar pelo teclado */
+:focus-visible {
+  outline: 2px solid var(--dourado);
+  outline-offset: 3px;
+}
+
+/* Link "pular para o conteúdo" (leitores de tela / teclado) */
+.pular-conteudo {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 1000;
+  padding: 10px 16px;
+  background: var(--dourado);
+  color: var(--azul-marinho-fundo);
+  border-radius: var(--raio-pequeno);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-150%);
+  transition: transform var(--transicao);
+}
+
+.pular-conteudo:focus { transform: translateY(0); }
 
 /* Títulos h2 padrão de seção */
 h2 {
   font-family: var(--fonte-titulo);
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: clamp(30px, 6vw, 48px);
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.15;
   color: var(--texto-escuro);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 h2 em {
@@ -96,60 +157,159 @@ h2 em {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--dourado);
-  margin-bottom: 16px;
+  color: var(--dourado-escuro);
+  margin-bottom: 14px;
 }
 
 .etiqueta-secao::before {
   content: '';
   width: 30px;
   height: 1px;
-  background: var(--dourado);
+  background: currentColor;
   display: block;
 }
 
-/* Botão dourado (CTA principal) */
-.botao-dourado {
-  display: inline-block;
-  background: var(--dourado);
-  color: var(--azul-marinho-fundo);
-  padding: 14px 30px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.2s, transform 0.2s;
+/* Parágrafo curto abaixo do título */
+.secao-intro {
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 560px;
 }
 
-.botao-dourado:hover {
-  background: var(--dourado-claro);
-  transform: translateY(-2px);
-}
-
-/* Botão fantasma (secundário, bordas transparentes) */
-.botao-fantasma {
-  display: inline-block;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.75);
-  padding: 14px 30px;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: border-color 0.2s, color 0.2s;
-}
-
-.botao-fantasma:hover {
-  border-color: var(--dourado);
-  color: var(--dourado);
+/* Recuo lateral padrão de todas as seções */
+.secao-sobre,
+.secao-servicos,
+.secao-solicitar,
+.secao-links-uteis,
+.secao-duvidas,
+.secao-contato {
+  padding: var(--padding-secao) var(--recuo);
 }
 
 /* ============================================================
-   3. NAVEGAÇÃO
+   3. BOTÕES
+   Base comum (.botao) + variações de cor.
+   Altura mínima de 48px = área de toque confortável no celular.
+   ============================================================ */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 26px;
+  border: 1.5px solid transparent;
+  border-radius: var(--raio-pequeno);
+  font-family: var(--fonte-corpo);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    transform var(--transicao),
+    box-shadow var(--transicao),
+    background var(--transicao),
+    border-color var(--transicao),
+    color var(--transicao);
+}
+
+.botao:hover  { transform: translateY(-2px); }
+.botao:active { transform: translateY(1px) scale(0.98); }
+
+/* Ícones e setas dentro dos botões */
+.botao .icone {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.botao .seta {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform var(--transicao);
+}
+
+.botao:hover .seta { transform: translateX(4px); }
+
+/* Ocupa toda a largura disponível */
+.botao-largo { width: 100%; }
+
+/* Versão compacta (navbar) */
+.botao-pequeno {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 11.5px;
+}
+
+/* Dourado — ação principal */
+.botao-dourado {
+  background: linear-gradient(180deg, var(--dourado-claro) 0%, var(--dourado) 100%);
+  border-color: var(--dourado);
+  color: var(--azul-marinho-fundo);
+  box-shadow:
+    0 4px 14px rgba(200, 169, 110, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.botao-dourado:hover {
+  background: linear-gradient(180deg, #e3c999 0%, var(--dourado-claro) 100%);
+  box-shadow:
+    0 8px 22px rgba(200, 169, 110, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Fantasma — ação secundária sobre fundo escuro */
+.botao-fantasma {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.32);
+  color: var(--branco);
+}
+
+.botao-fantasma:hover {
+  background: rgba(200, 169, 110, 0.10);
+  border-color: var(--dourado);
+  color: var(--dourado-claro);
+}
+
+/* Escuro — ação sobre fundo claro */
+.botao-escuro {
+  background: var(--azul-marinho);
+  border-color: var(--azul-marinho);
+  color: var(--branco);
+  box-shadow: 0 4px 14px rgba(30, 45, 64, 0.22);
+}
+
+.botao-escuro:hover {
+  background: var(--azul-marinho-medio);
+  box-shadow: 0 8px 22px rgba(30, 45, 64, 0.30);
+}
+
+.botao-escuro .seta { color: var(--dourado); }
+
+/* WhatsApp */
+.botao-whatsapp {
+  background: var(--verde-whatsapp);
+  border-color: var(--verde-whatsapp);
+  color: var(--branco);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.28);
+}
+
+.botao-whatsapp:hover {
+  background: var(--verde-whatsapp-escuro);
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.36);
+}
+
+/* ============================================================
+   4. NAVEGAÇÃO
    ============================================================ */
 .navegacao {
   position: fixed;
@@ -160,26 +320,35 @@ h2 em {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--padding-lateral);
+  gap: 16px;
+  padding: 0 var(--recuo);
   height: var(--altura-navegacao);
-  background: rgba(22, 34, 47, 0.97);
+  background: rgba(22, 34, 47, 0.96);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(200, 169, 110, 0.2);
+  transition: box-shadow var(--transicao), background var(--transicao);
+}
+
+/* Sombra quando a página já foi rolada */
+.navegacao.rolada {
+  background: rgba(22, 34, 47, 0.99);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
 }
 
 /* Logo */
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   text-decoration: none;
-  flex-shrink: 0;
+  min-width: 0; /* permite o texto encolher */
 }
 
 /* Ícone circular com o símbolo § */
 .nav-selo {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border: 1.5px solid var(--dourado);
   border-radius: 50%;
   display: flex;
@@ -187,7 +356,7 @@ h2 em {
   justify-content: center;
   font-family: var(--fonte-titulo);
   color: var(--dourado);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   flex-shrink: 0;
 }
@@ -195,157 +364,201 @@ h2 em {
 /* Nome e subtítulo ao lado do selo */
 .nav-identidade {
   line-height: 1.25;
+  min-width: 0;
+}
+
+.nav-identidade strong,
+.nav-identidade span {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-identidade strong {
-  display: block;
   font-family: var(--fonte-titulo);
   color: var(--branco);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
 }
 
 .nav-identidade span {
-  font-size: 10px;
+  font-size: 9.5px;
   color: var(--dourado-claro);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-/* Links de navegação desktop */
+/* Links de navegação desktop (escondidos no celular) */
 .nav-lista-links {
-  display: flex;
-  gap: 30px;
+  display: none;
+  gap: 6px;
   list-style: none;
 }
 
 .nav-lista-links a {
-  color: rgba(255, 255, 255, 0.65);
+  position: relative;
+  display: block;
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-weight: 400;
-  transition: color 0.2s;
-}
-
-.nav-lista-links a:hover,
-.nav-lista-links a.ativo {
-  color: var(--dourado-claro);
-}
-
-/* Botão WhatsApp na navbar */
-.nav-botao-whatsapp {
-  background: transparent;
-  border: 1.5px solid var(--dourado);
-  color: var(--dourado);
-  padding: 8px 20px;
-  font-family: var(--fonte-corpo);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
   white-space: nowrap;
+  transition: color var(--transicao), background var(--transicao);
 }
 
-.nav-botao-whatsapp:hover {
+/* Traço dourado sob o link ativo */
+.nav-lista-links a::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 1.5px;
   background: var(--dourado);
-  color: var(--azul-marinho-fundo);
+  transform: scaleX(0);
+  transition: transform var(--transicao);
 }
 
-/* Hambúrguer (só aparece no mobile via CSS responsivo) */
+.nav-lista-links a:hover {
+  color: var(--branco);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-lista-links a.ativo { color: var(--dourado-claro); }
+.nav-lista-links a.ativo::after { transform: scaleX(1); }
+
+.nav-botao-whatsapp { display: none; }
+
+/* Hambúrguer — com cara de botão (borda e área de toque de 44px) */
 .botao-hamburguer {
-  display: none;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   cursor: pointer;
-  background: none;
-  border: none;
-  padding: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(200, 169, 110, 0.4);
+  border-radius: var(--raio-pequeno);
+  transition: background var(--transicao), border-color var(--transicao);
+}
+
+.botao-hamburguer:hover,
+.botao-hamburguer.aberto {
+  background: rgba(200, 169, 110, 0.12);
+  border-color: var(--dourado);
 }
 
 .botao-hamburguer span {
-  width: 22px;
+  width: 20px;
   height: 1.5px;
   background: var(--branco);
   display: block;
+  border-radius: 2px;
   transition: transform 0.3s, opacity 0.3s;
 }
 
 /* Animação hambúrguer → X */
-.botao-hamburguer.aberto span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.botao-hamburguer.aberto span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .botao-hamburguer.aberto span:nth-child(2) { opacity: 0; }
-.botao-hamburguer.aberto span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+.botao-hamburguer.aberto span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* ============================================================
-   4. MENU MOBILE
+   5. MENU MOBILE (gaveta abaixo da navbar)
    ============================================================ */
 .menu-mobile {
   position: fixed;
   top: var(--altura-navegacao);
   left: 0;
   right: 0;
+  z-index: 199;
+  max-height: calc(100vh - var(--altura-navegacao));
+  max-height: calc(100dvh - var(--altura-navegacao));
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--azul-marinho-fundo);
   border-bottom: 1px solid rgba(200, 169, 110, 0.2);
-  z-index: 199;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  padding-bottom: env(safe-area-inset-bottom);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
 }
 
 .menu-mobile.aberto {
-  max-height: 400px;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s;
 }
 
 .menu-mobile-lista {
   list-style: none;
-  padding: 1rem var(--padding-lateral) 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  padding: 8px var(--recuo) 0;
 }
 
 .menu-mobile-link {
-  display: block;
-  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 54px;
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: color 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: color var(--transicao), padding var(--transicao);
 }
 
-.menu-mobile-link:hover {
+.menu-mobile-link span {
+  color: var(--dourado);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.menu-mobile-link:hover,
+.menu-mobile-link:active,
+.menu-mobile-link.ativo {
   color: var(--dourado-claro);
+  padding-left: 6px;
 }
 
-.menu-mobile-botao-wpp {
-  margin-top: 0.5rem;
-  background: var(--dourado);
-  color: var(--azul-marinho-fundo) !important;
-  padding: 0.75rem 1.25rem;
-  font-weight: 600;
-  text-align: center;
-  border-bottom: none;
+.menu-mobile-acoes {
+  display: grid;
+  gap: 10px;
+  padding: 20px var(--recuo) 24px;
 }
 
 .menu-mobile-overlay {
-  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
   z-index: 198;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.menu-mobile-overlay.visivel {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease, visibility 0s;
 }
 
 /* ============================================================
-   5. HERO — SEÇÃO DE ABERTURA
+   6. HERO — SEÇÃO DE ABERTURA
    ============================================================ */
 .secao-hero {
-  min-height: 100vh;
   background: var(--azul-marinho-fundo);
   display: flex;
   align-items: center;
@@ -369,12 +582,13 @@ h2 em {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 55% 70% at 80% 40%, rgba(200, 169, 110, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 30% 50% at 10% 70%, rgba(200, 169, 110, 0.04) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 50% at 80% 20%, rgba(200, 169, 110, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(200, 169, 110, 0.05) 0%, transparent 50%);
 }
 
-/* Painel diagonal no lado direito */
+/* Painel diagonal no lado direito (só desktop) */
 .hero-painel-lateral {
+  display: none;
   position: absolute;
   right: 0;
   top: 0;
@@ -384,15 +598,16 @@ h2 em {
   clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
 }
 
-/* Grid interno: texto (esq) + badges (dir) */
+/* Grid interno: texto + especialidades */
 .hero-conteudo {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  gap: 44px;
   align-items: center;
   width: 100%;
-  padding: 120px var(--padding-lateral) 80px;
+  padding: calc(var(--altura-navegacao) + 44px) var(--recuo) 64px;
 }
 
 /* Texto da esquerda */
@@ -400,27 +615,28 @@ h2 em {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-size: 10px;
-  letter-spacing: 0.25em;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--dourado);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .hero-subtag::before {
   content: '';
-  width: 36px;
+  width: 28px;
   height: 1px;
   background: var(--dourado);
+  flex-shrink: 0;
 }
 
 h1 {
   font-family: var(--fonte-titulo);
-  font-size: clamp(36px, 5vw, 64px);
+  font-size: clamp(38px, 10vw, 68px);
   font-weight: 300;
-  line-height: 1.1;
+  line-height: 1.08;
   color: var(--branco);
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 h1 em {
@@ -429,72 +645,104 @@ h1 em {
 }
 
 .hero-descricao {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.55);
-  line-height: 1.8;
-  max-width: 420px;
-  margin-bottom: 40px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.75;
+  max-width: 460px;
+  margin-bottom: 32px;
   font-weight: 300;
 }
 
+/* No celular, botões empilhados e com largura total */
 .hero-botoes {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 12px;
 }
 
-/* Coluna direita: badges + lista */
+/* Coluna direita: especialidades + lista */
 .hero-lado-direito {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   gap: 16px;
-  padding-left: 40px;
 }
 
+.hero-rotulo {
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dourado);
+}
+
+.hero-rotulo span {
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+/* Grade 3 × 2 de selos clicáveis */
 .hero-grupo-badges {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
-/* Badge individual (RTD, PJ, RI) */
 .hero-badge {
-  border: 1px solid rgba(200, 169, 110, 0.3);
-  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 84px;
+  padding: 14px 8px;
   text-align: center;
+  text-decoration: none;
+  border: 1px solid rgba(200, 169, 110, 0.3);
+  border-radius: var(--raio);
+  background: rgba(255, 255, 255, 0.04);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
-  background: rgba(255, 255, 255, 0.03);
+  transition:
+    transform var(--transicao),
+    border-color var(--transicao),
+    background var(--transicao),
+    box-shadow var(--transicao);
 }
+
+.hero-badge:hover {
+  transform: translateY(-3px);
+  border-color: var(--dourado);
+  background: rgba(200, 169, 110, 0.10);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.hero-badge:active { transform: scale(0.97); }
 
 .badge-sigla {
   font-family: var(--fonte-titulo);
-  font-size: 42px;
-  font-weight: 300;
+  font-size: 26px;
+  font-weight: 400;
   color: var(--dourado-claro);
   line-height: 1;
 }
 
 .badge-descricao {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 0.12em;
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-top: 4px;
+  line-height: 1.3;
 }
 
-/* Lista de serviços no hero */
+/* Lista de serviços mais procurados */
 .hero-lista-servicos {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(200, 169, 110, 0.15);
-  padding: 24px 28px;
-  width: 100%;
-  max-width: 380px;
+  border-radius: var(--raio);
+  padding: 22px 22px;
 }
 
 .hero-lista-servicos p {
-  font-size: 10px;
+  font-size: 10.5px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--dourado);
@@ -505,32 +753,34 @@ h1 em {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .hero-lista-servicos li {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
+  line-height: 1.45;
 }
 
 .hero-lista-servicos li::before {
   content: '';
-  width: 20px;
+  width: 14px;
   height: 1px;
   background: var(--dourado);
   flex-shrink: 0;
+  transform: translateY(-4px);
 }
 
-/* Indicador de scroll no rodapé do hero */
+/* Indicador de scroll no rodapé do hero (só desktop) */
 .hero-indicador-scroll {
+  display: none;
   position: absolute;
-  bottom: 32px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
@@ -553,50 +803,58 @@ h1 em {
 }
 
 /* ============================================================
-   6. SOBRE
+   7. SOBRE
    ============================================================ */
 .secao-sobre {
   background: var(--creme);
-  padding: var(--padding-secao) var(--padding-lateral);
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 80px;
+  grid-template-columns: 1fr;
+  gap: 48px;
   align-items: center;
 }
 
 /* Wrapper da imagem com decorações */
 .sobre-imagem-wrapper {
   position: relative;
+  width: 100%;
+  max-width: 340px;
+  margin: 12px auto 0;
 }
 
 .sobre-etiqueta-titular {
   position: absolute;
   top: -12px;
-  left: -12px;
+  left: -10px;
   z-index: 2;
-  font-size: 9px;
+  font-size: 9.5px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--branco);
-  background: var(--dourado);
-  padding: 5px 12px;
+  background: var(--dourado-escuro);
+  padding: 6px 12px;
+  border-radius: 4px;
 }
 
 .sobre-imagem-moldura {
   border: 1px solid var(--dourado-palido);
+  border-radius: var(--raio);
   padding: 6px;
+  background: var(--branco);
+  box-shadow: var(--sombra-suave);
 }
 
-/* Placeholder onde vai a foto da titular */
+/* Placeholder onde vai a foto do(a) titular */
 .sobre-imagem-placeholder {
   background: linear-gradient(160deg, var(--azul-marinho) 0%, var(--azul-marinho-claro) 100%);
-  min-height: 380px;
+  aspect-ratio: 4 / 5;
+  border-radius: 6px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.4);
   font-size: 12px;
   letter-spacing: 0.08em;
 }
@@ -607,10 +865,11 @@ h1 em {
   opacity: 0.4;
 }
 
-/* Imagem real da titular (quando adicionada) */
+/* Imagem real do(a) titular (quando adicionada) */
 .sobre-imagem-placeholder img {
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
 }
 
@@ -623,25 +882,36 @@ h1 em {
   height: 80px;
   border-right: 1px solid var(--dourado);
   border-bottom: 1px solid var(--dourado);
+  pointer-events: none;
 }
 
-/* Credenciais da titular */
+/* Parágrafos de texto da seção sobre */
+.sobre-texto p:not(.etiqueta-secao) {
+  font-size: 15px;
+  color: var(--texto-medio);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+
+/* Credenciais */
 .sobre-credenciais {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 28px;
-  padding-top: 28px;
+  gap: 12px;
+  margin-top: 26px;
+  padding-top: 26px;
   border-top: 1px solid var(--creme-medio);
 }
 
 .credencial {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--texto-medio);
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 12px;
-  font-weight: 300;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .credencial::before {
@@ -650,370 +920,573 @@ h1 em {
   flex-shrink: 0;
 }
 
-/* Parágrafos de texto da seção sobre */
-.sobre-texto p {
-  font-size: 14px;
-  color: var(--texto-medio);
-  line-height: 1.8;
-  font-weight: 300;
-  margin-bottom: 14px;
-}
-
 /* ============================================================
-   7. SERVIÇOS
+   8. SERVIÇOS (abas por especialidade)
    ============================================================ */
 .secao-servicos {
   background: var(--azul-marinho);
-  padding: var(--padding-secao) var(--padding-lateral);
 }
 
 .secao-servicos .etiqueta-secao { color: var(--dourado); }
-.secao-servicos h2 { color: var(--branco); }
-.secao-servicos h2 em { color: var(--dourado-claro); }
+.secao-servicos h2              { color: var(--branco); }
+.secao-servicos h2 em           { color: var(--dourado-claro); }
+.secao-servicos .secao-intro    { color: rgba(255, 255, 255, 0.55); }
 
-/* Grade de cards de serviços (3 colunas) */
+/* Moldura das abas: no celular vira uma faixa rolável na horizontal */
+.abas-moldura {
+  position: relative;
+  margin: 28px calc(-1 * var(--recuo)) 0;
+}
+
+/* Esmaecimento na borda direita indica que dá para arrastar */
+.abas-moldura::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, rgba(30, 45, 64, 0), var(--azul-marinho));
+  pointer-events: none;
+}
+
+.abas-lista {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding: 4px var(--recuo) 8px;
+  scroll-padding-inline: var(--recuo);
+}
+
+.abas-lista::-webkit-scrollbar { display: none; }
+
+/* Botão de cada aba (formato "pílula") */
+.aba-botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  min-height: 46px;
+  padding: 0 18px;
+  scroll-snap-align: start;
+  border: 1.5px solid rgba(200, 169, 110, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--fonte-corpo);
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--transicao),
+    border-color var(--transicao),
+    color var(--transicao),
+    box-shadow var(--transicao);
+}
+
+.aba-botao:hover {
+  border-color: var(--dourado);
+  color: var(--branco);
+  background: rgba(200, 169, 110, 0.08);
+}
+
+.aba-botao.ativa {
+  background: linear-gradient(180deg, var(--dourado-claro) 0%, var(--dourado) 100%);
+  border-color: var(--dourado);
+  color: var(--azul-marinho-fundo);
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(200, 169, 110, 0.3);
+}
+
+/* Painel de conteúdo de cada aba */
+.aba-painel {
+  margin-top: 28px;
+}
+
+.aba-painel[hidden] { display: none; }
+
+.painel-cabecalho {
+  margin-bottom: 22px;
+  padding-left: 16px;
+  border-left: 2px solid var(--dourado);
+}
+
+.painel-cabecalho h3 {
+  font-family: var(--fonte-titulo);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--branco);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.painel-cabecalho p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.65;
+  font-weight: 300;
+  max-width: 640px;
+}
+
+/* Grade de cards (1 coluna no celular) */
 .grade-servicos {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: rgba(200, 169, 110, 0.1);
-  margin-top: 52px;
-  border: 1px solid rgba(200, 169, 110, 0.1);
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
 .card-servico {
-  background: var(--azul-marinho);
-  padding: 36px 28px;
-  transition: background 0.25s;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  column-gap: 16px;
+  align-items: start;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(200, 169, 110, 0.14);
+  border-radius: var(--raio);
+  padding: 20px 18px;
+  transition: background var(--transicao), border-color var(--transicao), transform var(--transicao);
+}
+
+/* Cards surgem em cascata ao trocar de aba */
+.aba-painel:not([hidden]) .card-servico {
+  animation: surgirCard 0.45s ease both;
+}
+
+.aba-painel .card-servico:nth-child(2) { animation-delay: 0.04s; }
+.aba-painel .card-servico:nth-child(3) { animation-delay: 0.08s; }
+.aba-painel .card-servico:nth-child(4) { animation-delay: 0.12s; }
+.aba-painel .card-servico:nth-child(5) { animation-delay: 0.16s; }
+.aba-painel .card-servico:nth-child(6) { animation-delay: 0.20s; }
+
+@keyframes surgirCard {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .card-servico:hover {
   background: var(--azul-marinho-medio);
-}
-
-.servico-numero {
-  font-family: var(--fonte-titulo);
-  font-size: 36px;
-  font-weight: 300;
-  color: rgba(200, 169, 110, 0.25);
-  line-height: 1;
-  margin-bottom: 14px;
+  border-color: rgba(200, 169, 110, 0.35);
 }
 
 .servico-icone {
-  font-size: 24px;
-  margin-bottom: 14px;
+  grid-row: span 2;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border-radius: 50%;
+  background: rgba(200, 169, 110, 0.1);
+  border: 1px solid rgba(200, 169, 110, 0.25);
 }
 
-.card-servico h3 {
+.card-servico h4 {
   font-family: var(--fonte-titulo);
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 19px;
+  font-weight: 500;
   color: var(--branco);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  line-height: 1.25;
 }
 
 .card-servico p {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.45);
-  line-height: 1.7;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.65;
   font-weight: 300;
 }
 
-/* ============================================================
-   8. CERTIDÕES
-   ============================================================ */
-.secao-certidoes {
-  background: var(--creme);
-  padding: var(--padding-secao) var(--padding-lateral);
+.painel-acao {
+  margin-top: 24px;
+  width: 100%;
 }
 
-/* Layout duas colunas: passos (esq) + painel (dir) */
-.certidoes-layout {
+/* ============================================================
+   9. COMO SOLICITAR
+   ============================================================ */
+.secao-solicitar {
+  background: var(--creme);
+}
+
+.solicitar-layout {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 70px;
-  margin-top: 52px;
+  grid-template-columns: 1fr;
+  gap: 36px;
   align-items: start;
 }
 
 /* Lista de passos numerados */
 .lista-passos {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 28px;
 }
 
 .passo-item {
+  position: relative;
   display: flex;
-  gap: 22px;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--creme-medio);
+  gap: 18px;
+  padding: 20px 0;
 }
 
-.passo-item:last-child {
-  border-bottom: none;
+/* Linha vertical ligando os números */
+.passo-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 21px;
+  top: 66px;
+  bottom: -2px;
+  width: 1px;
+  background: var(--dourado-palido);
 }
 
-/* Número grande do passo */
+/* Número do passo dentro de um círculo */
 .passo-numero {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--dourado);
+  border-radius: 50%;
+  background: var(--branco);
   font-family: var(--fonte-titulo);
-  font-size: 36px;
-  font-weight: 300;
-  color: var(--dourado);
-  line-height: 1;
-  min-width: 40px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dourado-escuro);
 }
+
+.passo-conteudo { padding-top: 4px; }
 
 .passo-conteudo h4 {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   margin-bottom: 6px;
   color: var(--texto-escuro);
 }
 
 .passo-conteudo p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--texto-medio);
-  line-height: 1.65;
+  line-height: 1.7;
   font-weight: 300;
 }
 
 .passo-conteudo a {
-  color: var(--dourado);
-  text-decoration: none;
-}
-
-.passo-conteudo a:hover {
+  color: var(--dourado-escuro);
+  font-weight: 500;
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-/* Painel lateral com documentos necessários */
-.certidoes-painel-lateral {
+/* Painel lateral com documentos básicos */
+.solicitar-painel-lateral {
   background: var(--azul-marinho);
-  padding: 38px 32px;
-  position: sticky;
-  top: calc(var(--altura-navegacao) + 20px);
+  border-radius: var(--raio);
+  padding: 30px 22px;
+  box-shadow: var(--sombra-media);
 }
 
-.certidoes-painel-lateral h3 {
+.solicitar-painel-lateral h3 {
   font-family: var(--fonte-titulo);
-  font-size: 22px;
-  font-weight: 300;
+  font-size: 24px;
+  font-weight: 400;
   color: var(--branco);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
-.certidoes-painel-lateral > p {
+.solicitar-painel-lateral > p:first-of-type {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.35);
-  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 22px;
   letter-spacing: 0.05em;
 }
 
-/* Lista de documentos necessários */
 .lista-documentos {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: 12px;
 }
 
 .lista-documentos li {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  gap: 12px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
   font-weight: 300;
 }
 
+/* Marcador "✓" */
 .lista-documentos li::before {
-  content: '—';
-  color: var(--dourado);
+  content: '✓';
   flex-shrink: 0;
-}
-
-.certidoes-painel-lateral .botao-dourado {
-  display: inline-block;
-  margin-top: 30px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(200, 169, 110, 0.18);
+  color: var(--dourado-claro);
   font-size: 11px;
+  font-weight: 600;
+  margin-top: 1px;
 }
 
-/* Aviso/nota abaixo do botão do painel */
-.certidoes-aviso {
+.painel-botoes {
+  display: grid;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.solicitar-aviso {
   margin-top: 20px;
-  padding-top: 20px;
+  padding-top: 18px;
   border-top: 1px solid rgba(200, 169, 110, 0.15);
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
   line-height: 1.6;
 }
 
 /* ============================================================
-   9. LINKS ÚTEIS
+   10. LINKS ÚTEIS
    ============================================================ */
 .secao-links-uteis {
   background: var(--dourado-palido);
-  padding: var(--padding-secao) var(--padding-lateral);
 }
 
 .secao-links-uteis h2 em { color: var(--azul-marinho); }
 
+.grupo-links-titulo {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texto-medio);
+  margin: 36px 0 14px;
+}
+
 /* Grade de cartões de links externos */
 .grade-links {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  margin-top: 50px;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
 .cartao-link {
   background: var(--branco);
   border: 1px solid var(--creme-medio);
-  padding: 24px 22px;
+  border-radius: var(--raio);
+  padding: 16px 16px;
+  min-height: 72px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
   text-decoration: none;
   color: var(--texto-escuro);
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(14, 24, 32, 0.04);
+  transition: border-color var(--transicao), box-shadow var(--transicao), transform var(--transicao);
 }
 
 .cartao-link:hover {
   border-color: var(--dourado);
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(200, 169, 110, 0.15);
+  box-shadow: 0 10px 28px rgba(200, 169, 110, 0.2);
 }
 
+.cartao-link:active { transform: scale(0.99); }
+
 .cartao-link-icone {
-  font-size: 22px;
   flex-shrink: 0;
-  margin-top: 2px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  border-radius: var(--raio-pequeno);
+  background: var(--creme);
+}
+
+.cartao-link-texto {
+  min-width: 0;
 }
 
 .cartao-link strong {
   display: block;
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 500;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
-.cartao-link span {
-  font-size: 11px;
+.cartao-link-texto span {
+  display: block;
+  font-size: 12.5px;
   color: var(--texto-suave);
   line-height: 1.4;
 }
 
-/* Seta que aparece no hover */
+/* Seta sempre visível (no celular não existe "hover") */
 .cartao-link-seta {
   margin-left: auto;
-  color: var(--dourado);
-  font-size: 14px;
-  align-self: center;
-  opacity: 0;
-  transition: opacity 0.2s;
   flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--dourado-palido);
+  color: var(--dourado-escuro);
+  font-size: 14px;
+  transition: background var(--transicao), color var(--transicao), border-color var(--transicao);
 }
 
 .cartao-link:hover .cartao-link-seta {
-  opacity: 1;
+  background: var(--dourado);
+  border-color: var(--dourado);
+  color: var(--branco);
 }
 
 /* ============================================================
-   10. DÚVIDAS (FAQ — PERGUNTAS FREQUENTES)
+   11. DÚVIDAS (FAQ — PERGUNTAS FREQUENTES)
    ============================================================ */
 .secao-duvidas {
   background: var(--branco);
-  padding: var(--padding-secao) var(--padding-lateral);
 }
 
-/* Grade 2×N de itens de dúvida */
+/* Lista de dúvidas (1 coluna no celular) */
 .lista-duvidas {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  margin-top: 52px;
-  background: var(--creme-medio);
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 32px;
+  align-items: start;
 }
 
 /* Item individual de dúvida */
 .duvida-item {
   background: var(--branco);
+  border: 1px solid var(--creme-medio);
+  border-radius: var(--raio);
+  overflow: hidden;
+  transition: border-color var(--transicao), box-shadow var(--transicao);
+}
+
+.duvida-item:has(.duvida-botao.aberto) {
+  border-color: var(--dourado);
+  box-shadow: var(--sombra-suave);
 }
 
 /* Botão da pergunta */
 .duvida-botao {
   width: 100%;
+  min-height: 64px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 22px 24px;
+  padding: 16px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   font-family: var(--fonte-corpo);
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 500;
+  line-height: 1.45;
   color: var(--texto-escuro);
   text-align: left;
-  border-bottom: 1px solid var(--creme-medio);
-  transition: background 0.2s;
+  transition: background var(--transicao);
 }
 
 .duvida-botao:hover {
   background: var(--creme);
 }
 
-/* Ícone + que vira × quando aberto */
+/* Ícone + num círculo, que vira × quando aberto */
 .duvida-icone-mais {
-  color: var(--dourado);
-  font-size: 20px;
-  transition: transform 0.3s;
   flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--dourado);
+  border-radius: 50%;
+  color: var(--dourado-escuro);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 0.3s, background 0.3s, color 0.3s;
 }
 
 .duvida-botao.aberto .duvida-icone-mais {
   transform: rotate(45deg);
+  background: var(--dourado);
+  color: var(--branco);
 }
 
-/* Corpo da resposta (expande via JS com classe 'aberto') */
+/* Corpo da resposta (altura definida pelo JS conforme o texto) */
 .duvida-resposta {
   max-height: 0;
   overflow: hidden;
-  font-size: 13px;
+  transition: max-height 0.35s ease;
+}
+
+.duvida-resposta-interno {
+  padding: 0 18px 20px;
+  font-size: 14px;
   color: var(--texto-medio);
   line-height: 1.75;
   font-weight: 300;
-  transition: max-height 0.35s ease, padding 0.3s;
-  padding: 0 24px;
 }
 
-.duvida-resposta.aberto {
-  max-height: 220px;
-  padding: 18px 24px;
+/* Chamada abaixo das dúvidas */
+.duvidas-rodape {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  margin-top: 32px;
+  padding: 24px 20px;
+  border-radius: var(--raio);
+  background: var(--creme);
+  text-align: center;
+}
+
+.duvidas-rodape p {
+  font-family: var(--fonte-titulo);
+  font-size: 22px;
+  color: var(--texto-escuro);
 }
 
 /* ============================================================
-   11. CONTATO
+   12. CONTATO
    ============================================================ */
 .secao-contato {
   background: var(--azul-marinho-fundo);
-  padding: var(--padding-secao) var(--padding-lateral);
 }
 
 .secao-contato .etiqueta-secao { color: var(--dourado); }
-.secao-contato h2 { color: var(--branco); }
-.secao-contato h2 em { color: var(--dourado-claro); }
+.secao-contato h2              { color: var(--branco); }
+.secao-contato h2 em           { color: var(--dourado-claro); }
 
-/* Layout: informações (esq) + mapa (dir) */
+/* Layout: informações + mapa */
 .contato-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  margin-top: 52px;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  margin-top: 32px;
   align-items: start;
 }
 
@@ -1025,71 +1498,76 @@ h1 em {
 
 .contato-linha-info {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   align-items: flex-start;
-  padding: 24px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.contato-linha-info:first-child {
-  padding-top: 0;
-}
+.contato-linha-info:first-child { padding-top: 0; }
 
 /* Ícone circular de cada linha de contato */
 .contato-icone {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
   border: 1px solid rgba(200, 169, 110, 0.35);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 16px;
 }
 
-/* Rótulo acima do valor (ex: "Endereço", "WhatsApp") */
 .contato-rotulo {
-  font-size: 10px;
+  font-size: 10.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--dourado);
   margin-bottom: 5px;
 }
 
-/* Valor do contato */
 .contato-valor {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.55;
   font-weight: 300;
+  word-break: break-word;
 }
 
 .contato-valor a {
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
+  color: var(--branco);
+  text-decoration: underline;
+  text-decoration-color: rgba(200, 169, 110, 0.5);
+  text-underline-offset: 4px;
 }
 
-.contato-valor a:hover {
-  color: var(--dourado-claro);
-}
+.contato-valor a:hover { color: var(--dourado-claro); }
 
 /* Grade de horários de atendimento */
 .grade-horarios {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top: 28px;
+  margin-top: 26px;
 }
 
 .caixa-horario {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(200, 169, 110, 0.15);
-  padding: 16px 18px;
+  border-radius: var(--raio-pequeno);
+  padding: 14px 16px;
+}
+
+/* Caixa de plantão ocupa a linha inteira no celular */
+.caixa-horario-destaque {
+  grid-column: 1 / -1;
+  border-color: rgba(200, 169, 110, 0.35);
+  background: rgba(200, 169, 110, 0.07);
 }
 
 .horario-dia {
-  font-size: 10px;
+  font-size: 10.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--dourado);
@@ -1097,36 +1575,22 @@ h1 em {
 }
 
 .horario-hora {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* Botão do WhatsApp na seção contato */
-.botao-whatsapp {
-  display: inline-flex;
-  align-items: center;
+/* Botões de contato */
+.contato-botoes {
+  display: grid;
   gap: 10px;
-  background: #25D366;
-  color: var(--branco);
-  padding: 14px 28px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  margin-top: 28px;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.botao-whatsapp:hover {
-  background: #1ebe5a;
-  transform: translateY(-2px);
+  margin-top: 26px;
 }
 
 /* Caixa do mapa do Google Maps */
 .contato-mapa {
   border: 1px solid rgba(200, 169, 110, 0.15);
-  min-height: 360px;
+  border-radius: var(--raio);
+  min-height: 280px;
   overflow: hidden;
 }
 
@@ -1134,13 +1598,13 @@ h1 em {
 .mapa-placeholder {
   width: 100%;
   height: 100%;
-  min-height: 360px;
+  min-height: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 14px;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.3);
   font-size: 12px;
   letter-spacing: 0.08em;
   background: rgba(255, 255, 255, 0.03);
@@ -1153,13 +1617,13 @@ h1 em {
   position: absolute;
   inset: 0;
   background:
-    repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(255, 255, 255, 0.02) 29px, rgba(255, 255, 255, 0.02) 30px),
-    repeating-linear-gradient(90deg, transparent, transparent 29px, rgba(255, 255, 255, 0.02) 29px, rgba(255, 255, 255, 0.02) 30px);
+    repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(255, 255, 255, 0.025) 29px, rgba(255, 255, 255, 0.025) 30px),
+    repeating-linear-gradient(90deg, transparent, transparent 29px, rgba(255, 255, 255, 0.025) 29px, rgba(255, 255, 255, 0.025) 30px);
 }
 
 .mapa-icone {
   font-size: 40px;
-  opacity: 0.3;
+  opacity: 0.35;
   position: relative;
   z-index: 1;
 }
@@ -1173,104 +1637,344 @@ h1 em {
 .contato-mapa iframe {
   width: 100%;
   height: 100%;
-  min-height: 360px;
+  min-height: 280px;
   border: none;
   display: block;
 }
 
 /* ============================================================
-   12. RODAPÉ
+   13. RODAPÉ
    ============================================================ */
 .rodape {
   background: #0e1820;
-  padding: 44px var(--padding-lateral);
+  padding: 40px var(--recuo) calc(96px + env(safe-area-inset-bottom));
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  text-align: center;
   gap: 24px;
   border-top: 1px solid rgba(200, 169, 110, 0.12);
 }
 
 .rodape-identidade strong {
   font-family: var(--fonte-titulo);
-  font-size: 16px;
+  font-size: 18px;
   color: var(--branco);
   display: block;
   margin-bottom: 4px;
 }
 
 .rodape-identidade span {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.25);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.5;
 }
 
 .rodape-lista-links {
   display: flex;
-  gap: 24px;
+  justify-content: center;
+  gap: 4px 6px;
   list-style: none;
   flex-wrap: wrap;
 }
 
 .rodape-lista-links a {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.3);
+  display: block;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   letter-spacing: 0.05em;
-  transition: color 0.2s;
+  transition: color var(--transicao);
 }
 
-.rodape-lista-links a:hover {
-  color: var(--dourado-claro);
-}
+.rodape-lista-links a:hover { color: var(--dourado-claro); }
 
 .rodape-direitos {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.18);
-  text-align: right;
-  line-height: 1.6;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.7;
 }
 
 /* ============================================================
-   13. ANIMAÇÕES — REVELAR AO SCROLL
+   14. BOTÕES FLUTUANTES (WhatsApp e voltar ao topo)
    ============================================================ */
+.botao-flutuante-whatsapp {
+  position: fixed;
+  right: calc(16px + env(safe-area-inset-right));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 150;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  background: var(--verde-whatsapp);
+  color: var(--branco);
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform var(--transicao), background var(--transicao), opacity var(--transicao);
+}
 
-/* Estado inicial: invisível e deslocado para baixo */
-.revelar {
+.botao-flutuante-whatsapp svg {
+  width: 28px;
+  height: 28px;
+}
+
+.botao-flutuante-whatsapp:hover  { background: var(--verde-whatsapp-escuro); transform: translateY(-3px); }
+.botao-flutuante-whatsapp:active { transform: scale(0.95); }
+
+/* O texto só aparece no desktop */
+.botao-flutuante-texto { display: none; }
+
+/* Esconde o botão flutuante com o menu aberto */
+body.menu-aberto .botao-flutuante-whatsapp,
+body.menu-aberto .botao-topo {
   opacity: 0;
-  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.botao-topo {
+  position: fixed;
+  right: calc(23px + env(safe-area-inset-right));
+  bottom: calc(86px + env(safe-area-inset-bottom));
+  z-index: 150;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 169, 110, 0.5);
+  background: rgba(22, 34, 47, 0.92);
+  color: var(--dourado-claro);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity var(--transicao), transform var(--transicao), visibility 0s linear 0.22s, background var(--transicao);
+}
+
+.botao-topo.visivel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity var(--transicao), transform var(--transicao), visibility 0s, background var(--transicao);
+}
+
+.botao-topo:hover { background: var(--azul-marinho-medio); }
+
+/* ============================================================
+   15. ANIMAÇÕES — REVELAR AO SCROLL
+   Só escondem o conteúdo quando o JS está ativo (classe .js no <html>).
+   ============================================================ */
+.js .revelar {
+  opacity: 0;
+  transform: translateY(18px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Quando o IntersectionObserver adiciona .visivel */
-.revelar.visivel {
+.js .revelar.visivel {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ============================================================
-   14. RESPONSIVO
-   ============================================================ */
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 
-/* Tablet */
-@media (max-width: 900px) {
-  .hero-conteudo        { grid-template-columns: 1fr; }
-  .hero-painel-lateral  { display: none; }
-  .hero-lado-direito    { align-items: flex-start; flex-direction: row; flex-wrap: wrap; padding-left: 0; }
-  .secao-sobre          { grid-template-columns: 1fr; }
-  .sobre-imagem-wrapper { max-width: 340px; }
-  .grade-servicos       { grid-template-columns: 1fr 1fr; }
-  .certidoes-layout,
-  .contato-layout       { grid-template-columns: 1fr; }
-  .lista-duvidas        { grid-template-columns: 1fr; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .js .revelar { opacity: 1; transform: none; }
 }
 
-/* Mobile */
-@media (max-width: 600px) {
-  .nav-lista-links,
-  .nav-botao-whatsapp { display: none; }
-  .botao-hamburguer   { display: flex; }
-  .grade-servicos     { grid-template-columns: 1fr; }
-  h1                  { font-size: 34px; }
-  .hero-grupo-badges  { flex-wrap: wrap; }
+/* ============================================================
+   16. TABLET (≥ 640px)
+   ============================================================ */
+@media (min-width: 640px) {
+  .hero-botoes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .hero-badge { min-height: 92px; }
+  .badge-sigla { font-size: 30px; }
+
+  .grade-servicos { grid-template-columns: 1fr 1fr; }
+
+  .card-servico {
+    display: block;
+    padding: 26px 22px;
+  }
+
+  .servico-icone { margin-bottom: 16px; }
+
+  .painel-acao { width: auto; }
+
+  .grade-links { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+  .duvidas-rodape {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 24px 28px;
+  }
+
+  .grade-horarios { grid-template-columns: repeat(3, 1fr); }
+  .caixa-horario-destaque { grid-column: auto; }
+
+  .contato-botoes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .rodape-direitos { font-size: 11px; }
+}
+
+/* ============================================================
+   17. TABLET GRANDE (≥ 900px)
+   ============================================================ */
+@media (min-width: 900px) {
+  /* Hero em duas colunas */
+  .secao-hero { min-height: 100vh; min-height: 100svh; }
+
+  .hero-conteudo {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    padding-top: calc(var(--altura-navegacao) + 64px);
+    padding-bottom: 96px;
+  }
+
+  .hero-painel-lateral { display: block; }
+
+  .hero-indicador-scroll { display: flex; }
+
+  /* Sobre em duas colunas */
+  .secao-sobre {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+  }
+
+  .sobre-imagem-wrapper {
+    max-width: 420px;
+    margin: 0;
+  }
+
+  /* Abas sem rolagem: quebram linha */
+  .abas-moldura { margin-left: 0; margin-right: 0; }
+  .abas-moldura::after { display: none; }
+
+  .abas-lista {
+    flex-wrap: wrap;
+    overflow: visible;
+    padding: 4px 0 0;
+  }
+
+  .aba-botao { padding: 0 22px; }
+
+  .grade-servicos { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+  /* Como solicitar: passos + painel fixo ao lado */
+  .solicitar-layout {
+    grid-template-columns: 1.3fr 1fr;
+    gap: 64px;
+  }
+
+  .solicitar-painel-lateral {
+    position: sticky;
+    top: calc(var(--altura-navegacao) + 24px);
+    padding: 38px 32px;
+    margin-top: 24px;
+  }
+
+  /* Dúvidas em duas colunas */
+  .lista-duvidas { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .duvida-botao { padding: 18px 22px; }
+  .duvida-resposta-interno { padding: 0 22px 22px; }
+
+  /* Contato: informações + mapa */
+  .contato-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+
+  .grade-horarios { grid-template-columns: 1fr 1fr; }
+  .caixa-horario-destaque { grid-column: 1 / -1; }
+
+  .contato-mapa,
+  .mapa-placeholder,
+  .contato-mapa iframe { min-height: 100%; height: 100%; }
+
+  .contato-mapa { align-self: stretch; min-height: 420px; }
+
+  /* Rodapé em linha */
+  .rodape {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+    padding-bottom: 44px;
+  }
+
+  .rodape-direitos { text-align: right; }
+}
+
+/* ============================================================
+   18. DESKTOP (≥ 1100px)
+   ============================================================ */
+@media (min-width: 1100px) {
+  :root { --altura-navegacao: 76px; }
+
+  .nav-selo { width: 42px; height: 42px; font-size: 18px; }
+  .nav-identidade strong { font-size: 17px; }
+  .nav-identidade span   { font-size: 10px; }
+
+  /* Mostra links e WhatsApp; esconde hambúrguer e menu mobile */
+  .nav-lista-links    { display: flex; }
+  .nav-botao-whatsapp { display: inline-flex; }
+  .botao-hamburguer,
+  .menu-mobile,
+  .menu-mobile-overlay { display: none; }
+
+  .hero-descricao { font-size: 16px; }
+
+  .badge-sigla { font-size: 34px; }
+
+  .card-servico { padding: 30px 26px; }
+
+  .rodape { padding-bottom: 44px; }
+
+  /* Botão flutuante vira "pílula" com texto */
+  .botao-flutuante-whatsapp {
+    width: auto;
+    height: 54px;
+    padding: 0 22px 0 18px;
+    right: 24px;
+    bottom: 24px;
+  }
+
+  .botao-flutuante-whatsapp svg { width: 24px; height: 24px; }
+
+  .botao-flutuante-texto {
+    display: inline;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .botao-topo {
+    right: 24px;
+    bottom: 92px;
+  }
 }
